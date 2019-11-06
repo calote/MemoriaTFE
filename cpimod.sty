@@ -1,0 +1,57 @@
+\usepackage{color} %include colors
+%\usepackage[T1]{fontenc} %include font support
+%\usepackage{lmodern} %make fonts look better
+%\usepackage{garamond} %include garamond
+%\usepackage{helvet} %include helvetica
+%\usepackage{xcolor,mdframed,caption} %for the box
+%\usepackage{fancyhdr}
+
+
+%\pdfmapfile{=ggm.map}
+
+\definecolor{cpiOrange}{RGB}{241,85,44}
+\definecolor{cpiGray}{RGB}{106,100,100}
+
+% \newcommand*{\proyecto}[1]{\gdef\@proyecto{#1}%
+% }
+% \newcommand*{\@proyecto}{Trabajo Fin de Grado}
+
+%\renewcommand{\rmdefault}{ggm} %Set default serif (roman) font
+%\renewcommand{\sfdefault}{phv} %Set default sans serif font
+%\renewcommand{\familydefault}{\sfdefault} %Set default font to sans serif - must specify where roman is used
+
+\newgeometry{margin = 1in}
+\newcommand{\callout}[1]{{\large\emph{\textcolor{cpiOrange}{#1}}}}
+\renewcommand{\frame}[1]{\begin{framed} {\color{black} #1} \end{framed}}
+
+%\raggedright
+\setlength{\parskip}{1.2ex plus 0.5ex minus 0.2ex}
+\setlength{\parindent}{0in}
+
+\makeatletter
+
+\renewcommand*{\maketitle}{\newpage
+%\renewcommand\@maketitle{\newpage
+\newgeometry{margin = 0in}
+%\vspace{-1cm}
+\quad\includegraphics[width=5cm]{\Logo}
+\setlength{\fboxsep}{0pt}
+\hfill \colorbox{cpiGray}{\makebox[3.22in][r]{\shortstack[r]{\vspace{2.75in}}}}%
+%\hfill \colorbox{cpiGray}{\hspace{.25in} \parbox{2.97in}{\vspace{2.75in}}}%
+\vspace{-0.25pt}
+\setlength{\fboxsep}{25pt}
+\setlength{\fboxrule}{0pt}
+\colorbox{cpiOrange}{\makebox[8in][l]{\shortstack[l]{%
+%\fontsize{26}{26}\rmfamily
+\LARGE\color{white} \textbf{\@title}\\%
+%\fontsize{22}{22}\rmfamily
+\Large\color{white} \textbf{\proyecto}}}\hfill}%
+\setlength{\fboxsep}{0pt}
+\vspace{-8.5pt}
+%\hfill \colorbox{cpiGray}{\makebox[3.22in][r]{\shortstack[r]{\vspace{4in} \color{white} \textbf{\@author \\ \\ Climate Policy Initiative San Francisco \\ \\ \today \vspace{2.3in}}}}%
+%\hfill \colorbox{cpiGray}{\hfill \begin{minipage}{3.22in} \vspace{3in} \color{white} turtleface \end{minipage}}%
+\hfill \colorbox{cpiGray}{\hspace{.25in} \parbox{2.97in}{\vspace{4in} \color{white} \large\textbf{{\Large\@author} \\ \\ \titulacion \\ \\   \@date \vspace{2.5in} \vfill}}}%2.3
+\let\Title\@title
+\restoregeometry}
+
+\makeatother

@@ -1,0 +1,17 @@
+---
+title: "TODO"
+author: ''
+date: "`r format(Sys.time(), '%d de %B de %Y')`"
+output:
+  html_document: 
+    toc: yes
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# TODO o tareas por realizar
+

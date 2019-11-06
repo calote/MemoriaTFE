@@ -1,0 +1,14 @@
+---
+title: "README"
+author: ""
+date: "`r format(Sys.time(), '%d de %B de %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# README o descripción y consideraciones del proyecto
+
+

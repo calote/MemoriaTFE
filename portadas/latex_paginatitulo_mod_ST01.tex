@@ -1,0 +1,106 @@
+% \documentclass[12pt]{report} %% Remove demo in your file.
+% %\documentclass[12pt]{scrreprt}
+% \usepackage{geometry}
+% \usepackage{xcolor}
+% \usepackage{graphicx}
+% \usepackage[utf8]{inputenc}
+% %\usepackage{tranparent}
+% 
+% \usepackage{lipsum}% Used for dummy text.
+% % \definecolor{titlepagecolor}{cmyk}{1,.60,0,.40}
+% % \definecolor{namecolor}{cmyk}{1,.50,0,.10} 
+% %-----------------------------------------------------------------
+% \begin{document}
+% % ----------------------------------------------------------------
+
+%\definecolor{titlepagecolor}{cmyk}{1,.60,0,.40}
+%\definecolor{namecolor}{cmyk}{1,.50,0,.10} 
+\definecolor{titlepagecolor}{rgb}{0.0, 0.28, 0.67}
+\definecolor{namecolor}{rgb}{0.55, 0.57, 0.67}
+
+% \definecolor{titlepagecolor}{rgb}{0.0, 0.8, 0.8}
+% \definecolor{namecolor}{rgb}{0.55, 0.28, 0.28}
+% \definecolor{titlepagecolor}{cmyk}{1,.10,0,0}
+% \definecolor{namecolor}{cmyk}{1,.50,0,.10}
+% \definecolor{white}{cmyk}{0,0,0,0}
+
+
+
+% \begin{titlepage}
+%     \pagecolor{titlepagecolor}
+%     \newgeometry{left=5cm,right=1cm,bottom=1cm}
+%     \noindent
+% \begin{flushright}
+% \vspace*{-3cm}
+%  \includegraphics[scale=0.5]{../logo}
+%  \vspace{2cm}
+% \end{flushright}
+%     \color{white}
+%     {\LARGE \textsf{Subject} }
+%     \par
+%     \noindent
+%     \color{white}
+%     \makebox[0pt][l]{\rule{1.3\textwidth}{1pt}}
+%     \par\medskip
+%     {\noindent \huge\textbf{\textsf{Title}}}
+%     \par\medskip
+%     {\noindent\huge\textbf{\textsf{Subtitle} }}
+%     \par
+% 
+% \vfill%
+% 
+% \end{titlepage}
+% \restoregeometry
+% 
+% \nopagecolor lipsum[1-9]
+% 
+% \end{document}
+
+
+\begin{titlepage}
+\newgeometry{left=7.5cm} %defines the geometry for the titlepage
+\pagecolor{titlepagecolor}
+% \newgeometry{left=5cm,right=1cm,bottom=1cm}
+% \noindent
+% \begin{flushright}
+% \vspace*{-3cm}
+% \includegraphics[scale=0.5]{../logo}
+% \vspace{2cm}
+% \end{flushright}
+% \noindent
+\includegraphics[width=3cm,height=3cm]{logo}\\
+%{\transparent{0.4}\includegraphics[width=0.5\textwidth]{../logo}}\\
+\color{white}
+\makebox[0pt][l]{\rule{1.3\textwidth}{1pt}}
+\par
+\noindent
+\textbf{\textsf{TRABAJO FIN DE GRADO}} 
+
+\noindent
+\textcolor{namecolor}{\textsf{Grado en Estadística}}
+\vfill
+\noindent
+{\huge \textsf{Introducción a \\[0.6\baselineskip]
+la Estadística Aplicada\\[0.6\baselineskip] 
+con ayuda de R}}\\[0.6\baselineskip] 
+\vskip\baselineskip
+\noindent
+{\large\textbf{\textsf{Marta García Moreno}}}\\[0.6\baselineskip] 
+\noindent
+\textsf{Sevilla, Octubre de 2017}
+
+\end{titlepage}
+\restoregeometry % restores the geometry
+\nopagecolor% Use this to restore the color pages to white
+
+\vfill % Fill the rest of the page with whitespace
+
+\cleardoublepage
+%\newpage{\ }
+\thispagestyle{empty}
+
+
+
+% ----------------------------------------------------------------
+%\lipsum[1-9]
+%\end{document}

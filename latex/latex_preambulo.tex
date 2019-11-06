@@ -1,0 +1,462 @@
+%% UTILIZA CODIFICACIÓN UTF-8
+%% MODIFICARLO CONVENIENTEMENTE PARA USARLO CON OTRAS CODIFICACIONES
+
+
+\usepackage[spanish,es-nodecimaldot,es-noshorthands]{babel}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{fancyhdr}
+\usepackage{chngcntr}
+\usepackage{microtype}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % Usa codificación 8-bit que tiene 256 glyphs
+
+%\usepackage[dvipsnames]{xcolor}
+\usepackage[usenames,dvipsnames]{xcolor}  %new
+\usepackage{pdfpages}
+\usepackage{natbib}
+
+
+
+
+% Para portada: latex_paginatitulo_mod_ST02.tex (inicio)
+\usepackage{tikz}
+\usepackage{epigraph}
+\input{portadas/latex_paginatitulo_mod_ST02_add.sty}
+% Para portada: latex_paginatitulo_mod_ST02.tex (fin)
+
+% Para portada: latex_paginatitulo_mod_OV01.tex (inicio)
+\usepackage{cpimod}
+% Para portada: latex_paginatitulo_mod_OV01.tex (fin)
+
+% Para portada: latex_paginatitulo_mod_OV03.tex (inicio)
+\usepackage{KTHEEtitlepage}
+% Para portada: latex_paginatitulo_mod_OV03.tex (fin)
+
+\renewcommand{\contentsname}{Índice}
+\renewcommand{\listfigurename}{Índice de figuras}
+\renewcommand{\listtablename}{Índice de tablas}
+%\onehalfspacing
+%\counterwithin{figure}{chapter}
+%\counterwithin{table}{chapter}
+%\usepackage{amsthm}
+
+% \newtheorem{theorem}{Teorema}
+% \newtheorem{etheorem}[theorem]{Teorema}
+% \newtheorem{eproposition}[theorem]{Proposición}
+% \newtheorem{ecorollary}[theorem]{Corolario}
+% \newtheorem{elemma}[theorem]{Lema}
+% 
+% \theoremstyle{definition}
+% \newtheorem{edefinition}[theorem]{Definición}
+% 
+% \theoremstyle{example}
+% \newtheorem{eexample}[theorem]{Ejemplo}
+% \newtheorem{eexercise}[theorem]{Ejercicio}
+% \newtheorem{eproblem}[theorem]{Problema}
+% 
+% \theoremstyle{plain}
+% \newtheorem{eremark}[theorem]{Nota}
+% 
+% \newcommand{\betheorem}{\begin{etheorem}}
+% \newcommand{\eetheorem}{\end{etheorem}}
+% \newcommand{\beproposition}{\begin{eproposition}}
+% \newcommand{\eeproposition}{\end{eproposition}}
+% 
+% \newcommand{\bedefinition}{\begin{edefinition}}
+% \newcommand{\eedefinition}{\end{edefinition}}
+% 
+% \newcommand{\beexample}{\begin{eexample}}
+% \newcommand{\eeexample}{\end{eexample}}
+% \newcommand{\beexercise}{\begin{eexercise}}
+% \newcommand{\eeexercise}{\end{eexercise}}
+% \newcommand{\beproblem}{\begin{eproblem}}
+% \newcommand{\eeproblem}{\end{eproblem}}
+% 
+% \newcommand{\beremark}{\begin{eremark}}
+% \newcommand{\eeremark}{\end{eremark}}
+
+
+% \def\proofname{Demostraci\'on}
+% \def\abstractname{Resumen}
+% %\def\chaptername{Tema}
+% \def\appendixname{Apéndice}
+% \def\listfigurename{\'Indice de Figuras}
+% \def\listtablename{\'Indice de Tablas}
+% \def\indexname{\'Indice de Materias}
+% \def\figurename{Figura}
+% \def\tablename{Tabla}
+% \def\partname{Parte}
+% \def\pagename{Página}
+% \gdef\contentsname{\'Indice} \gdef\bibname{Bibliografía}
+% \gdef\refname{Referencias bibliográficas}
+% \def\today{\number\day~de\space\ifcase\month\or
+% enero\or febrero\or marzo\or abril\or mayo\or junio\or julio\or agosto\or
+% septiembre\or octubre\or noviembre\or diciembre\fi \space de~\number\year}
+
+
+
+% \newtheorem{ejemplo}{Ejemplo}[section]
+% \newtheorem{ejem}{Ejemplo}[section]
+% \newtheorem{props}{Proposición}[section]
+% \newtheorem{prop}{Proposición}[section]
+% \newtheorem{mdef}{Definición}[section]
+% \newtheorem{defn}{Definición}[section]
+
+\newcommand{\bcols}{}
+\newcommand{\ecols}{}
+\newcommand{\bcol}[1]{\begin{minipage}{#1\linewidth}}
+\newcommand{\ecol}{\end{minipage}}
+% \newcommand{\beexample}{\begin{eexample} \ \\ }
+% \newcommand{\eeexample}{\end{eexample}}
+\newcommand{\balertblock}[1]{\begin{alertblock}{#1}}
+\newcommand{\ealertblock}{\end{alertblock}}
+\newcommand{\bitemize}{\begin{itemize}}
+\newcommand{\eitemize}{\end{itemize}}
+\newcommand{\benumerate}{\begin{enumerate}}
+\newcommand{\eenumerate}{\end{enumerate}}
+\newcommand{\saltopagina}{\newpage}
+\newcommand{\bcenter}{\begin{center}}
+\newcommand{\ecenter}{\end{center}}
+% \newcommand{\bbcenter}{\begin{center}}
+% \newcommand{\eecenter}{\end{center}}
+
+\newcommand{\beproof}{\begin{proof}} %new
+\newcommand{\eeproof}{\end{proof}} %new
+
+
+
+
+%De: https://texblog.org/2007/11/07/headerfooter-in-latex-with-fancyhdr/
+% \fancyhead
+% E: Even page
+% O: Odd page
+% L: Left field
+% C: Center field
+% R: Right field
+% H: Header
+% F: Footer
+%\fancyhead[CO,CE]{Resultados}
+
+%OPCION 1
+% \fancyhead[LE,RO]{\slshape \rightmark}
+% \fancyhead[LO,RE]{\slshape \leftmark}
+% \fancyfoot[C]{\thepage}
+% \renewcommand{\headrulewidth}{0.4pt}
+% \renewcommand{\footrulewidth}{0pt}
+
+%OPCION 2
+% \fancyhead[LE,RO]{\slshape \rightmark}
+% \fancyfoot[LO,RE]{\slshape \leftmark}
+% \fancyfoot[LE,RO]{\thepage}
+% \renewcommand{\headrulewidth}{0.4pt}
+% \renewcommand{\footrulewidth}{0.4pt}
+
+
+
+
+
+
+
+
+%%%%%%%%%%
+\usepackage{calc,amsfonts}
+% Elimina la cabecera de páginas impares vacías al finalizar los capítulos
+\usepackage{emptypage}
+\makeatletter
+
+\definecolor{ocre}{RGB}{25,25,243} % Define el color naranja usado para resaltar algunas salidas
+
+\usepackage{calc} 
+
+\usepackage{lipsum}
+
+%\usepackage{tikz} % Requerido para dibujar formas personalizadas
+
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+
+
+% Boxed/framed environments
+\newtheoremstyle{ocrenumbox}% % Theorem style name
+{0pt}% Space above
+{0pt}% Space below
+{\normalfont}% % Body font
+{}% Indent amount
+{\small\bf\sffamily\color{ocre}}% % Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily\color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
+\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
+
+\newtheoremstyle{blacknumex}% Theorem style name
+{5pt}% Space above
+{5pt}% Space below
+{\normalfont}% Body font
+{} % Indent amount
+{\small\bf\sffamily}% Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily{\tiny\ensuremath{\blacksquare}}\nobreakspace\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreakspace#3.}}% Optional theorem note
+
+\newtheoremstyle{blacknumbox} % Theorem style name
+{0pt}% Space above
+{0pt}% Space below
+{\normalfont}% Body font
+{}% Indent amount
+{\small\bf\sffamily}% Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreakspace#3.}}% Optional theorem note
+
+% Non-boxed/non-framed environments
+\newtheoremstyle{ocrenum}% % Theorem style name
+{5pt}% Space above
+{5pt}% Space below
+{\normalfont}% % Body font
+{}% Indent amount
+{\small\bf\sffamily\color{ocre}}% % Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily\color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
+\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
+\makeatother
+
+
+
+% Define el estilo texto theorem para cada tipo definido anteriormente
+\newcounter{dummy} 
+\numberwithin{dummy}{section}
+\theoremstyle{ocrenumbox}
+\newtheorem{theoremeT}[dummy]{Teorema}  % (Pedro: Theorem)
+\newtheorem{problem}{Problema}[chapter]  % (Pedro: Problem)
+\newtheorem{exerciseT}{Ejercicio}[chapter] % (Pedro: Exercise)
+\theoremstyle{blacknumex}
+\newtheorem{exampleT}{Ejemplo}[chapter] % (Pedro: Example)
+\theoremstyle{blacknumbox}
+\newtheorem{vocabulary}{Vocabulario}[chapter]  % (Pedro: Vocabulary)
+\newtheorem{definitionT}{Definición}[section]  % (Pedro: Definition)
+\newtheorem{corollaryT}[dummy]{Corolario}  % (Pedro: Corollary)
+\theoremstyle{ocrenum}
+\newtheorem{proposition}[dummy]{Proposición} % (Pedro: Proposition)
+
+
+\usepackage[framemethod=default]{mdframed}
+
+
+
+\newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
+\newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
+\newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
+\newtheorem{notation}{Notation}[chapter]
+
+
+\mdfdefinestyle{exampledefault}{%
+rightline=true,innerleftmargin=10,innerrightmargin=10,
+frametitlerule=true,frametitlerulecolor=green,
+frametitlebackgroundcolor=yellow,
+frametitlerulewidth=2pt}
+
+
+% Theorem box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+backgroundcolor=black!5,
+linecolor=ocre,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=10pt,%5pt
+leftmargin=0cm,
+rightmargin=0cm,
+innerbottommargin=5pt]{tBox}
+
+% Exercise box	  
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=ocre!10,
+linecolor=ocre,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=10pt,%5pt
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{eBox}	
+
+% Definition box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=ocre,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=10pt,%0pt
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt,
+innerbottommargin=0pt]{dBox}	
+
+% Corollary box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=gray,
+backgroundcolor=black!5,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=10pt,%5pt
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt,
+innerbottommargin=5pt]{cBox}
+
+% Crea un entorno para cada tipo de theorem y le asigna un estilo 
+% con ayuda de las cajas coloreadas anteriores
+\newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
+\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}				  
+\newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
+\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}		
+\newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}	
+
+%	ENVIRONMENT remark
+\newenvironment{remark}{\par\vspace{10pt}\small 
+% Espacio blanco vertical sobre la nota y tamaño de fuente menor
+\begin{list}{}{
+\leftmargin=35pt % Indentación sobre la izquierda
+\rightmargin=25pt}\item\ignorespaces % Indentación sobre la derecha
+\makebox[-2.5pt]{\begin{tikzpicture}[overlay]
+\node[draw=ocre!60,line width=1pt,circle,fill=ocre!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{ocre}{N}}; \end{tikzpicture}} % R naranja en un círculo (Pedro)
+\advance\baselineskip -1pt}{\end{list}\vskip5pt} 
+% Espaciado de línea más estrecho y espacio en blanco después del comentario
+
+
+\newenvironment{solutionExe}{\par\vspace{10pt}\small 
+\begin{list}{}{
+\leftmargin=35pt 
+\rightmargin=25pt}\item\ignorespaces 
+\makebox[-2.5pt]{\begin{tikzpicture}[overlay]
+\node[draw=ocre!60,line width=1pt,circle,fill=ocre!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{ocre}{S}}; \end{tikzpicture}} 
+\advance\baselineskip -1pt}{\end{list}\vskip5pt} 
+
+\newenvironment{solutionExa}{\par\vspace{10pt}\small 
+\begin{list}{}{
+\leftmargin=35pt 
+\rightmargin=25pt}\item\ignorespaces 
+\makebox[-2.5pt]{\begin{tikzpicture}[overlay]
+\node[draw=ocre!60,line width=1pt,circle,fill=ocre!55,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{ocre}{S}}; \end{tikzpicture}} 
+\advance\baselineskip -1pt}{\end{list}\vskip5pt} 
+
+%\usepackage{float}
+
+\usepackage{tcolorbox}
+
+\usetikzlibrary{trees}
+
+\theoremstyle{ocrenum}
+\newtheorem{solutionT}[dummy]{Solución}  % (Pedro: Corollary)
+\newenvironment{solution}{\begin{cBox}\begin{solutionT}}{\end{solutionT}\end{cBox}}	
+
+
+\newcommand{\tcolorboxsolucion}[2]{%
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=#1] 
+ #2
+ %\tcblower  % pone una línea discontinua
+\end{tcolorbox}
+}% final definición comando
+
+\newtcbox{\mybox}[1][green]{on line,
+arc=0pt,outer arc=0pt,colback=#1!10!white,colframe=#1!50!black, boxsep=0pt,left=1pt,right=1pt,top=2pt,bottom=2pt, boxrule=0pt,bottomrule=1pt,toprule=1pt}
+
+
+
+\mdfdefinestyle{exampledefault}{%
+rightline=true,innerleftmargin=10,innerrightmargin=10,
+frametitlerule=true,frametitlerulecolor=green,
+frametitlebackgroundcolor=yellow,
+frametitlerulewidth=2pt}
+
+
+
+
+
+\newcommand{\betheorem}{\begin{theorem}}
+\newcommand{\eetheorem}{\end{theorem}}
+\newcommand{\bedefinition}{\begin{definition}}
+\newcommand{\eedefinition}{\end{definition}}
+
+\newcommand{\beremark}{\begin{remark}}
+\newcommand{\eeremark}{\end{remark}}
+\newcommand{\beexercise}{\begin{exercise}}
+\newcommand{\eeexercise}{\end{exercise}}
+\newcommand{\beexample}{\begin{example}}
+\newcommand{\eeexample}{\end{example}}
+\newcommand{\becorollary}{\begin{corollary}}
+\newcommand{\eecorollary}{\end{corollary}}
+
+
+\newcommand{\besolutionExe}{\begin{solutionExe}}
+\newcommand{\eesolutionExe}{\end{solutionExe}}
+\newcommand{\besolutionExa}{\begin{solutionExa}}
+\newcommand{\eesolutionExa}{\end{solutionExa}}
+
+
+%%%%%%%%
+
+
+% Caja Salida Markdown
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=GreenYellow!10,
+linecolor=GreenYellow!80,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=10pt,%5pt
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{mBox}	
+
+%% RMarkdown
+\newenvironment{markdownsal}{\begin{mBox}}{\end{mBox}}	
+
+\newcommand{\bmarkdownsal}{\begin{markdownsal}}
+\newcommand{\emarkdownsal}{\end{markdownsal}}
+
+
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{subfig} %new
+%\usepackage{booktabs,dcolumn,rotating,thumbpdf,longtable}
+\usepackage{dcolumn,rotating}  %new
+\usepackage[graphicx]{realboxes} %new de: https://stackoverflow.com/questions/51633434/prevent-pagebreak-in-kableextra-landscape-table
+
+%define el interlineado vertical
+%\renewcommand{\baselinestretch}{1.5}
+
+%define etiqueta para las Tablas o Cuadros
+\renewcommand\spanishtablename{Tabla}
+
+\bibliographystyle{plain}
+

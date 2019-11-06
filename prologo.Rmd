@@ -1,0 +1,8 @@
+---
+output: pdf_document
+---
+
+
+Escrito colocado al comienzo de una obra en el que se hacen comentarios sobre la obra o su autor, o se introduce en su lectura; a menudo está realizado por una persona distinta del autor.
+
+También se podrían incluir aquí los agradecimientos.

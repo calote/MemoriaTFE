@@ -1,0 +1,53 @@
+---
+#title: "TFM"
+author: "Nombre Completo Autor"
+date: "27/10/2017"
+documentclass: book
+classoption: a4paper
+#lang: es
+#bibliography: bib/library.bib
+bibliography: ["bib/library.bib", "bib/paquetes.bib"]
+#csl: methods-in-ecology-and-evolution.csl
+csl: acm-sig-proceedings-long-author-list.csl
+urlcolor: blue #black
+linkcolor: blue #black
+link-citations: yes
+fontsize: 12pt # 10pt,11pt
+geometry: margin = 2.5cm
+output: 
+  pdf_document: 
+    keep_tex: no
+    number_sections: yes
+#    toc: yes
+    fig_caption: yes
+    includes:
+      in_header: latex/latex_preambulo.tex
+      after_body: latex/latex_antes_enddoc.tex
+---
+
+
+
+```{r include=FALSE}
+knitr::opts_chunk$set(fig.path = 'figurasR/',
+                      echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.pos="H",fig.align="center",out.width="95%",
+                      cache=FALSE)
+
+```
+
+
+<!-- \setcounter{chapter}{2} -->
+<!-- \setcounter{chapter}{2} escribir 2 para capítulo 3  -->
+<!-- \pagenumbering{arabic} -->
+
+\fancyhead[LE,RO]{\scriptsize\rightmark}
+\fancyfoot[LO,RE]{\scriptsize\slshape \leftmark}
+\fancyfoot[C]{}
+\fancyfoot[LE,RO]{\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+# Título del Capítulo
+
+## Primera sección

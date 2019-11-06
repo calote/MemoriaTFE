@@ -1,0 +1,151 @@
+---
+#title: "TFM"
+author: "Nombre Completo Autor"
+date: "27/10/2017"
+documentclass: book
+classoption: a4paper
+#classoption: a4paper,oneside
+#bibliography: bib/library.bib
+bibliography: ["bib/library.bib", "bib/paquetes.bib"]
+#csl: methods-in-ecology-and-evolution.csl
+csl: acm-sig-proceedings-long-author-list.csl
+urlcolor: blue #black
+linkcolor: blue #black
+link-citations: yes
+fontsize: 12pt # 10pt,11pt
+geometry: margin = 2.5cm
+output: 
+  pdf_document: 
+    keep_tex: no
+    number_sections: yes
+#    toc: yes
+    fig_caption: yes
+    includes:
+      in_header: latex/latex_preambulo.tex
+      before_body: portadas/latex_paginatitulo_modTFE.tex
+#      before_body: portadas/latex_paginatitulo_modTFGE.tex
+#      before_body: portadas/latex_paginatitulo_modTFGM.tex
+#      before_body: portadas/latex_paginatitulo_modTFDGME.tex
+#      before_body: portadas/latex_paginatitulo_modTFMDS.tex
+#      before_body: portadas/latex_paginatitulo_mod_OV01.tex
+      after_body: latex/latex_antes_enddoc.tex
+---
+
+---
+nocite: | 
+  @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2, @R-xtable,
+  @R-stringr,@Techopedia,@Pentaho2
+...
+
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.path = 'figurasR/',
+                      echo = FALSE, warning = FALSE, message = FALSE,
+                      fig.pos="H",fig.align="center",out.width="95%",
+                      cache=FALSE)
+
+knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
+                   "stringr","shiny","flexdashboard","htmlwidgets","bookdown"),
+                 file="bib/paquetes.bib", width = 60)
+```
+
+
+
+\pagestyle{fancy}
+\fancyhead[LE,RO]{}
+\fancyhead[LO,RE]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\pagenumbering{roman}
+
+\setcounter{tocdepth}{4}
+\tableofcontents
+
+
+\cleardoublepage   
+<!--  \clearpage -->
+\section*{Agradecimientos}
+\addcontentsline{toc}{section}{Agradecimientos}
+
+```{r child = 'agradecimientos.Rmd'}
+```
+
+
+\cleardoublepage   
+<!--  \clearpage -->
+\section*{Resumen}
+\addcontentsline{toc}{section}{Resumen}
+
+```{r child = 'resumen.Rmd'}
+```
+
+
+\clearpage
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+
+```{r child = 'abstract.Rmd'}
+```
+
+
+\cleardoublepage   
+<!--  \clearpage -->
+\listoffigures
+\addcontentsline{toc}{section}{Índice de Figuras}
+
+\cleardoublepage   
+<!--  \clearpage -->
+\listoftables
+\addcontentsline{toc}{section}{Índice de Cuadros}
+
+
+\cleardoublepage   
+<!--  \clearpage -->
+\pagenumbering{arabic}
+
+\fancyhead[LE,RO]{\scriptsize\rightmark}
+\fancyfoot[LO,RE]{\scriptsize\slshape \leftmark}
+\fancyfoot[C]{}
+\fancyfoot[LE,RO]{\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+```{r child = 'capitulo01.Rmd'}
+```
+
+\FloatBarrier
+
+```{r child = 'capitulo02.Rmd'}
+```
+
+\FloatBarrier
+
+```{r child = 'capitulo03.Rmd'}
+```
+
+\FloatBarrier
+
+```{r child = 'capitulo04.Rmd'}
+```
+
+\FloatBarrier
+
+\appendix
+
+```{r child = 'apendice01.Rmd'}
+```
+
+
+
+```{r child = 'apendice02.Rmd'}
+```
+
+
+\FloatBarrier
+\cleardoublepage   
+<!--  \clearpage -->
+
+\fancyhead[CO,CE]{Bibliografía}
+
+# Bibliografía
