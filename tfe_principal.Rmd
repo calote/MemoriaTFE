@@ -4,22 +4,29 @@ documentclass: book
 classoption: a4paper
 #####
 #version para libro digital
-# classoption: a4paper,oneside
-# urlcolor: blue #black
-# linkcolor: blue #black
+#classoption: a4paper,oneside
+#urlcolor: blue #black
+#linkcolor: blue #black
 #####
 #bibliography: bib/library.bib
 bibliography: ["bib/library.bib", "bib/paquetes.bib"]
-#csl: methods-in-ecology-and-evolution.csl
-csl: acm-sig-proceedings-long-author-list.csl
+#Método 1 de bibliografía (descomente la línea siguiente y la línea: "citation_package: natbib" más abajo) 
+#Haga knit 2 veces si hay fallos
+#Abre fichero: latex/latex_antes_enddoc.tex
+#natbib: plainnat, abbrvnat, unsrtnat
+biblio-style: "plainnat"
+#Método 2 de bibliografía (descomente una línea de las 2 siguientes en caso de usarlo)
+#csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
+#csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
 link-citations: yes
 fontsize: 12pt # 10pt,11pt
 geometry: margin = 2.5cm 
 output: 
-  pdf_document: 
+  pdf_document:
     keep_tex: no
     number_sections: yes
-#    toc: yes
+    citation_package: natbib
+    #toc: yes
     fig_caption: yes
     includes:
       in_header: latex/latex_preambulo.tex
@@ -40,12 +47,21 @@ nocite: |
 ...
 
 
+
+<!-- ```{r echo=FALSE} -->
+<!-- knitr::knit_hooks$set(document = function(x) { -->
+<!--   sub('\\usepackage{color}', '\\usepackage[usenames,dvipsnames]{xcolor}', x, fixed = TRUE) -->
+<!-- }) -->
+<!-- ``` -->
+
+
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(fig.path = 'figurasR/',
                       echo = TRUE, warning = FALSE, message = FALSE,
                       fig.pos="H",fig.align="center",out.width="95%",
                       cache=FALSE) # 
-
+Sys.setlocale('LC_ALL','C') # corrige problema con 
+#options(tinytex.latexmk.emulation = FALSE)
 knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
                    "stringr","shiny","flexdashboard","htmlwidgets","bookdown"),
                  file="bib/paquetes.bib", width = 60)
@@ -156,7 +172,13 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 \FloatBarrier
 \cleardoublepage   
 
-
+\fancyhead[LE,RO]{}
+\fancyfoot[LO,RE]{}
 \fancyhead[CO,CE]{Bibliografía}
 
-# Bibliografía
+<!-- Método 1 bibliografía: en caso de SÍ usar: "citation_package: natbib" -->
+<!-- ver fichero: latex/latex_antes_enddoc.tex (descomentar) -->
+
+<!-- Método 2 bibliografía: Descomentar en caso de NO usar: "citation_package: natbib" -->
+<!-- CUIDADO: LA SIGUIENTE LÍNEA DEBE SER LA ÚLTIMA SI NO ESTÁ COMENTADA -->
+<!-- # Bibliografía -->

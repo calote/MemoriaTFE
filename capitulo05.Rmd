@@ -55,18 +55,18 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 
 Este capítulo está escrito en el fichero R Markdown **"capitulo05.Rmd"** y se ha incluido para 
 que pueda copiar y pegar en su trabajo la solución a algunas de las cuestiones más habituales
-al escribir un trabajo. 
+al escribir un trabajo escrito. 
 
 
 
 ## Mostrar los chunks de código R y las opciones
 
 
-Un chunk de código R comienza con tres acentos abiertos:  ```` ```{r} ```` donde `r` indica el nombre del lenguaje,^[No se limita al lenguaje R, se pueden usar otros lenguajes, ver: [Ingenierías de lenguaje con knitr](https://rmarkdown.rstudio.com/authoring_knitr_engines.html%23sql).] y finaliza con tres acentos abiertos. Pueden escribirse opciones adicionales a un chunk en las llaves (por ejemplo, se define la altura de un gráfico en 5 centímetros: ```` ```{r, fig.height='5cm'} ````). 
+Un chunk de código R comienza con tres acentos abiertos:  ```` ```{r} ```` donde `r` indica el nombre del lenguaje,^[No se limita al lenguaje R, se pueden usar otros lenguajes, ver: [Ingenierías de lenguaje con knitr](https://rmarkdown.rstudio.com/authoring_knitr_engines.html%23sql).] y finaliza con tres acentos abiertos. Pueden escribirse opciones adicionales a un chunk en las llaves (por ejemplo, se define la altura de un gráfico en 5 centímetros: ```` ```{r fig.height='5cm'} ````). 
 
 **Nota importante**: las opciones de un chunk deben estar escritas en una misma línea de texto.
 
-Un "expresión R en línea" o el interior de un párrafo comienza con `` `r `` y finaliza con un acento abierto `` ` ``.
+Un "expresión R en línea" o en el interior de un párrafo comienza con `` `r `` y finaliza con un acento abierto `` ` ``.
 
 Para marcar texto como "código en línea" use un par de acentos abiertos, por ejemplo, `` `code` ``. Para incluir $n$ acentos abiertos literalmente, se deben usar al menos $n+1$ acentos abiertos que los envuelvan, por ejemplo, pueden usarse 4 acentos abiertos para preservar 3 acentos abiertos dentro: ````` ```` ```code``` ```` `````, lo cual se mostrará como: ```` ```code``` ````.
 
@@ -102,12 +102,63 @@ plot(cars)
 abline(fit)
 ```
 
-La pendiente de la regresión es `r b[1]`.
+La pendiente de la regresión es `r '\x60r b[1]\x60'`
 
 ````
 
-```` ````
+La pendiente de la regresión es `r b[1]`.
 
+
+Hay una gran cantidad de opciones para los chunks en knitr documentadas en <https://yihui.name/knitr/options>. 
+A continuación, enumeramos un subconjunto de ellas:
+
+- **eval**: si evalúa un fragmento de código o no.
+
+- **echo**: si se debe hacer eco o presentar el código fuente en el documento de salida (en algunas ocasiones es posible no quiera leer el código fuente, solamente los resultados).
+
+- **result**: 
+
+    + cuando se establece en `'hide'` (ocultar), la salida de texto se ocultará; 
+        
+        \bmarkdownsal
+        ```{r echo=TRUE,results='hide'}
+        cat('**Markdown** es genial. \n')
+        ```
+        \emarkdownsal
+    
+    + cuando se establece en `'asis'`, la salida de texto se escribe "tal cual", por ejemplo, puede escribirse el texto markdown sin procesar el código R (como `cat('**Markdown** es genial. \n')`). 
+
+        \bmarkdownsal
+        ```{r echo=TRUE,results='asis'}
+        cat('**Markdown** es genial. \n')
+        ```
+        \emarkdownsal
+        
+    + De forma predeterminada (`'markup'` y `'hold'`), la salida de texto se envolverá en elementos textuales (generalmente bloques de código simple).
+
+        \bmarkdownsal
+        ```{r echo=TRUE}
+        cat('**Markdown** es genial. \n')
+        ```
+        \emarkdownsal
+        
+- **warning**, **message**, y **error**: si se muestran o no advertencias, mensajes y errores en el documento de salida. Tenga en cuenta que si establece `error = FALSE`, `rmarkdown::render()` se detendrá al encontrar un error en un fragmento de código, y el error se mostrará en la consola R, si `error = TRUE`, no se detendrá cuando encuentre un error en el chunk y mostrará el mensaje de error. De manera similar, cuando `warning = FALSE` o `message = FALSE`, estos mensajes se mostrarán en la consola R.
+
+    \bmarkdownsal
+    ```{r echo=TRUE,error=TRUE}
+    si(3.2)
+    ```
+    \emarkdownsal
+    
+- **child**: puede incluir un documento hijo a un documento principal. Esta opción toma una ruta a un archivo externo.
+
+En este enlace [url-bookdown](https://bookdown.org/yihui/rmarkdown/r-code.html) puede obtenerse más información sobre las opciones en un chunk de código R.
+
+
+
+
+
+```` ````
 
 
 
@@ -152,13 +203,13 @@ Si queremos incluirlo con una leyenda explicativa con una numeración que lo ide
 ````markdown
 `r ''````{r echo=FALSE,out.width='8cm',fig.align='center',
 fig.cap="\\label{fig:c05ej01}Se muestra el panel Files de RStudio. 
-\\newline{}Fuente: elaboración propia",fig.pos="H"}
+\\newline{}Fuente: elaboraci\\'on propia",fig.pos="H"}
 knitr::include_graphics("graficos/capitulo05ejemplo01.png")
 ```
 
 ````
 
-```{r echo=FALSE,out.width='8cm',fig.align='center',fig.cap="\\label{fig:c05ej01}Se muestra el panel Files de RStudio. \\newline{}Fuente: elaboración propia",fig.pos="H"}
+```{r echo=FALSE,out.width='8cm',fig.align='center',fig.cap="\\label{fig:c05ej01}Se muestra el panel Files de RStudio. \\newline{}Fuente: elaboraci\\'on propia",fig.pos="H"}
 knitr::include_graphics("graficos/capitulo05ejemplo01.png")
 ```
 
@@ -189,7 +240,7 @@ Lo habitual es hacer la primera referencia cerca de donde esté ubicada. Como ve
 
 En R Markdown se tiene que utilizar en la opción del chunk correspondiente: **`fig.pos="t"`**  para colocarla en la parte superior, **`fig.pos="b"`**  para colocarla en la parte inferior de una página y **`fig.pos="htbp"`** para colocarla por orden: "aquí-superior-inferior-páginasolotablas", pero a partir de la página en la que se haya colocado la figura (se decide automáticamente).
 
-**Nota**. Se recomienda el uso de la opción **`fig.pos="htbp"`** o **`fig.pos="!htbp"`** para que no aparezcan espacios en blanco adicionales (`!` obliga). Se puede obligar a que en el caso que no se especifique se comporte obligadamente como se indiquemos con `floatplacement{figure}{}` o `floatplacement{table}{}` . Por ejemplo, si queremos obligar que las figuras se coloquen como: "!bthp".
+**Nota**. Se recomienda el uso de la opción **`fig.pos="htbp"`** o **`fig.pos="!htbp"`** para que no aparezcan espacios en blanco adicionales (`!` obliga). Se puede obligar a que en el caso que no se especifique se comporte obligadamente como indiquemos con `floatplacement{figure}{}` o `floatplacement{table}{}` . Por ejemplo, si queremos obligar que las figuras se coloquen como: "!bthp".
 
 ```latex
 \floatplacement{figure}{!bthp}
@@ -222,7 +273,7 @@ Se tienen las mismas posibilidades que el caso de un fichero gráfico, pero habi
 
 También es posible construir el gráfico con funciones R en un fichero de script R y guardar el resultado en un fichero gráfico (ver comandos: **`png()`** y **`dev.off()`**, **`ggplot2::ggsave()`**). Para incluirlo en el documento R Markdown se haría lo visto en la sección anterior.
 
-El siguiente código ilustra cómo crea un fichero con ayuda del paquete "ggplot2" y lo grabamos en un fichero ".png" con ayuda de la función **`ggsave()`**.
+El siguiente código ilustra cómo crear un fichero con ayuda del paquete "ggplot2" y lo grabamos en un fichero ".png" con ayuda de la función **`ggsave()`**.
 
 ```{r echo=TRUE}
 library(ggplot2)
@@ -290,15 +341,15 @@ El gráfico de la Figura \ref{fig:cap05gg02} es un ejemplo de gráfico creado co
 
 ````markdown
 `r ''````{r echo=FALSE,out.width='80%',fig.align='center',fig.pos='htbp',
-fig.cap="\\label{fig:cap05gg02}Gráfico de Líneas creado con ggplot2. 
-Fuente: elaboración propia"}
+fig.cap="\\label{fig:cap05gg02}Gr\\'afico de L\\'{\\i}neas creado con ggplot2. 
+Fuente: elaboraci\\'on propia"}
 library(ggplot2)
 ggplot(mtcars, aes(mpg, wt)) + 
   geom_line(col="blue")
 ```
 ````
 
-```{r echo=FALSE,out.width='80%',fig.align='center',fig.pos='htbp',fig.cap="\\label{fig:cap05gg02}Gráfico de Líneas creado con ggplot2. Fuente: elaboración propia"}
+```{r echo=FALSE,out.width='80%',fig.align='center',fig.pos='htbp',fig.cap="\\label{fig:cap05gg02}Gr\\'afico de L\\'{\\i}aneas creado con ggplot2. Fuente: elaboraci\\'on propia"}
 library(ggplot2)
 ggplot(mtcars, aes(mpg, wt)) + 
   geom_line(col="blue")
@@ -323,8 +374,8 @@ Vea la Figura \ref{fig:plot-cars}, la cual contiene la Figura
 \ref{fig:plot-cars1} y la Figura \ref{fig:plot-cars2}.
 
 ```{r plot-cars, fig.height = 3, fig.width = 4,out.width='49%', 
-fig.cap='Dos gráficos', fig.subcap = c('Regresión', 
-'Gráfico sobre cars'),fig.pos="htbp"}
+fig.cap="Dos gr\\'aficos", fig.subcap = c("Regresi\\'on", 
+"Gr\\'afico sobre cars"),fig.pos="htbp"}
 plot(mpg ~ wt, data = mtcars)
 plot(cars)
 ```
@@ -336,7 +387,7 @@ plot(cars)
 Vea la Figura \ref{fig:plot-cars}, la cual contiene la Figura 
 \ref{fig:plot-cars1} y la Figura \ref{fig:plot-cars2}.
 
-```{r plot-cars, fig.height = 3, fig.width = 4, out.width='49%', fig.cap='Dos gráficos', fig.subcap = c('Regresión', 'Gráfico sobre cars'),fig.pos="htbp"}
+```{r plot-cars, fig.height = 3, fig.width = 4, out.width='49%', fig.cap="Dos gr\\'aficos", fig.subcap = c("Regresi\\'on", "Gr\\'afico sobre cars"),fig.pos="htbp"}
 plot(mpg ~ wt, data = mtcars)
 plot(cars)
 ```
@@ -345,47 +396,59 @@ plot(cars)
 
 
 
-Otro ejemplo en el que solamente se usa leyenda para los dos gráficos (también se modifican los márgenes). Importante el uso de la opción de chunk: **fig.show="hold"**.
+Otro ejemplo en el que solamente se usa una leyenda para los dos gráficos (también se modifican los márgenes). Importante el uso de la opción de chunk: **fig.show="hold"**.
 
 
-```{r out.width='45%',fig.show="hold",fig.cap="Dos gráficos R cara a cara",fig.pos="htbp"}
+````markdown
+```{r out.width='45%',fig.show="hold",
+        fig.cap="Dos gr\\'aficos R cara a cara",fig.pos="htbp"}
+par(mar = c(4, 4, 0.1, 0.1))
+plot(pressure, pch = 19, type = "b")
+plot(cars, pch = 19)
+```
+
+````
+
+Produce la Figura \ref{fig:fig2}.
+
+```{r fig2, out.width='45%',fig.show="hold",fig.cap="Dos gr\\'aficos R cara a cara",fig.pos="htbp"}
 par(mar = c(4, 4, 0.1, 0.1))
 plot(pressure, pch = 19, type = "b")
 plot(cars, pch = 19)
 ```
 
 
-## Cómo incluir un tabla o cuadro con información
+## Cómo incluir una tabla o cuadro con información
 
 Para profundizar en el tema de la presentación de tablas de información se recomienda visitar la siguiente url: [Cómo Crear tablas de información en  R Markdown](http://destio.us.es/calvo/post/como-crear-tablas-de-informacion-en-r-markdown/).
 
 
-### Incluir un tabla con leyenda
+### Incluir una tabla con leyenda
 
 
-La presentación de los primeras 10 filas de un data.frame de R, por ejemplo, el dataset `iris`, puede hacerse del siguiente modo:
+La presentación de las primeras 10 filas de un data.frame de R, por ejemplo, el dataset `iris`, puede hacerse del siguiente modo:
 
 ```{r echo=TRUE}
 head(iris,10)
 ```
 
-Pero para mejorar la presentación se pueden utilizar paquetes R especializados, como: [knitr](https://cran.r-project.org/web/packages/knitr/index.html), [kableExtra](https://cran.r-project.org/web/packages/kableExtra/index.html), [huxtable](https://cran.r-project.org/web/packages/huxtable/) (trata aspectos muy avanzados), etc. El siguiente ejemplo ilustra el uso de "kableExtra". Se comenta algunas de las opciones usadas:
+Pero para mejorar la presentación se pueden utilizar paquetes R especializados, como: [knitr](https://cran.r-project.org/web/packages/knitr/index.html), [kableExtra](https://cran.r-project.org/web/packages/kableExtra/index.html), [huxtable](https://cran.r-project.org/web/packages/huxtable/) (trata aspectos muy avanzados), etc. El siguiente ejemplo ilustra el uso de "kableExtra". Se comentan algunas de las opciones usadas:
 
-- **`"hold_position"`: usa el posicionamiento como en las figuras **"h"**.
-- **`position="center"**`: presenta la tabla centrada.
-- **"striped"**: alterna el color de las filas.
-- **`caption="\\label{}Explicación..."`**: Añade una leyenda que explique el contenido de la tabla junto a un identificador para hacer referencia a ella **`\ref{}`**.
+- **`"hold_position"`**: usa el posicionamiento como en las figuras **"h"**.
+- **`position="center"`**: presenta la tabla centrada.
+- **`"striped"`**: alterna el color de las filas.
+- **`caption="\\label{}Explicación..."`**: Añade una leyenda que explique el contenido de la tabla junto a un identificador para hacer referencia a ella con **`\ref{}`**.
 
 ````markdown
 `r ''````{r}
 library(knitr)
 library(kableExtra) 
 head(iris,10) %>%
-  kable(booktabs = TRUE,format = "latex",
-    caption = "\\label{tabla02}Leyenda explicativa de la segunda tabla") %>%
-  kable_styling(
-    latex_options = c("striped", "condensed","hold_position"), 
-    position = "center",full_width = FALSE)
+ kable(booktabs = TRUE,format = "latex",
+  caption = "\\label{tabla02}Leyenda explicativa de la segunda tabla") %>%
+ kable_styling(
+  latex_options = c("striped", "condensed","hold_position"), 
+  position = "center",full_width = FALSE)
 ```
 ````
 
@@ -550,9 +613,9 @@ kable(dt, "latex", align = "cccrcc", booktabs = T) %>%
 
 ### Presentar una tabla en modo apaisado
 
-Se presentan dos ejemplos de tablas apaisadas.
+Se presentan tres ejemplos de tablas apaisadas.
 
-1. La tabla \ref{tab:apaisada} tiene tiene de especial que se usa la función **`landscape()`**.
+1. La tabla \ref{tab:apaisada} tiene de especial que se usa la función **`landscape()`**.
 
 ````markdown
 `r ''````{r}
@@ -591,7 +654,7 @@ text_tbl <- data.frame(
   )
 text_tbl %>%
   kable(booktabs = TRUE,caption="\\label{tab:apaisada}Esta tabla 
-          está apaisada y en una página separada") %>% 
+          est\\'a apaisada y en una p\\'agina separada") %>% 
       column_spec(c(1), 
           width = "2cm") %>% 
       column_spec(c(2), 
@@ -632,7 +695,7 @@ text_tbl %>%
 \newpage
 ````
 
-
+3. La tabla \ref{tab:sidewaystable} es un ejemplo de uso del entorno LaTeX "sidewaystable" (en el paquete "rotating" incluido) que rota la tabla y la leyenda.
 
 
 ```{r}
@@ -670,7 +733,7 @@ text_tbl <- data.frame(
   )
 text_tbl %>%
   kable(booktabs = TRUE,caption="\\label{tab:apaisada}Esta tabla 
-          está apaisada y en una página separada") %>% 
+          est\\'a apaisada y en una p\\'agina separada") %>% 
       column_spec(c(1), 
           width = "2cm") %>% 
       column_spec(c(2), 
@@ -740,6 +803,62 @@ text_tbl %>%
 \newpage
 
 
+
+\begingroup
+\begin{sidewaystable}
+\centering
+\caption{Es una tabla apaisada ...} \label{tab:sidewaystable}
+```{r echo=FALSE, warning=FALSE}
+library(knitr)
+library(kableExtra)
+library(dplyr)
+text_tbl <- data.frame(
+  Items = c("Item 1", "Item 2", "Item 3","Item 4", "Item 5", "Item 6","Item 7", "Item 8", "Item 9"), 
+  Features = c(
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
+    at venenatis nisl luctus a. ",
+    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
+    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
+    a aliquet ex tincidunt in. ",
+    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
+    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
+    velit scelerisque mattis. ",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
+    at venenatis nisl luctus a. ",
+    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
+    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
+    a aliquet ex tincidunt in. ",
+    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
+    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
+    velit scelerisque mattis. ",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,
+    at venenatis nisl luctus a. ",
+    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit
+    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,
+    a aliquet ex tincidunt in. ",
+    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
+    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at
+    velit scelerisque mattis. "
+    ) 
+  )
+
+text_tbl %>%
+  kable(booktabs = TRUE) %>% 
+      column_spec(c(1), width = "2cm") %>% 
+      column_spec(c(2), width = "14cm")
+
+```
+\end{sidewaystable}
+\endgroup
+
+\clearpage
+
+
+
+
 ### Cambiar la etiqueta "Cuadro"
 
 Para que en lugar de "Cuadro" aparezca "Tabla", se debería incluir una de las siguientes opciones en el fichero principal 
@@ -760,7 +879,7 @@ Con el paquete babel y la opción "spanish" (o al final del fichero: "latex/late
 ## Uso de expresiones matemáticas
 
 
-En el siguiente enlace [overleaf: alfabeto griego y símbolos matemáticos](https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols)
+En el siguiente enlace [overleaf: alfabeto griego y símbolos matemáticos](https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols) puede encontrarse una recopilación de los comandos LaTeX para representar todo el alfabeto griego y muchos de los símbolos más usados en expresiones matemáticas.
 
 
 
@@ -791,6 +910,7 @@ y en un estilo matemático centrado como puede verse a continuación:
 
 Veamos más ejemplos de uso de LaTeX en R Markdown para escribir expresiones matemáticas:
 
+\[ \int_0^1 x^2 + y^2 \ dx \]
 
 \[ \int\limits_0^1 x^2 + y^2 \ dx \]
 
@@ -824,6 +944,8 @@ $$
 El código LaTeX utilizado respectivamente ha sido:
 
 ```latex
+\[ \int_0^1 x^2 + y^2 \ dx \]
+
 \[ \int\limits_0^1 x^2 + y^2 \ dx \]
 
 \[ a_1^2 + a_2^2 = a_3^2 \]
@@ -1117,7 +1239,7 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 
 
 
-Algunos de las referencias bibliográficos incluidas en el fichero "bib/library.bib" aparecen a continuación. Se recogen ejemplos de publicaciones de tipos diferentes: "Manual", "book", "article", "misc", pero existen muchas más.
+Algunas de las referencias bibliográficas incluidas en el fichero "bib/library.bib" aparecen a continuación. Se recogen ejemplos de publicaciones de tipos diferentes: "Manual", "book", "article", "misc", pero existen muchas más.
 
 Hay que resaltar, que cada una de estas referencias bibliográficas tiene un identificador ("Luque2017", "R-base", "Wickham2017", etc) que será el que nos permita hacer referencia a las correspondientes referencias al añadir el prefijo `@`, es decir, por ejemplo: `@Luque2017`.
 
@@ -1197,30 +1319,237 @@ A BibTeX entry for LaTeX users is
 
 \normalsize
 
-### Hacer referencias bibliográficas
 
-En el texto se podrán incluir citas a cualquiera de las referencias bibliográficas incluidas en los ficheros de bibliografía ".bib" con ayuda del código LaTeX: **`\cite{idbibliografico}`** y sus variantes.
+Para obtener más información sobre la realización de citas en R Markdown visitar la url [R Markdown: Bibliographies and Citations](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html).
 
+### Hacer citaciones
 
-El siguiente código
+Las citas van entre corchetes y están separadas por punto y coma. Cada cita debe tener una clave, compuesta de "`@`" + el identificador de cita de la base de datos, y opcionalmente puede tener un prefijo, un localizador y un sufijo. A continuación  se muestran algunos ejemplos:
 
 ```markdown
-Como se indica en las siguientes referencias
-@Luque2017, [@R-base] y @Wickham2017(págs.3-7), 
-o también se podría ver en @Luque2017 y @Wickham2017.
+Blah blah [vea @Luque2017, págs. 33-35; también @Luque2019, cap. 1].
+
+Blah blah [@Luque2017, págs. 33-35, 38-39 y *passim*].
+
+Blah blah [@Luque2017; @Wickham2017].
 ```
 
+*Produce la siguiente salida:*
 
-Produce el siguiente resultado:
+Blah blah [vea @Luque2017, págs. 33-35; también @Luque2019, cap. 1].
 
-Como se indica en las siguientes referencias
-@Luque2017, [@R-base] y @Wickham2017(págs.3-7), 
-o también se podría ver en @Luque2017 y  @Wickham2017.
+Blah blah [@Luque2017, págs. 33-35, 38-39 y *passim*].
 
-
+Blah blah [@Luque2017; @Wickham2017].
 
 
-**Importante**. En la bibligrafía  que **se muestra al final del documento**  aparecerán las referencias bibliográficas de aquellas que hayan sido citadas, es decir, hayan aparecido en un comando **`@identificador`**.
+Un signo menos (-) antes de la @ suprimirá la mención del autor en la cita. Esto puede ser útil cuando el autor ya se menciona en el texto:
+
+<!-- A minus sign (-) before the @ will suppress mention of the author in the citation. This can be useful when the author is already mentioned in the text: -->
+
+```markdown
+Luque dice blah [-@Luque2017].
+```
+
+*Produce la siguiente salida:*
+
+Luque dice blah [-@Luque2017].
+
+También puede escribir una cita en el texto, de la siguiente manera:
+
+```markdown
+@Luque2017 dice blah.
+
+@Luque2017 [pág. 33] dice blah.
+```
+
+*Produce la siguiente salida:*
+
+@Luque2017 dice blah.
+
+@Luque2017 [pág. 33] dice blah.
+
+
+### Estilos de citación
+
+Por defecto, pandoc usará un formato de "fecha-autor" del estilo "Chicago" para citas y referencias. Para usar otro estilo, deberá especificar un archivo de estilo CSL 1.0 en el campo de metadatos csl. Por ejemplo:
+
+```yaml
+---
+title: "Sample Document"
+output: html_document
+bibliography: bibliography.bib
+csl: biomed-central.csl
+---
+```
+
+Puede encontrar una introducción a la creación y modificación de estilos CSL en <http://citationstyles.org/downloads/primer.html>. Puede encontrar un repositorio de estilos CSL en <https://github.com/citation-style-language/styles>. Consulte también <http://zotero.org/styles> para navegar fácilmente por ellos.
+
+
+**Citaciones para salidas PDF**. Por defecto, las citas son generadas por la utilidad "pandoc-citeproc", y funciona para todos los formatos de salida. Cuando la salida es LaTeX/PDF, también puede usar paquetes LaTeX (por ejemplo, natbib) para generar citas; ver [documentos PDF](https://bookdown.org/yihui/rmarkdown/pdf-document.html) para más detalles.
+
+
+
+
+
+
+### Estilos bibliográficos con natbib: método 1
+
+Este método es el que está activado por defecto.
+
+**Importante**. Hay que asegurarse que en el fichero principal: "tfe_principal.Rmd" aparecen sin comentar las siguientes líneas (habría que comentar las del otro método):
+
+- En la cabecera "yaml":
+
+\footnotesize
+```markdown
+#Método 1 de bibliografía
+#Haga knit 2 veces si hay fallos
+#Abre fichero: latex/latex_antes_enddoc.tex
+#otros natbib: plainnat, abbrvnat, unsrtnat
+biblio-style: "plainnat"
+output: 
+  pdf_document: 
+    citation_package: natbib
+```
+\normalsize
+
+
+
+
+
+
+**Importante**. En la bibligrafía  que **se muestra al final del documento**  aparecerán las referencias bibliográficas de aquellas que hayan sido citadas en el documento escrito.
+
+También es posible incluir algunas referencias bibliográficas que no hayan sido citadas, con ayuda del comando `\nocite{}` situado en el fichero: "`latex/latex_antes_enddoc.tex`", como puede verse en el siguiente código:
+
+\footnotesize
+````latex
+% código latex para el final del documento
+
+%%%%%%%%%%%%%%%%%%% Siguiente para el uso de bibliografía: natbib
+% comentarla si no se usa natbib
+\addcontentsline{toc}{chapter}{Bibliografía}
+
+% Descomente la siguiente línea para incluir todas las referencias en ficheros ".bib"
+% \nocite{*}
+
+% Descomente las siguientes líneas para incluir adicionalmente las referencias que 
+\nocite{Luque2017,Luque2019,RStudio,R-base,
+R-knitr,R-rmarkdown,R-dplyr,R-ggplot2, R-xtable,
+R-stringr,Techopedia}
+%%%%%%%%%%%%%%%%%%% final para el uso de bibliografía: natbib
+
+````
+\normalsize
+
+ 
+
+
+En la cabecera "yaml" del fichero "tfe_principal.Rmd" aparece la clave "biblio-style:", que permite presentar la bibliografía siguiendo unas pautas habituales en publicaciones científicas. 
+
+Por defecto se ha elegido el estilo "plainnat":
+
+```yaml
+biblio-style: "plainnat" 
+```
+
+pero se pueden elegir otras variantes de "natbib":
+
+- plainnat, abbrvnat, unsrtnat
+
+<!-- - **usa números**: unsrt, siam, plain, ieeetr, acm, abbrv -->
+<!-- - **usa etiquetas**: apalike, alpha -->
+
+Para obtener más información sobre este tema consultar el siguiente enlace: [overleaf-Bibtex](https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles)
+y 
+[overleaf-Bibtex-natbib](https://www.overleaf.com/learn/latex/Bibliography_management_with_natbib)
+
+<!-- Si se comentan las opciones "csl" de la cabecera "yaml" se puede personalizar por otra vía la presentación de la bibliografía con el comando (ver más información en [overleaf](https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles): -->
+
+
+
+
+**Nota**: además de a través del paquete "natbib" hay otra forma de manejar bibliografías  con el paquete [biblatex](https://www.overleaf.com/learn/latex/Bibliography_management_with_biblatex) que posee características adicionales al sistema bibtex, pero necesita la instalación de nuevo software.
+
+[overleaf biblatex](https://www.overleaf.com/learn/latex/Articles/Getting_started_with_BibLaTeX) y [documentación completa biblatex](http://mirror.ox.ac.uk/sites/ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf)
+
+
+<!-- #csl: 3-biotech.csl -->
+<!-- #csl: 3d-research.csl -->
+<!-- #csl: journal-of-chemometrics.csl -->
+<!-- #Método 3 de bibliografía: descomente -->
+<!-- #citation_package: biblatex -->
+<!-- # \usepackage[style=numeric]{biblatex} -->
+<!-- # \usepackage[citestyle=alphabetic,bibstyle=authortitle]{biblatex} -->
+<!-- # numeric,alphabetic, reading, authoryear -->
+<!-- # \usepackage[style=authoryear,sorting=ynt]{biblatex} -->
+<!-- # nty—sorts entries by name, title, year; -->
+<!-- # nyt—sorts entries by name, year, title; -->
+<!-- # nyvt—sorts entries by name, year, volume, title; -->
+<!-- # anyt—sorts entries by alphabetic label, name, year, title; -->
+<!-- # anyvt—sorts entries by alphabetic label, name, year, volume, title; -->
+<!-- # ynt—sorts entries by year, name, title; -->
+<!-- # ydnt—sorts entries by year (descending order), name, title; -->
+<!-- # none—no sorting. Entries appear in the order they appear in the text. -->
+<!-- #biblio-style: authoryear,sorting=ynt,citestyle=alphabetic,bibstyle=numeric -->
+<!-- #biblio-style: numeric,sorting=ynt,citestyle=alphabetic,bibstyle=numeric -->
+<!-- # -->
+<!-- #biblio-style: authoryear,sorting=ydnt,backend=bibtex,hyperref,backref,backrefstyle=none -->
+<!-- #biblio-style: numeric,sorting=ydnt,backend=bibtex,hyperref,backref,backrefstyle=none -->
+<!-- # -->
+<!-- #biblio-style: authoryear,sorting=ynt  https://stackoverflow.com/questions/49042613/how-to-change-citation-style-in-biblatex-in-r-markdown -->
+<!-- #latex_engine: pdflatex  #pdflatex  # xelatex -->
+<!-- #citation_package: biblatex #natbib -->
+
+
+
+### Estilos bibliográficos con pandoc: método 2 {#bibliografiametodo2}
+
+
+**Importante**. Hay que asegurarse que en el fichero principal: "tfe_principal.Rmd" aparecen sin comentar las siguientes líneas (habría que comentar las del otro método):
+
+- En la cabecera "yaml":
+
+\footnotesize
+```markdown
+# Método 2 de bibliografía (descomente una línea de las 2 siguientes en caso de usarlo)
+csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
+#csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
+```
+\normalsize
+
+- Al final del fichero:
+
+\footnotesize
+```markdown
+<!-- Método 2 bibliografía: Descomentar en caso de NO usar: "citation_package: natbib" -->
+<!-- CUIDADO: LA SIGUIENTE LÍNEA DEBE SER LA ÚLTIMA SI NO ESTÁ COMENTADA -->
+# Bibliografía
+```
+\normalsize
+
+
+<!-- #### Cómo citar y estilos bibliográficos en el método 2 -->
+
+<!-- En el texto se podrán incluir citas a cualquiera de las referencias bibliográficas incluidas en los ficheros de bibliografía ".bib" con ayuda de código como el siguiente: -->
+
+<!-- ```markdown -->
+<!-- Como se indica en las siguientes referencias -->
+<!-- @Luque2017, [@R-base] y @Wickham2017 en págs.3-7,  -->
+<!-- o también se podría ver en [@Luque2017; @Wickham2017]. -->
+<!-- ``` -->
+
+<!-- Produce el siguiente resultado: -->
+
+<!-- Como se indica en las siguientes referencias -->
+<!-- @Luque2017, [@R-base] y @Wickham2017 en págs.3-7,  -->
+<!-- o también se podría ver en [@Luque2017; @Wickham2017]. -->
+
+
+<!-- **Nota**. Hay problemas al usar la referencia sin corchete con el método 1: `@Luque2017`. -->
+
+**Importante**. En la bibligrafía  que **se muestra al final del documento**  aparecerán las referencias bibliográficas de aquellas que hayan sido citadas, es decir, hayan aparecido en un comando **`@identificador`** en el documento.
 
 
 
@@ -1236,41 +1565,21 @@ nocite: |
 
 ````
 
-````  `````
 
-### Estilos bibliográficos de presentación
-
-En la cabecera "yaml" del fichero "tfe_principal.Rmd" aparece la clave "csl:", que permite presentar la bibliografía siguiente las pautas que se exigen en algunas revistas científicas.
+En la cabecera "yaml" del fichero "tfe_principal.Rmd" aparece la clave "csl:", que permite presentar la bibliografía siguiendo las pautas que se exigen en algunas revistas científicas (listado para descargar en [zotero csl](https://www.zotero.org/styles/), también [más información](https://citationstyles.org/publishers/)).
 
 ```yaml
-#csl: methods-in-ecology-and-evolution.csl
 csl: acm-sig-proceedings-long-author-list.csl
+#csl: methods-in-ecology-and-evolution.csl
 ```
 
 
-<!-- Si se comentan las opciones "csl" de la cabecera "yaml" se puede personalizar por otra vía la presentación de la bibliografía con el comando (ver más información en [overleaf](https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles): -->
 
-
-<!-- ```latex -->
-<!-- \bibliographystyle{nombreestilo} -->
-<!-- ``` -->
-<!-- donde "nombreestilo" puede ser uno de los siguientes valores:  -->
-
-<!-- - usa números: unsrt, siam, plain, ieeetr, acm, abbrv -->
-<!-- - usa etiquetas: apalike, alpha. -->
-
-
-
-
-
-
-**Nota**: hay otra forma de manejar bibliografías con el paquete [biblatex](https://www.overleaf.com/learn/latex/Bibliography_management_with_biblatex) que posee características adicionales al sistema bibtex.
-
-## Otras cuestiones
+## Otras cuestiones de interés
 
 ### Cómo hacer referencias a otras partes del documento
 
-Se pueden hacer referencia a capítulos, secciones, subsecciones, u otros subniveles. Para ello es conveniente saber cómo insertar identificadores a estas partes. Se incluir un identificador,
+Se pueden hacer referencias a capítulos, secciones, subsecciones, u otros subniveles. Para ello es conveniente saber cómo insertar identificadores a estas partes. Para incluir un identificador,
 al final de la definición de un apartado se añaden unas llaves entre las que se ha puesto el identificador deseado con el prefijo `#`. 
 
 Para hacer referencia a este identificador se pueden emplear los comandos LaTeX: **`\ref{identificador}`** para referirse a la numeración del apartado o **`\pageref{identificador}`** para referirse a la página en la que se encuentra definido el apartado.
@@ -1281,7 +1590,7 @@ En el siguiente ejemplo se ha definido a una sección el identificador "sec:incl
 ## Cómo incluir un gráfico {#sec:incluirgrafico}
 ```
 
-**Nota**. No se pueden asociar identificadores iguales a secciones distintas.
+**Nota**. No se pueden definir identificadores iguales a secciones distintas.
 
 
 
@@ -1314,7 +1623,7 @@ produce
 
 ### Colorear párrafos de texto
 
-El siguiente código se utiliza varios comandos LaTeX para producir cajas coloreadas:
+En el siguiente código se utilizan varios comandos LaTeX para producir cajas coloreadas:
 
 - **`\colorbox{color}{texto}`**
 - **`\begin{minipage}{anchocaja}    \end{minipage}`**
@@ -1326,13 +1635,13 @@ El siguiente código se utiliza varios comandos LaTeX para producir cajas colore
 \begin{minipage}{0.30\textwidth}
 \color{white}
 Lo que se ve en esta \textcolor{red}{minipágina} 
-tiene un color de fondo negro y
+tiene un color de fondo azul y
 el texto está escrito en blanco. 
 \end{minipage}}\hspace{0.5cm} 
 \colorbox{yellow}{\begin{minipage}{0.60\textwidth} 
 Lo que se ve en esta \textcolor{red}{minipágina} 
-tiene un color de fondo negro y
-el texto está escrito en blanco
+tiene un color de fondo amarillo y
+el texto está escrito en negro
 \end{minipage}}
 ```
 
@@ -1359,7 +1668,7 @@ el texto está escrito en blanco
 
 Es posible incluir un documento pdf externo dentro de nuestro documento con ayuda del comando LaTeX **`\includepdf`** del paquete: "pdfpages" (incluido en este proyecto). 
 
-En el siguiente ejemplo se insertan en nuestro documento las páginas 8 y 14 del fichero local “xaringanej01_defecto.pdf” con un escalado de 75% (de la 13 a 14, habría que escribir: pages=13-14):
+En el siguiente ejemplo (no se muestra en este documento el resultado) se insertarían en nuestro documento las páginas 8 y 14 del fichero local “xaringanej01_defecto.pdf” con un escalado de 75% (de la 11 a 14, habría que escribir: pages=11-14):
 
 
 ```latex
@@ -1375,6 +1684,7 @@ En el siguiente ejemplo se incluye el fichero pdf (vendría apaisado y puede que
 \includepdf[scale=0.90,pages=1-,angle=90,pagecommand=,
 offset=00 -20]{chuleta_tabla_kableExtra_apaisada_texrevisado.pdf}
 ```
+como puede verse en la siguiente página.
 
 \includepdf[scale=0.90,pages=1-,angle=90,pagecommand=,
 offset=00 -20]{graficos/chuleta_tabla_kableExtra_apaisada.pdf}

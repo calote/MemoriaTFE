@@ -6,6 +6,10 @@
 \usepackage{float}
 \usepackage{placeins}
 \usepackage{fancyhdr}
+% Solucion: ! LaTeX Error: Command \counterwithout already defined.
+% https://tex.stackexchange.com/questions/425600/latex-error-command-counterwithout-already-defined
+\let\counterwithout\relax
+\let\counterwithin\relax
 \usepackage{chngcntr}
 \usepackage{microtype}
 \usepackage[utf8]{inputenc}
@@ -14,7 +18,7 @@
 %\usepackage[dvipsnames]{xcolor}
 \usepackage[usenames,dvipsnames]{xcolor}  %new
 \usepackage{pdfpages}
-\usepackage{natbib}
+%\usepackage{natbib}
 
 
 
@@ -167,7 +171,7 @@
 
 \definecolor{ocre}{RGB}{25,25,243} % Define el color naranja usado para resaltar algunas salidas
 
-\usepackage{calc} 
+%\usepackage{calc} 
 
 \usepackage{lipsum}
 
@@ -456,7 +460,29 @@ linewidth=4pt]{mBox}
 %\renewcommand{\baselinestretch}{1.5}
 
 %define etiqueta para las Tablas o Cuadros
-\renewcommand\spanishtablename{Tabla}
+%\renewcommand\spanishtablename{Tabla}
 
-\bibliographystyle{plain}
+%%\bibliographystyle{plain} %new no necesario
 
+
+%%%%%%%%%%%% PARA USO CON biblatex
+% \DefineBibliographyStrings{english}{%
+%   backrefpage = {ver pag.\adddot},%
+%   backrefpages = {ver pags.\adddot}%
+% }
+
+% \DefineBibliographyStrings{spanish}{%
+%   backrefpage = {ver pag.\adddot},%
+%   backrefpages = {ver pags.\adddot}%
+% }
+% 
+% \DeclareFieldFormat{pagerefformat}{\mkbibparens{{\color{red}\mkbibemph{#1}}}}
+% \renewbibmacro*{pageref}{%
+%   \iflistundef{pageref}
+%     {}
+%     {\printtext[pagerefformat]{%
+%        \ifnumgreater{\value{pageref}}{1}
+%          {\bibstring{backrefpages}\ppspace}
+%          {\bibstring{backrefpage}\ppspace}%
+%        \printlist[pageref][-\value{listtotal}]{pageref}}}}
+% 
