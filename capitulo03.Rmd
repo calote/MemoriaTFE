@@ -1,25 +1,32 @@
 ---
+author: "Nombre Completo Autor"
+date: "27/10/2017"
 documentclass: book
-classoption: a4paper
-#classoption: a4paper,oneside
-#bibliography: bib/library.bib
-bibliography: ["bib/library.bib", "bib/paquetes.bib"]
-#csl: methods-in-ecology-and-evolution.csl
-csl: acm-sig-proceedings-long-author-list.csl
-urlcolor: blue #black
-linkcolor: blue #black
-link-citations: yes
+forprint: true  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
-geometry: margin = 2.5cm #1.2in
+geometry: margin = 2.5cm 
+bibliography: ["bib/library.bib", "bib/paquetes.bib"]
+# metodobib -> true: natbib (descomentar: citation_package: natbib) 
+#           -> false: pandoc (comentar: citation_package: natbib)
+metodobib: true
+#natbib: plainnat, abbrvnat, unsrtnat
+biblio-style: "plainnat"
+#Método 2 (pandoc): descomente una línea de las 2 siguientes en caso de usarlo
+csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
+#csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
+link-citations: yes
 output: 
-  pdf_document: 
+  pdf_document:
     keep_tex: no
     number_sections: yes
-#    toc: yes
+    citation_package: natbib  # comentado usa: pandoc-citeproc
+    #toc: yes
     fig_caption: yes
+    template: latex/templateMemoriaTFE.tex
     includes:
-      in_header: latex/latex_preambulo.tex
-      after_body: latex/latex_antes_enddoc.tex
+      #before_body: portadas/latex_paginatitulo_modTFE.tex
+      #in_header: latex/latex_preambulo.tex
+      #after_body: latex/latex_antes_enddoc.tex
 ---
 
 
@@ -37,10 +44,28 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 <!-- \setcounter{chapter}{2} escribir 2 para capítulo 3  -->
 <!-- \pagenumbering{arabic} -->
 
+\ifdefined\ifprincipal
+\else
+\setlength{\parindent}{1em}
+\pagestyle{fancy}
+\setcounter{tocdepth}{4}
+\tableofcontents
+<!-- \nocite{*} -->
+\fi
+
+\ifdefined\ifdoblecara
+\fancyhead{}{}
 \fancyhead[LE,RO]{\scriptsize\rightmark}
 \fancyfoot[LO,RE]{\scriptsize\slshape \leftmark}
 \fancyfoot[C]{}
 \fancyfoot[LE,RO]{\footnotesize\thepage}
+\else
+\fancyhead{}{}
+\fancyhead[RO]{\scriptsize\rightmark}
+\fancyfoot[LO]{\scriptsize\slshape \leftmark}
+\fancyfoot[C]{}
+\fancyfoot[RO]{\footnotesize\thepage}
+\fi
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 

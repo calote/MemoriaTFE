@@ -1,41 +1,47 @@
 ---
-#title: "TFM"
 author: "Nombre Completo Autor"
 date: "27/10/2017"
 documentclass: book
-classoption: a4paper
-#bibliography: bib/library.bib
-bibliography: ["bib/library.bib", "bib/paquetes.bib"]
-#csl: methods-in-ecology-and-evolution.csl
-csl: acm-sig-proceedings-long-author-list.csl
-urlcolor: blue #black
-linkcolor: blue #black
-link-citations: yes
+forprint: true  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
-geometry: margin = 2.5cm #1.2in
+geometry: margin = 2.5cm 
+bibliography: ["bib/library.bib", "bib/paquetes.bib"]
+# metodobib -> true: natbib (descomentar: citation_package: natbib) 
+#           -> false: pandoc (comentar: citation_package: natbib)
+metodobib: true
+#natbib: plainnat, abbrvnat, unsrtnat
+biblio-style: "plainnat"
+#Método 2 (pandoc): descomente una línea de las 2 siguientes en caso de usarlo
+csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
+#csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
+link-citations: yes
 output: 
-  pdf_document: 
+  pdf_document:
     keep_tex: no
     number_sections: yes
-#    toc: yes
+    citation_package: natbib  # comentado usa: pandoc-citeproc
+    #toc: yes
     fig_caption: yes
+    template: latex/templateMemoriaTFE.tex
     includes:
-      in_header: latex/latex_preambulo.tex
-      after_body: latex/latex_antes_enddoc.tex
+      #before_body: portadas/latex_paginatitulo_modTFE.tex
+      #in_header: latex/latex_preambulo.tex
+      #after_body: latex/latex_antes_enddoc.tex
 ---
 
 
-
 ```{r include=FALSE}
-# knitr::knit_hooks$set(document = function(x) {sub('\\usepackage[]{color}', '\\usepackage[table]{xcolor}', x, fixed = TRUE)})
+
+Sys.setlocale('LC_ALL','C') # corrige problema con 
+options(kableExtra.latex.load_packages = F)
+#options(tinytex.latexmk.emulation = FALSE)
 knitr::opts_chunk$set(fig.path = 'figurasR/',
                       echo = FALSE, warning = FALSE, message = FALSE,
                       fig.pos="H",fig.align="center",out.width="95%",
                       cache=FALSE)
-#knitr::knit_hooks$set(document = function(x) {sub('\\usepackage[]{color}', '\\usepackage{xcolor}', x, fixed = TRUE)})
-#knitr::knit_hooks$set(document = function(x) {sub('\\usepackage{color}', '\\usepackage[usenames,dvipsnames]{xcolor}', x, fixed = TRUE)})
-
-
+knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
+                   "stringr","shiny","flexdashboard","htmlwidgets","bookdown"),
+                 file="bib/paquetes.bib", width = 60)
 ```
 
 
@@ -43,15 +49,42 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 <!-- \setcounter{chapter}{2} escribir 2 para capítulo 3  -->
 <!-- \pagenumbering{arabic} -->
 
+
+\ifdefined\ifprincipal
+\else
+\setlength{\parindent}{1em}
+\pagestyle{fancy}
+\setcounter{tocdepth}{4}
+\tableofcontents
+<!-- \subpdfbookmark{Índice General}{indice} -->
+\nocite{Luque2017,Luque2019,RStudio,R-base,
+R-knitr,R-rmarkdown,R-dplyr,R-ggplot2, R-xtable,
+R-stringr,Techopedia}
+
+\fi
+
+\ifdefined\ifdoblecara
+\fancyhead{}{}
 \fancyhead[LE,RO]{\scriptsize\rightmark}
 \fancyfoot[LO,RE]{\scriptsize\slshape \leftmark}
 \fancyfoot[C]{}
 \fancyfoot[LE,RO]{\footnotesize\thepage}
+\else
+\fancyhead{}{}
+\fancyhead[RO]{\scriptsize\rightmark}
+\fancyfoot[LO]{\scriptsize\slshape \leftmark}
+\fancyfoot[C]{}
+\fancyfoot[RO]{\footnotesize\thepage}
+\fi
+
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
 
 # Tareas habituales al escribir documentos R Markdown
+
+
+
 
 Este capítulo está escrito en el fichero R Markdown **"capitulo05.Rmd"** y se ha incluido para 
 que pueda copiar y pegar en su trabajo la solución a algunas de las cuestiones más habituales
@@ -867,7 +900,7 @@ Para que en lugar de "Cuadro" aparezca "Tabla", se debería incluir una de las s
 \renewcommand\tablename{Tabla}
 ```
 
-Con el paquete babel y la opción "spanish" (o al final del fichero: "latex/latex_preambulo.tex"):
+Con el paquete babel y la opción "spanish" (o al final de: "latex/latex_preambulo.tex"):
 
 ```latex
 \renewcommand\spanishtablename{Tabla}
@@ -1403,10 +1436,10 @@ Este método es el que está activado por defecto.
 
 \footnotesize
 ```markdown
-#Método 1 de bibliografía
-#Haga knit 2 veces si hay fallos
-#Abre fichero: latex/latex_antes_enddoc.tex
-#otros natbib: plainnat, abbrvnat, unsrtnat
+# metodobib -> true: natbib (descomentar: citation_package: natbib) 
+#           -> false: pandoc (comentar: citation_package: natbib)
+metodobib: true
+#natbib: plainnat, abbrvnat, unsrtnat
 biblio-style: "plainnat"
 output: 
   pdf_document: 
@@ -1421,24 +1454,20 @@ output:
 
 **Importante**. En la bibligrafía  que **se muestra al final del documento**  aparecerán las referencias bibliográficas de aquellas que hayan sido citadas en el documento escrito.
 
-También es posible incluir algunas referencias bibliográficas que no hayan sido citadas, con ayuda del comando `\nocite{}` situado en el fichero: "`latex/latex_antes_enddoc.tex`", como puede verse en el siguiente código:
+También es posible incluir algunas referencias bibliográficas que no hayan sido citadas, con ayuda del comando `\nocite{}` situado al final del fichero: "tfe_principal.Rmd", como puede verse en el siguiente código:
 
 \footnotesize
-````latex
-% código latex para el final del documento
+````markdown
+\ifdefined\ifcitapandoc
 
-%%%%%%%%%%%%%%%%%%% Siguiente para el uso de bibliografía: natbib
-% comentarla si no se usa natbib
-\addcontentsline{toc}{chapter}{Bibliografía}
+\else
 
-% Descomente la siguiente línea para incluir todas las referencias en ficheros ".bib"
-% \nocite{*}
-
-% Descomente las siguientes líneas para incluir adicionalmente las referencias que 
+<!-- \nocite{*} -->
 \nocite{Luque2017,Luque2019,RStudio,R-base,
 R-knitr,R-rmarkdown,R-dplyr,R-ggplot2, R-xtable,
 R-stringr,Techopedia}
-%%%%%%%%%%%%%%%%%%% final para el uso de bibliografía: natbib
+
+\fi 
 
 ````
 \normalsize
@@ -1513,19 +1542,12 @@ y
 
 \footnotesize
 ```markdown
-# Método 2 de bibliografía (descomente una línea de las 2 siguientes en caso de usarlo)
-csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
-#csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
-```
-\normalsize
-
-- Al final del fichero:
-
-\footnotesize
-```markdown
-<!-- Método 2 bibliografía: Descomentar en caso de NO usar: "citation_package: natbib" -->
-<!-- CUIDADO: LA SIGUIENTE LÍNEA DEBE SER LA ÚLTIMA SI NO ESTÁ COMENTADA -->
-# Bibliografía
+# metodobib -> true: natbib (descomentar: citation_package: natbib) 
+#           -> false: pandoc (comentar: citation_package: natbib)
+metodobib: false
+output: 
+  pdf_document: 
+    #citation_package: natbib
 ```
 \normalsize
 
