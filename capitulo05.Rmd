@@ -920,7 +920,7 @@ En el siguiente enlace [overleaf: alfabeto griego y símbolos matemáticos](http
 ### Algunas expresiones matemáticas
 
 
-Las fracciones pueden usarse en el texto, por ejemplo \( \frac{1}{2} \), y en un estilo matemático centrado como puede verse a continuación:
+Las fracciones pueden usarse en el texto, por ejemplo $\frac{1}{2}$, y en un estilo matemático centrado como puede verse a continuación:
  
 \[\frac{1}{2}\]
 
