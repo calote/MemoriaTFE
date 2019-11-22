@@ -732,6 +732,12 @@ $endif$
 $if(lof)$
 \listoffigures
 $endif$
+
+$if(principal)$
+$else$
+\raggedbottom
+$endif$
+
 $body$
 
 $if(natbib)$
