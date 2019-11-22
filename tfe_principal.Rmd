@@ -33,6 +33,9 @@ output:
       #after_body: latex/latex_antes_enddoc.tex
 ---
 
+<!-- Si "metodobib: false", modificar este "nocite:"  -->
+<!-- Si "metodobib: true", modificar el "nocite:" del final de este fichero  -->
+
 ---
 nocite: | 
   @Luque2017,@Luque2019,@RStudio,@R-base,
@@ -191,6 +194,8 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 
 \else
 
+<!-- Si "metodobib: true", modificar este "nocite:"  -->
+<!-- Si "metodobib: false", modificar el "nocite:" del inicio de este fichero  -->
 
 <!-- \nocite{*} -->
 \nocite{Luque2017,Luque2019,RStudio,R-base,
