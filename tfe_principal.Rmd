@@ -45,7 +45,7 @@ nocite: |
 
 
 ```{r global_options, include=FALSE}
-Sys.setlocale('LC_ALL','C') # corrige problema con 
+#Sys.setlocale('LC_ALL','C') # corrige problema con (ocasionaba problemas con acentos en fig.cap)
 options(kableExtra.latex.load_packages = F)
 #options(tinytex.latexmk.emulation = FALSE)
 knitr::opts_chunk$set(fig.path = 'figurasR/',
