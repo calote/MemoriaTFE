@@ -36,8 +36,7 @@ output:
 ---
 nocite: | 
   @Luque2017,@Luque2019,@RStudio,@R-base,
-  @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2, @R-xtable,
-  @R-stringr,@Techopedia
+  @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2,@Techopedia
 ...
 
 
@@ -49,8 +48,7 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
                       echo = TRUE, warning = FALSE, message = FALSE,
                       fig.pos="H",fig.align="center",out.width="95%",
                       cache=FALSE) # 
-knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
-                   "stringr","shiny","flexdashboard","htmlwidgets","bookdown"),
+knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
                  file="bib/paquetes.bib", width = 60)
 ```
 
@@ -194,7 +192,6 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 
 <!-- \nocite{*} -->
 \nocite{Luque2017,Luque2019,RStudio,R-base,
-R-knitr,R-rmarkdown,R-dplyr,R-ggplot2, R-xtable,
-R-stringr,Techopedia}
+R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 
 \fi 
