@@ -27,8 +27,8 @@ output:
   
 ---
 nocite: | 
-  @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2, @R-xtable,
-  @R-stringr,@Techopedia,@Pentaho2, @R-kableExtra
+  @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2,
+  @Techopedia,@Pentaho2, @R-kableExtra
 ...
 
 <!-- ,@Example1999, @Example2000 -->
@@ -39,9 +39,7 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
                       fig.pos="H",fig.align="center",out.width="95%",
                       cache=FALSE)
 
-knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
-                   "stringr","shiny","flexdashboard","htmlwidgets","bookdown",
-                   "kableExtra"),
+knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
                  file="paquetes.bib", width = 60)
 options(knitr.table.format = "latex",
         kableExtra.latex.load_package = FALSE)
