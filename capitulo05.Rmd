@@ -38,8 +38,7 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
                       echo = FALSE, warning = FALSE, message = FALSE,
                       fig.pos="H",fig.align="center",out.width="95%",
                       cache=FALSE)
-knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
-                   "stringr","shiny","flexdashboard","htmlwidgets","bookdown"),
+knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
                  file="bib/paquetes.bib", width = 60)
 ```
 
@@ -57,8 +56,7 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 \tableofcontents
 <!-- \subpdfbookmark{Índice General}{indice} -->
 \nocite{Luque2017,Luque2019,RStudio,R-base,
-R-knitr,R-rmarkdown,R-dplyr,R-ggplot2, R-xtable,
-R-stringr,Techopedia}
+R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 
 \fi
 
@@ -296,7 +294,7 @@ knitr::include_graphics("graficos/capitulo05ejemplo01.png")
 knitr::include_graphics("graficos/capitulo05ejemplo01.png")
 ```
 
-````  ````
+
 
 ### Incluir un gráfico creado con R en el documento
 
@@ -365,7 +363,7 @@ p
 ```
 
 
-````  ```` 
+
 
 #### Incluir un gráfico creado con R con leyenda y situado en la parte superior
 
@@ -388,7 +386,7 @@ ggplot(mtcars, aes(mpg, wt)) +
 ```
 
 
-````  ```` 
+
 
 
 <!-- \pagebreak\FloatBarrier -->
@@ -498,7 +496,7 @@ head(iris,10) %>%
     position = "center",full_width = FALSE)
 ```
 
-````  ````
+
 
 ### Incluir una tabla que ocupe varias páginas
 
@@ -904,8 +902,6 @@ Con el paquete babel y la opción "spanish" (o al final de: "latex/latex_preambu
 ```latex
 \renewcommand\spanishtablename{Tabla}
 ```
-
-```` ````
 
 
 ## Uso de expresiones matemáticas
@@ -1463,8 +1459,7 @@ También es posible incluir algunas referencias bibliográficas que no hayan sid
 
 <!-- \nocite{*} -->
 \nocite{Luque2017,Luque2019,RStudio,R-base,
-R-knitr,R-rmarkdown,R-dplyr,R-ggplot2, R-xtable,
-R-stringr,Techopedia}
+R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 
 \fi 
 
@@ -1580,8 +1575,7 @@ También es posible incluir algunas referencias bibliográficas que no hayan sid
 ---
 nocite: | 
   @Luque2017,@RStudio,@R-base,
-  @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2, @R-xtable,
-  @R-stringr,@Techopedia
+  @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2,@Techopedia
 ...
 
 ````
