@@ -186,12 +186,6 @@ En este enlace [url-bookdown](https://bookdown.org/yihui/rmarkdown/r-code.html) 
 
 
 
-
-
-```` ````
-
-
-
 ## Cómo incluir un gráfico {#sec:incluirgrafico}
 
 
