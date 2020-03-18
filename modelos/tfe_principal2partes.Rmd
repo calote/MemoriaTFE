@@ -93,8 +93,8 @@ options(knitr.table.format = "latex",
 \cleardoublepage   
 <!--  \clearpage -->
 \listoftables
-\addcontentsline{toc}{section}{Índice de Cuadros}
-
+<!-- \addcontentsline{toc}{section}{Índice de Cuadros} -->
+\addcontentsline{toc}{section}{Índice de Tablas}
 
 \cleardoublepage   
 <!--  \clearpage -->

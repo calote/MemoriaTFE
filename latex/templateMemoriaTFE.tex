@@ -280,7 +280,10 @@ $endif$
 %% MODIFICARLO CONVENIENTEMENTE PARA USARLO CON OTRAS CODIFICACIONES
 
 
-\usepackage[spanish,es-nodecimaldot,es-noshorthands]{babel}
+%\usepackage[spanish,es-nodecimaldot,es-noshorthands]{babel}
+\usepackage[spanish,es-nodecimaldot,es-noshorthands,es-tabla]{babel}
+% Ver: es-tabla (en: https://osl.ugr.es/CTAN/macros/latex/contrib/babel-contrib/spanish/spanish.pdf)
+% es-tabla (en: https://tex.stackexchange.com/questions/80443/change-the-word-table-in-table-captions)
 \usepackage{float}
 \usepackage{placeins}
 \usepackage{fancyhdr}
@@ -696,8 +699,6 @@ linewidth=4pt]{mBox}
 %\usepackage{xcolor}
 
 %%%%%%% fin: latex_preambulo.tex PLLC
-
-
 
 $for(header-includes)$
 $header-includes$

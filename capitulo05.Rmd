@@ -882,20 +882,38 @@ text_tbl %>%
 
 
 
+### Cambiar la etiqueta "Tabla"
 
-### Cambiar la etiqueta "Cuadro"
+Para que en lugar de "Tabla" aparezca "Cuadro" (este término es el que recomienda la RAE), se deberían hacer las siguientes modificaciones en: 
 
-Para que en lugar de "Cuadro" aparezca "Tabla", se debería incluir una de las siguientes opciones en el fichero principal 
+- en el fichero principal "tfe_principal.Rmd"
 
-```latex
-\renewcommand\tablename{Tabla}
-```
+    ```latex
+    \addcontentsline{toc}{section}{Índice de Tablas}
+    ```
 
-Con el paquete babel y la opción "spanish" (o al final de: "latex/latex_preambulo.tex"):
+- Quitar la opción "es-tabla" en el fichero "latex/templateMemoriaTFE.tex" 
 
-```latex
-\renewcommand\spanishtablename{Tabla}
-```
+    ```latex
+    %\usepackage[spanish,es-nodecimaldot,es-noshorthands,es-tabla]{babel}
+    \usepackage[spanish,es-nodecimaldot,es-noshorthands]{babel}
+    ```
+
+Más información en la url siguiente: [Documentación babel-spanish en CTAN](https://osl.ugr.es/CTAN/macros/latex/contrib/babel-contrib/spanish/spanish.pdf).
+
+<!-- ### Cambiar la etiqueta "Cuadro" -->
+
+<!-- Para que en lugar de "Cuadro" aparezca "Tabla", se debería incluir una de las siguientes opciones en el fichero principal  -->
+
+<!-- ```latex -->
+<!-- \renewcommand\tablename{Tabla} -->
+<!-- ``` -->
+
+<!-- Con el paquete babel y la opción "spanish" (o al final de: "latex/latex_preambulo.tex"): -->
+
+<!-- ```latex -->
+<!-- \renewcommand\spanishtablename{Tabla} -->
+<!-- ``` -->
 
 
 ## Uso de expresiones matemáticas

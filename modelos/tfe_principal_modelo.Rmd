@@ -106,8 +106,8 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
 \cleardoublepage   
 
 \listoftables
-\addcontentsline{toc}{section}{Índice de Cuadros}
-
+<!-- \addcontentsline{toc}{section}{Índice de Cuadros} -->
+\addcontentsline{toc}{section}{Índice de Tablas}
 
 \cleardoublepage   
 

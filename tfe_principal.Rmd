@@ -109,8 +109,8 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
 \cleardoublepage   
 
 \listoftables
-\addcontentsline{toc}{section}{Índice de Cuadros}
-
+<!-- \addcontentsline{toc}{section}{Índice de Cuadros} -->
+\addcontentsline{toc}{section}{Índice de Tablas}
 
 \cleardoublepage   
 
@@ -149,11 +149,22 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
 ```{r child = 'capitulo04.Rmd'}
 ```
 
-\FloatBarrier
 
-<!-- Borrarlo o comentarlo para obtener la versión final: contiene utilidades -->
-```{r child = 'capitulo05.Rmd'}
-```
+<!-- 
+Descomentarlo para incluir el capítulo 5 el cual contiene utilidades de ejemplo
+para copiar y pegar.
+Atención: necesitará la instalación de algunos paquetes R 
+que puede no tener instalados. Son:
+install.packages(c("ggplot2","kableExtra","dplyr"))
+-->
+
+
+<!-- \FloatBarrier -->
+
+<!-- ```{r child = 'capitulo05.Rmd'} -->
+<!-- ``` -->
+
+
 
 
 \FloatBarrier
