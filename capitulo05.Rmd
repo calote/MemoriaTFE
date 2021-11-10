@@ -226,14 +226,14 @@ Si queremos incluirlo con una leyenda explicativa con una numeración que lo ide
 
 ````markdown
 `r ''````{r echo=FALSE,out.width='8cm',fig.align='center',
-fig.cap="\\label{fig:c05ej01}Se muestra el panel Files de RStudio. 
-\\newline{}Fuente: elaboraci\\'on propia",fig.pos="H"}
+fig.cap="\\label{fig:c05ej01}Se muestra el panel Files de RStudio 
+(fuente: elaboraci\\'on propia)",fig.pos="H"}
 knitr::include_graphics("graficos/capitulo05ejemplo01.png")
 ```
 
 ````
 
-```{r echo=FALSE,out.width='8cm',fig.align='center',fig.cap="\\label{fig:c05ej01}Se muestra el panel Files de RStudio. \\newline{}Fuente: elaboraci\\'on propia",fig.pos="H"}
+```{r echo=FALSE,out.width='8cm',fig.align='center',fig.cap="\\label{fig:c05ej01}Se muestra el panel Files de RStudio (fuente: elaboraci\\'on propia)",fig.pos="H"}
 knitr::include_graphics("graficos/capitulo05ejemplo01.png")
 ```
 
@@ -278,13 +278,13 @@ Ver más en [ayuda overleaf](https://es.overleaf.com/learn/latex/Line_breaks_and
 ````markdown
 `r ''````{r echo=FALSE,out.width='8cm',fig.align='center',
 fig.cap="\\label{fig:c05ej02}Un ejemplo de figura colocada 
-en la parte superior de un documento. 
-\\newline{}Fuente: \\url{http://destio.us.es/calvo}",fig.pos="t"}
+en la parte superior de un documento 
+(Fuente: \\url{http://destio.us.es/calvo})",fig.pos="t"}
 knitr::include_graphics("graficos/capitulo05ejemplo01.png")
 ```
 ````
 
-```{r echo=FALSE,out.width='8cm',fig.align='center',fig.cap="\\label{fig:c05ej02}Un ejemplo de figura colocada en la parte superior de un documento. \\newline{}Fuente: \\url{http://destio.us.es/calvo}",fig.pos="t"}
+```{r echo=FALSE,out.width='8cm',fig.align='center',fig.cap="\\label{fig:c05ej02}Un ejemplo de figura colocada en la parte superior de un documento. (fuente: \\url{http://destio.us.es/calvo})",fig.pos="t"}
 knitr::include_graphics("graficos/capitulo05ejemplo01.png")
 ```
 
@@ -365,15 +365,14 @@ El gráfico de la Figura \ref{fig:cap05gg02} es un ejemplo de gráfico creado co
 
 ````markdown
 `r ''````{r echo=FALSE,out.width='80%',fig.align='center',fig.pos='htbp',
-fig.cap="\\label{fig:cap05gg02}Gr\\'afico de L\\'{\\i}neas creado con ggplot2. 
-Fuente: elaboraci\\'on propia"}
+fig.cap="\\label{fig:cap05gg02}Gr\\'afico de L\\'{\\i}neas creado con ggplot2 (fuente: elaboraci\\'on propia)"}
 library(ggplot2)
 ggplot(mtcars, aes(mpg, wt)) + 
   geom_line(col="blue")
 ```
 ````
 
-```{r echo=FALSE,out.width='80%',fig.align='center',fig.pos='htbp',fig.cap="\\label{fig:cap05gg02}Gr\\'afico de L\\'{\\i}aneas creado con ggplot2. Fuente: elaboraci\\'on propia"}
+```{r echo=FALSE,out.width='80%',fig.align='center',fig.pos='htbp',fig.cap="\\label{fig:cap05gg02}Gr\\'afico de L\\'{\\i}neas creado con ggplot2 (fuente: elaboraci\\'on propia)"}
 library(ggplot2)
 ggplot(mtcars, aes(mpg, wt)) + 
   geom_line(col="blue")
@@ -395,7 +394,7 @@ Con el siguiente código se pueden presentar dos gráficos en una única figura 
 ````markdown
 
 Vea la Figura \ref{fig:plot-cars}, la cual contiene la Figura 
-\ref{fig:plot-cars1} y la Figura \ref{fig:plot-cars2}.
+\ref{fig:plot-cars-1} y la Figura \ref{fig:plot-cars-2}.
 
 ```{r plot-cars, fig.height = 3, fig.width = 4,out.width='49%', 
 fig.cap="Dos gr\\'aficos", fig.subcap = c("Regresi\\'on", 
@@ -409,7 +408,7 @@ plot(cars)
 
 
 Vea la Figura \ref{fig:plot-cars}, la cual contiene la Figura 
-\ref{fig:plot-cars1} y la Figura \ref{fig:plot-cars2}.
+\ref{fig:plot-cars-1} y la Figura \ref{fig:plot-cars-2}.
 
 ```{r plot-cars, fig.height = 3, fig.width = 4, out.width='49%', fig.cap="Dos gr\\'aficos", fig.subcap = c("Regresi\\'on", "Gr\\'afico sobre cars"),fig.pos="htbp"}
 plot(mpg ~ wt, data = mtcars)
