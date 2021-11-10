@@ -96,12 +96,12 @@ Un chunk de código R comienza con tres acentos abiertos:  ```` ```{r} ```` dond
 
 **Nota importante**: las opciones de un chunk deben estar escritas en una misma línea de texto.
 
-Un "expresión R en línea" o en el interior de un párrafo comienza con `` `r `` y finaliza con un acento abierto `` ` ``.
+Una "expresión R en línea" o en el interior de un párrafo comienza con `` `r `` y finaliza con un acento abierto `` ` ``.
 
 Para marcar texto como "código en línea" use un par de acentos abiertos, por ejemplo, `` `code` ``. Para incluir $n$ acentos abiertos literalmente, se deben usar al menos $n+1$ acentos abiertos que los envuelvan, por ejemplo, pueden usarse 4 acentos abiertos para preservar 3 acentos abiertos dentro: ````` ```` ```code``` ```` `````, lo cual se mostrará como: ```` ```code``` ````.
 
+Si lo que se quiere es mostrar literalmente los chunks de código junto a las opciones seleccionadas, ver el código utilizado en el siguiente ejemplo: 
 
-Si lo que se quiere es mostrar literalmente los chunks de código junto a las opciones seleccionadas, ver el siguiente ejemplo en el que se ha utilizado: 
 
 `````
 
@@ -111,13 +111,6 @@ código markdown que quiera mostrarse
 ````
 
 `````
-
-
-
-
-```{r}
-b = c(3,2,3)
-```
 
 
 ````markdown
@@ -136,7 +129,18 @@ La pendiente de la regresión es `r '\x60r b[1]\x60'`
 
 ````
 
+La última frase se mostraría así:
+
+\bmarkdownsal
+
+```{r echo=FALSE}
+fit = lm(dist ~ speed, data = cars)
+b   = coef(fit)
+```
+
 La pendiente de la regresión es `r b[1]`.
+
+\emarkdownsal
 
 
 Hay una gran cantidad de opciones para los chunks en knitr documentadas en <https://yihui.name/knitr/options>. 
@@ -197,6 +201,12 @@ puede proceder de
 - un fichero gráfico descargado de internet,
 - una captura de pantalla que hemos obtenido de nuestro ordenador,
 - una ilustración que hemos diseñado con carácter didáctico que hemos guardado en un fichero gráfico, etc.
+
+A continuación se ha escrito el comando LaTeX: "`\clearpage`", el cual provoca un salto de página en el punto del texto en el que se ha escrito.
+
+````markdown
+\clearpage
+````
 
 \clearpage
 
