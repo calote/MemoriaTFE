@@ -172,10 +172,10 @@ install.packages(c("ggplot2","kableExtra","dplyr"))
 -->
 
 
-\FloatBarrier
+<!-- \FloatBarrier -->
 
-```{r child = 'capitulo05.Rmd'}
-```
+<!-- ```{r child = 'capitulo05.Rmd'} -->
+<!-- ``` -->
 
 
 

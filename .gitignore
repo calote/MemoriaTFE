@@ -9,5 +9,6 @@
 *.lot
 *.toc
 *.lof
+*.bbl
 figurasR/unnamed-*.pdf
 capitulo05.pdf
