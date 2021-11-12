@@ -1,3 +1,4 @@
+.DS_Store
 .Rproj.user
 .Rhistory
 .RData
@@ -5,5 +6,8 @@
 *.log
 *.aux
 *.blg
+*.lot
+*.toc
+*.lof
 figurasR/unnamed-*.pdf
 capitulo05.pdf

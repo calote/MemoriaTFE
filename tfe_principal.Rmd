@@ -3,16 +3,24 @@ documentclass: book
 principal: true
 forprint: true  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
+fuentenueva: false  # false, true
 geometry: margin = 2.5cm 
 bibliography: ["bib/library.bib", "bib/paquetes.bib"]
 # metodobib -> true: natbib (descomentar: citation_package: natbib) 
 #           -> false: pandoc (comentar: citation_package: natbib)
 metodobib: true
 #natbib: plainnat, abbrvnat, unsrtnat
-biblio-style: "plainnat"
+#natbib: chicago, apalike
+#natbib: apalike2 (https://ctan.org/pkg/apalike2)
+#natbib: apa-good
+biblio-style: "apa-good"
+natbiboptions: "numbers" # "square,numbers" # ver: https://www.ctan.org/pkg/natbib
+# más info: authoryear,numbers,  super, angle, sort, compress
+# https://ctan.javinator9889.com/macros/latex/contrib/natbib/natnotes.pdf
 #Método 2 (pandoc): descomente una línea de las 2 siguientes en caso de usarlo
 csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
 #csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
+#csl: apa.csl  # apa.csl, ieee.csl
 link-citations: yes
 output: 
   pdf_document:
@@ -38,10 +46,12 @@ output:
 
 ---
 nocite: | 
-  @Luque2017,@Luque2019,@RStudio,@R-base,
+  @Luque2017,@Luque2019,@RStudio,@R-base2,
   @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2,@Techopedia
 ...
 
+
+<!-- \newcommand\Mycite[1]{\citeauthor{#1}~[\citeyear{#1}]} -->
 
 ```{r global_options, include=FALSE}
 #Sys.setlocale('LC_ALL','C') # corrige problema con (ocasionaba problemas con acentos en fig.cap)
@@ -53,6 +63,9 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
                       cache=FALSE) # 
 knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
                  file="bib/paquetes.bib", width = 60)
+# .packages() incluirá los paquetes utilizados
+# knitr::write_bib(c(.packages(),"rmarkdown"),   
+#                 file="bib/paquetes.bib", width = 60)
 ```
 
 
@@ -159,10 +172,10 @@ install.packages(c("ggplot2","kableExtra","dplyr"))
 -->
 
 
-<!-- \FloatBarrier -->
+\FloatBarrier
 
-<!-- ```{r child = 'capitulo05.Rmd'} -->
-<!-- ``` -->
+```{r child = 'capitulo05.Rmd'}
+```
 
 
 
@@ -178,6 +191,8 @@ install.packages(c("ggplot2","kableExtra","dplyr"))
 
 ```{r child = 'apendice02.Rmd'}
 ```
+
+
 
 
 \FloatBarrier
@@ -207,7 +222,9 @@ install.packages(c("ggplot2","kableExtra","dplyr"))
 <!-- Si "metodobib: false", modificar el "nocite:" del inicio de este fichero  -->
 
 <!-- \nocite{*} -->
-\nocite{Luque2017,Luque2019,RStudio,R-base,
-R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
+\nocite{Luque2017,Luque2019,RStudio,R-base2,
+R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia,
+webfacmatematicasus1,webUS2a,webPedroLuque,
+lopez2007aplicacion}
 
 \fi 

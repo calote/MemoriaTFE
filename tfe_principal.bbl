@@ -1,0 +1,94 @@
+\begin{thebibliography}{14}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+
+\bibitem[{web({Página web})}]{webUS2a}
+ ({Página web}).
+\newblock Universidad de sevilla.
+\newblock Disponible en \url{https://www.us.es}.
+
+\bibitem[{Allaire et~al.(2021)Allaire, Xie, McPherson, Luraschi, Ushey, Atkins,
+  Wickham, Cheng, Chang, \& Iannone}]{R-rmarkdown}
+Allaire, J., Xie, Y., McPherson, J., Luraschi, J., Ushey, K., Atkins, A.,
+  Wickham, H., Cheng, J., Chang, W., \& Iannone, R. (2021).
+\newblock {\em rmarkdown: Dynamic Documents for R\/}.
+\newblock R package version 2.11.
+\newline\urlprefix\url{https://CRAN.R-project.org/package=rmarkdown}
+
+\bibitem[{{Facultad de Matemáticas (Univ.
+  Sevilla)}({s.f.})}]{webfacmatematicasus1}
+{Facultad de Matemáticas (Univ. Sevilla)} ({s.f.}).
+\newline\urlprefix\url{https://www.matematicas.us.es}
+
+\bibitem[{Lopez et~al.(2007)Lopez, Fernández~Henao, \&
+  Morales}]{lopez2007aplicacion}
+Lopez, J.~F., Fernández~Henao, S., \& Morales, M.~M. (2007).
+\newblock Aplicación de la programación por metas en la distribución de
+  servicios entre empresas operadoras del sistema de transporte masivo.
+\newblock {\em Scientia et technica\/}, {\em 13\/}(37), 339--343.
+
+\bibitem[{Luque~Calvo(2017)}]{Luque2017}
+Luque~Calvo, P.~L. (2017).
+\newblock {\em Escribir un Trabajo Fin de Estudios con R Markdown\/}.
+\newline\urlprefix\url{http://destio.us.es/calvo}
+
+\bibitem[{Luque~Calvo(2019)}]{Luque2019}
+Luque~Calvo, P.~L. (2019).
+\newblock {\em Cómo crear Tablas de información en R Markdown\/}.
+\newline\urlprefix\url{http://destio.us.es/calvo}
+
+\bibitem[{{Luque Calvo, Pedro L.}({2021})}]{webPedroLuque}
+{Luque Calvo, Pedro L.} ({2021}).
+\newblock {Página personal de Pedro L. Luque}.
+\newline\urlprefix\url{http://destio.us.es/calvo}
+
+\bibitem[{{R Core Team}(2016)}]{R-base2}
+{R Core Team} (2016).
+\newblock {\em R: A Language and Environment for Statistical Computing\/}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria.
+\newline\urlprefix\url{https://www.R-project.org/}
+
+\bibitem[{{RStudio Team}(2015)}]{RStudio}
+{RStudio Team} (2015).
+\newblock {\em RStudio: Integrated Development Environment for R\/}.
+\newblock RStudio, Inc., Boston, MA.
+\newline\urlprefix\url{http://www.rstudio.com/}
+
+\bibitem[{Techopedia(2017)}]{Techopedia}
+Techopedia (2017).
+\newblock "definition - what does business intelligence (bi) mean?".
+\newblock Disponible en
+  \url{https://www.techopedia.com/definition/345/business-intelligence-bi}.
+
+\bibitem[{Wickham et~al.(2021{\natexlab{a}})Wickham, Chang, Henry, Pedersen,
+  Takahashi, Wilke, Woo, Yutani, \& Dunnington}]{R-ggplot2}
+Wickham, H., Chang, W., Henry, L., Pedersen, T.~L., Takahashi, K., Wilke, C.,
+  Woo, K., Yutani, H., \& Dunnington, D. (2021{\natexlab{a}}).
+\newblock {\em ggplot2: Create Elegant Data Visualisations Using the Grammar of
+  Graphics\/}.
+\newblock R package version 3.3.5.
+\newline\urlprefix\url{https://CRAN.R-project.org/package=ggplot2}
+
+\bibitem[{Wickham et~al.(2021{\natexlab{b}})Wickham, François, Henry, \&
+  Müller}]{R-dplyr}
+Wickham, H., François, R., Henry, L., \& Müller, K. (2021{\natexlab{b}}).
+\newblock {\em dplyr: A Grammar of Data Manipulation\/}.
+\newblock R package version 1.0.7.
+\newline\urlprefix\url{https://CRAN.R-project.org/package=dplyr}
+
+\bibitem[{Wickham \& Grolemund(2017)}]{Wickham2017}
+Wickham, H., \& Grolemund, G. (2017).
+\newblock {\em R for Data Science: Import, Tidy, Transform, Visualize, and
+  Model Data\/}.
+\newblock O'Reilly, first edition ed.
+
+\bibitem[{Xie(2021)}]{R-knitr}
+Xie, Y. (2021).
+\newblock {\em knitr: A General-Purpose Package for Dynamic Report Generation
+  in R\/}.
+\newblock R package version 1.36.
+\newline\urlprefix\url{https://yihui.org/knitr/}
+
+\end{thebibliography}

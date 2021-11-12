@@ -10,7 +10,9 @@ bibliography: ["bib/library.bib", "bib/paquetes.bib"]
 #           -> false: pandoc (comentar: citation_package: natbib)
 metodobib: true
 #natbib: plainnat, abbrvnat, unsrtnat
-biblio-style: "plainnat"
+#natbib: chicago, apalike, newapa
+biblio-style: "apa-good"
+natbiboptions: "numbers"
 #Método 2 (pandoc): descomente una línea de las 2 siguientes en caso de usarlo
 csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
 #csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
@@ -35,7 +37,7 @@ output:
 options(kableExtra.latex.load_packages = F)
 #options(tinytex.latexmk.emulation = FALSE)
 knitr::opts_chunk$set(fig.path = 'figurasR/',
-                      echo = FALSE, warning = FALSE, message = FALSE,
+                      echo = TRUE, warning = FALSE, message = FALSE,
                       fig.pos="H",fig.align="center",out.width="95%",
                       cache=FALSE)
 knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
@@ -55,7 +57,7 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
 \setcounter{tocdepth}{4}
 \tableofcontents
 <!-- \subpdfbookmark{Índice General}{indice} -->
-\nocite{Luque2017,Luque2019,RStudio,R-base,
+\nocite{Luque2017,Luque2019,RStudio,R-base2,
 R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 
 \fi
@@ -92,7 +94,7 @@ al escribir un trabajo escrito.
 ## Mostrar los chunks de código R y las opciones
 
 
-Un chunk de código R comienza con tres acentos abiertos:  ```` ```{r} ```` donde `r` indica el nombre del lenguaje,^[No se limita al lenguaje R, se pueden usar otros lenguajes, ver: [Ingenierías de lenguaje con knitr](https://rmarkdown.rstudio.com/authoring_knitr_engines.html%23sql).] y finaliza con tres acentos abiertos. Pueden escribirse opciones adicionales a un chunk en las llaves (por ejemplo, se define la altura de un gráfico en 5 centímetros: ```` ```{r fig.height='5cm'} ````). 
+Un chunk de código R comienza con tres acentos abiertos:  ```` ```{r} ```` donde `r` indica el nombre del lenguaje^[No se limita al lenguaje R, se pueden usar otros lenguajes, ver: [Ingenierías de lenguaje con knitr](https://rmarkdown.rstudio.com/authoring_knitr_engines.html%23sql).] y finaliza con tres acentos abiertos. Pueden escribirse opciones adicionales a un chunk en las llaves (por ejemplo, se define la altura de un gráfico en 5 centímetros: ```` ```{r fig.height='5cm'} ````). 
 
 **Nota importante**: las opciones de un chunk deben estar escritas en una misma línea de texto.
 
@@ -1288,9 +1290,9 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 
 
 
-Algunas de las referencias bibliográficas incluidas en el fichero "bib/library.bib" aparecen a continuación. Se recogen ejemplos de publicaciones de tipos diferentes: "Manual", "book", "article", "misc", pero existen muchas más.
+Algunas de las referencias bibliográficas incluidas en el fichero "bib/library.bib" aparecen a continuación. Se recogen ejemplos de publicaciones de tipos diferentes: "Manual", "Book", "Article", "Misc", pero existen muchas más.
 
-Hay que resaltar, que cada una de estas referencias bibliográficas tiene un identificador ("Luque2017", "R-base", "Wickham2017", etc) que será el que nos permita hacer referencia a las correspondientes referencias al añadir el prefijo `@`, es decir, por ejemplo: `@Luque2017`.
+Hay que resaltar, que cada una de estas referencias bibliográficas tiene un identificador ("Luque2017", "R-base2", "Wickham2017", etc) que será el que nos permita hacer referencia a las correspondientes referencias al añadir el prefijo `@`, es decir, por ejemplo: `@Luque2017`.
 
 ```bibtex
 @Manual{Luque2017,
@@ -1300,7 +1302,7 @@ Hay que resaltar, que cada una de estas referencias bibliográficas tiene un ide
   howpublished = {Disponible en \url{http://destio.us.es/calvo}}
 }
 
-@Manual{R-base,
+@Manual{R-base2,
   title = {R: A Language and Environment for Statistical
     Computing},
   author = {{R Core Team}},
@@ -1311,7 +1313,7 @@ Hay que resaltar, que cada una de estas referencias bibliográficas tiene un ide
 }
 
 
-@book{Wickham2017,
+@Book{Wickham2017,
 	Author = {Hadley Wickham and Garrett Grolemund},
 	Edition = {First Edition},
 	Publisher = {O'Reilly},
@@ -1320,7 +1322,7 @@ Hay que resaltar, que cada una de estas referencias bibliográficas tiene un ide
 	Year = {2017}
 }
 
-@ARTICLE {Example1999,
+@Article{Example1999,
     author  = "Example, The",
     title   = "This is an exmaple article not cited in the text",
     journal = "Journal of Examples",
@@ -1335,6 +1337,19 @@ Hay que resaltar, que cada una de estas referencias bibliográficas tiene un ide
   author = {Techopedia},
   howpublished = {Disponible en
   \url{https://www.techopedia.com/definition/345/business-intelligence-bi}}
+}
+
+@Article{lopez2007aplicacion,
+  title={Aplicación de la programación por metas en la distribución de 
+  servicios entre empresas operadoras del sistema de transporte masivo},
+  author={Lopez, Juan Fernando and Fernández Henao, Sergio and Morales,
+  Marcela María},
+  journal={Scientia et technica},
+  volume={13},
+  number={37},
+  pages={339--343},
+  year={2007},
+  publisher={Universidad Tecnológica de Pereira}
 }
 
 
@@ -1421,7 +1436,7 @@ También puede escribir una cita en el texto, de la siguiente manera:
 
 ### Estilos de citación
 
-Por defecto, pandoc usará un formato de "fecha-autor" del estilo "Chicago" para citas y referencias. Para usar otro estilo, deberá especificar un archivo de estilo CSL 1.0 en el campo de metadatos csl. Por ejemplo:
+Por defecto, pandoc usará un formato de "fecha-autor" del estilo "chicago" para citas y referencias. Para usar otro estilo, deberá especificar un archivo de estilo CSL 1.0 en el campo de metadatos csl. Por ejemplo:
 
 ```yaml
 ---
@@ -1479,7 +1494,7 @@ También es posible incluir algunas referencias bibliográficas que no hayan sid
 \else
 
 <!-- \nocite{*} -->
-\nocite{Luque2017,Luque2019,RStudio,R-base,
+\nocite{Luque2017,Luque2019,RStudio,R-base2,
 R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 
 \fi 
@@ -1510,6 +1525,58 @@ y
 [overleaf-Bibtex-natbib](https://www.overleaf.com/learn/latex/Bibliography_management_with_natbib)
 
 <!-- Si se comentan las opciones "csl" de la cabecera "yaml" se puede personalizar por otra vía la presentación de la bibliografía con el comando (ver más información en [overleaf](https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles): -->
+
+**Nota importante**. Hay que evitar que una referencia en el fichero BibTeX no tenga los campos: "year" y "author", ya que producirá salidas del tipo "(????)" al inicio de la referencia en la bibliografía. Cuando se incluyen referencias a páginas web suele presentarse esta situación. Las páginas webs usan el formato BibTeX: "`@Misc`". La recomendación es completar esos dos campos. Pero si no se conoce de forma exacta alguno de ellos, se puede utilizar alguna de las dos soluciones siguientes.
+
+- **Solución 1**. La que recomendaría las normas "apa" (en las citas aparecerá "autor (s.f.)", donde "s.f." significa "sin fecha"):
+
+```bibtex
+@Misc{webfacmatematicasus1,
+  year = "{s.f.}",
+  author = "{Facultad de Matemáticas (Univ. Sevilla)}",
+  url = {https://www.matematicas.us.es}
+} 
+```
+
+
+- **Solución 2**. En esta segunda opción (no usa el campo "author" y se añade en "year": "Página web") aparecería al principio de la referencia: "(Página web)".
+
+```bibtex
+@Misc{webUS2a,
+  year = "{Página web}",
+  title = {Universidad de Sevilla},
+  howpublished= {Disponible en \url{https://www.us.es}}
+}
+
+```
+
+Otras formas equivalentes serían:
+
+```bibtex
+@Misc{webUS2b,
+  year = "{Página web}",
+  title = {Universidad de Sevilla},
+  url = {https://www.us.es}
+}
+```
+
+```bibtex
+@Misc{webUS2c,
+  year = "{Página web}",
+  title = {Universidad de Sevilla},
+  url = {https://www.us.es},
+  note = {Consultada el 3-6-2021}
+}
+```
+
+Aunque para estás últimas, aparecería en otra línea de cada referencia, la url del siguiente modo:
+
+```
+URL: https://www.matematicas.us.es
+```
+
+
+
 
 
 
@@ -1567,24 +1634,7 @@ output:
 \normalsize
 
 
-<!-- #### Cómo citar y estilos bibliográficos en el método 2 -->
 
-<!-- En el texto se podrán incluir citas a cualquiera de las referencias bibliográficas incluidas en los ficheros de bibliografía ".bib" con ayuda de código como el siguiente: -->
-
-<!-- ```markdown -->
-<!-- Como se indica en las siguientes referencias -->
-<!-- @Luque2017, [@R-base] y @Wickham2017 en págs.3-7,  -->
-<!-- o también se podría ver en [@Luque2017; @Wickham2017]. -->
-<!-- ``` -->
-
-<!-- Produce el siguiente resultado: -->
-
-<!-- Como se indica en las siguientes referencias -->
-<!-- @Luque2017, [@R-base] y @Wickham2017 en págs.3-7,  -->
-<!-- o también se podría ver en [@Luque2017; @Wickham2017]. -->
-
-
-<!-- **Nota**. Hay problemas al usar la referencia sin corchete con el método 1: `@Luque2017`. -->
 
 **Importante**. En la bibligrafía  que **se muestra al final del documento**  aparecerán las referencias bibliográficas de aquellas que hayan sido citadas, es decir, hayan aparecido en un comando **`@identificador`** en el documento.
 
