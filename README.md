@@ -327,9 +327,31 @@ plot(v_y~v_x,type="o",col="red")
         
         + bibliografía (zotero, ...)
 
+- Actualizar los ficheros pdf: "tfe_principal_librodigital.pdf" y "tfe_principal_imprimir2caras.pdf".
 
+- Poner una pequeña tabla de contenido al fichero README.md.
+
+- Enlazar a ficheros pdf de "tests" en README.md.
 
 # Referencias
+
+## Ficheros pdf resultado de diferentes variantes de la plantilla
+
+- Uso de fuentes:
+
+    + [Inconsolata y mathptmx](https://raw.githack.com/calote/MemoriaTFE/master/tests/fuentes01_inconsolata_mathptmx/tfe_principal.pdf)
+
+    + [helvet y mathptmx](https://raw.githack.com/calote/MemoriaTFE/master/tests/fuentes01_helvet_mathptmx/tfe_principal.pdf)
+
+- Ajustando el código:
+
+    + [Uso de codigoajusta (ver página 38)](https://raw.githack.com/calote/MemoriaTFE/master/tests/otros01_codigoajusta_pag38/tfe_principal.pdf): si el código sobre pasa el ancho del texto del documento lo arregla automáticamente.
+
+    + [Uso de codigofuente sobre echo y CodigoFuente (ver página 29)](https://raw.githack.com/calote/MemoriaTFE/master/tests/otros03_codigofuente_echo_y_CodigoFuente_parcial/tfe_principal.pdf)
+    
+    
+
+
 
 ## Sobre Pandoc
 
