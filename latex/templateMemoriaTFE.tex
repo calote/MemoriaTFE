@@ -1,6 +1,9 @@
 $if(forprint)$
-\documentclass[$if(fontsize)$$fontsize$,a4paper,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+\documentclass[$if(fontsize)$$fontsize$,a4paper,$endif$$if(article)$oneside,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 \def\ifdoblecara{} %% set to true
+$if(article)$
+\let\ifdoblecara\undefined %% set to false
+$endif$
 $else$
 \documentclass[$if(fontsize)$$fontsize$,a4paper,oneside,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 \def\ifdoblecara{} %% set to true
@@ -22,6 +25,11 @@ $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $else$
 \usepackage{lmodern}
+$endif$
+$if(fontmathfamily)$
+\usepackage[$for(fontmathfamilyoptions)$$fontmathfamilyoptions$$sep$,$endfor$]{$fontmathfamily$}
+$else$
+% sin fontmathfamily
 $endif$
 $if(linestretch)$
 \usepackage{setspace}
@@ -104,10 +112,6 @@ $else$
 $endif$
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-$if(fuentenueva)$
-\usepackage{avant} % Usa la fuente Avantgarde
-\usepackage{mathptmx} % fuentes matemáticas
-$endif$
 $if(lang)$
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
@@ -122,9 +126,13 @@ $for(polyglossia-otherlangs)$
 $endfor$
 \fi
 $endif$
-$if(natbib)$
-\usepackage$if(natbiboptions)$[$for(natbiboptions)$$natbiboptions$$sep$,$endfor$]$endif${natbib}
-\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+$if(flexbib)$
+%
+$else$
+  $if(natbib)$
+  \usepackage$if(natbiboptions)$[$for(natbiboptions)$$natbiboptions$$sep$,$endfor$]$endif${natbib}
+  \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+  $endif$
 $endif$
 $if(biblatex)$
 \usepackage$if(biblio-style)$[style=$biblio-style$]$endif${biblatex}
@@ -143,6 +151,30 @@ $if(lhs)$
 $endif$
 $if(highlighting-macros)$
 $highlighting-macros$
+
+% PLLC modifica-ini
+$if(codigoajusta)$
+\renewcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+\usepackage{fvextra}
+\makeatletter
+\newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
+\makeatother
+
+$if(codigofuente)$
+\newcommand{\CodigoFuente}{\$codigofuente$}
+%%\verbatimfont{\$codigofuente$}%
+%\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines, fontsize=\$codigofuente$,commandchars=\\\{\}}
+$else$
+%\newcommand{\CodigoFuente}{\small}
+\newcommand{\CodigoFuente}{\normalsize}
+%%\verbatimfont{\small}%
+%\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines, fontsize=\small,commandchars=\\\{\}}
+$endif$
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines, fontsize=\CodigoFuente,commandchars=\\\{\}}
+$endif$
+% PLLC modifica-fin
+
 $endif$
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
@@ -280,6 +312,7 @@ $endif$
 
 %%%%%%% inicio: latex_preambulo.tex PLLC
 
+
 %% UTILIZA CODIFICACIÓN UTF-8
 %% MODIFICARLO CONVENIENTEMENTE PARA USARLO CON OTRAS CODIFICACIONES
 
@@ -288,6 +321,10 @@ $endif$
 \usepackage[spanish,es-nodecimaldot,es-noshorthands,es-tabla]{babel}
 % Ver: es-tabla (en: https://osl.ugr.es/CTAN/macros/latex/contrib/babel-contrib/spanish/spanish.pdf)
 % es-tabla (en: https://tex.stackexchange.com/questions/80443/change-the-word-table-in-table-captions)
+$if(flexbib)$
+\usepackage$if(flexbiboptions)$[$for(flexbiboptions)$$flexbiboptions$$sep$,$endfor$]$endif${flexbib}
+$endif$
+ 
 \usepackage{float}
 \usepackage{placeins}
 \usepackage{fancyhdr}
@@ -375,6 +412,38 @@ $endif$
 
 %\usepackage{calc} 
 
+
+%era if(csl-refs) con dolares
+$if(metodobib)$
+% metodobib: true
+$else$
+% metodobib: false
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+%\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+$endif$
+
+
 \usepackage{lipsum}
 
 %\usepackage{tikz} % Requerido para dibujar formas personalizadas
@@ -433,6 +502,36 @@ $endif$
 \makeatother
 
 
+$if(article)$
+
+
+% Define el estilo texto theorem para cada tipo definido anteriormente
+\newcounter{dummy} 
+\numberwithin{dummy}{section}
+\theoremstyle{ocrenumbox}
+\newtheorem{theoremeT}[dummy]{Teorema}  % (Pedro: Theorem)
+\newtheorem{problem}{Problema}[section]  % (Pedro: Problem)
+\newtheorem{exerciseT}{Ejercicio}[section] % (Pedro: Exercise)
+\theoremstyle{blacknumex}
+\newtheorem{exampleT}{Ejemplo}[section] % (Pedro: Example)
+\theoremstyle{blacknumbox}
+\newtheorem{vocabulary}{Vocabulario}[section]  % (Pedro: Vocabulary)
+\newtheorem{definitionT}{Definición}[section]  % (Pedro: Definition)
+\newtheorem{corollaryT}[dummy]{Corolario}  % (Pedro: Corollary)
+\theoremstyle{ocrenum}
+\newtheorem{proposition}[dummy]{Proposición} % (Pedro: Proposition)
+
+
+\usepackage[framemethod=default]{mdframed}
+
+
+
+\newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
+\newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
+\newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
+\newtheorem{notation}{Notation}[section]
+
+$else$
 
 % Define el estilo texto theorem para cada tipo definido anteriormente
 \newcounter{dummy} 
@@ -460,6 +559,7 @@ $endif$
 \newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
 \newtheorem{notation}{Notation}[chapter]
 
+$endif$
 
 \mdfdefinestyle{exampledefault}{%
 rightline=true,innerleftmargin=10,innerrightmargin=10,
@@ -710,6 +810,11 @@ $header-includes$
 $endfor$
 
 \begin{document}
+
+$if(flexbib)$
+\bibliographystyle{flexbib}
+$endif$
+
 $if(title)$
 \maketitle
 $endif$
@@ -765,7 +870,15 @@ $if(biblatex)$
 $endif$
 
 $if(metodobib)$
+$if(flexbib)$
+%
+$else$
+$if(article)$
+\addcontentsline{toc}{section}{Bibliografía}
+$else$
 \addcontentsline{toc}{chapter}{Bibliografía}
+$endif$
+$endif$
 $endif$
 
 $for(include-after)$
@@ -774,3 +887,4 @@ $include-after$
 $endfor$
 
 \end{document}
+

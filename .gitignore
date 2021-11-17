@@ -10,5 +10,8 @@
 *.toc
 *.lof
 *.bbl
+*.fls
 figurasR/unnamed-*.pdf
 capitulo05.pdf
+materialnuevo/
+README.html

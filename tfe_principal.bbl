@@ -1,88 +1,187 @@
-\begin{thebibliography}{13}
-\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
-\expandafter\ifx\csname url\endcsname\relax
-  \def\url#1{{\tt #1}}\fi
-\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\begin{thebibliography}{14}
+%Comandos de formato, por si no est'an definidos.
+\ProvideTextCommand{\guillemotleft}{OT1}{\leavevmode\raise
+  .27ex\hbox{$\scriptscriptstyle\ll$}}
+  \ProvideTextCommand{\guillemotright}{OT1}{\leavevmode\raise
+  .27ex\hbox{$\scriptscriptstyle\gg$}}
+\providecommand{\enquote}[1]{\guillemotleft#1\guillemotright}
+  \providecommand{\natexlab}[1]{#1}
+  \providecommand{\bibnamefont}[1]{\textsc{#1}}
+  \providecommand{\bibfnamefont}[1]{\textsc{#1}}
+  \providecommand{\bibfnamefontand}[1]{#1}
+  \providecommand{\citenamefont}[1]{#1}
+  \providecommand{\bibnamefont}[1]{\textsc{#1}}
+  \providecommand{\bbletalfont}[1]{\emph{#1}}
+  \providecommand{\citeandfont}[1]{#1} \providecommand{\citetalfont}[1]{#1}
+  \providecommand{\bibyearfont}[1]{#1} \providecommand{\isbn}[1]{ISBN #1}
+  \providecommand{\url}[1]{\texttt{#1}} \providecommand{\urlprefix}{}
+  \providecommand{\nameseparator}{;}
+  \providecommand{\namereplace}[1]{{---{}---} \ifx\datebegin\relax \else
+  \def\datebegin #1.{\relax}\fi} \providecommand{\dateend}[1]{, #1}
+  \providecommand{\bibtitle}[1]{#1}\providecommand{\bibtranslator}[1]{#1}
+  \providecommand{\bibtranslatorname}{Traducido por }
+  \providecommand{\selectlanguage}[1]{\relax} \providecommand{\finalpoint}{.}
+  \providecommand{\namesend}{:} \providecommand{\Capitalize}[1]{\uppercase{#1}}
+  \providecommand{\capitalize}[1]{\expandafter\Capitalize#1}
+  \providecommand{\bibinfont}[1]{\textbf{#1}}
+  \providecommand{\inbooktitlefont}[1]{\emph{#1}}
+  \providecommand{\bibvolfont}[1]{\textbf{#1}}
+  \providecommand{\bibandfont}[1]{#1}
+  \providecommand{\bibcommentname}{\textsc{Obs:}}
+  \providecommand{\bibcomment}[2]{\begin{quotation}
+  \noindent\textsc{\bibcommentname}\ #2\end{quotation}}
+  \providecommand{\bibabstract}[2]{\begin{quotation}
+  \noindent\textsc{\Abstractname:}\ #2\end{quotation}}
+\providecommand{\bblin}{En} \providecommand{\bbland}{y}
+  \providecommand{\bbletal}{et al.} \providecommand{\bbled}{ed.}
+  \providecommand{\bbleds}{Eds.} \providecommand{\bbvolume}{Vol.}
+  \providecommand{\bblof}{de} \providecommand{\bbledition}{ª~edición}
+  \providecommand{\bblp}{p.}  \providecommand{\bblpp}{pp.}
+  \providecommand{\bbltechreport}{Informe técnico}
+  \providecommand{\bblmthesis}{Tesina} \providecommand{\bblphdthesis}{Tesis
+  doctoral} \providecommand{\bblchapter}{cap\'\i{}tulo}
+  \providecommand{\bblnumber}{número} \providecommand{\bblvolume}{volumen}
+  \providecommand{\MR}[1]{\relax\ifhmode\unskip\space\fi MR #1}
+  \expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else  \providecommand{\doi}{doi:
+  \begingroup \urlstyle{rm}\Url}\fi
+%Para resultados estilo plain descomente la l'inea siguiente
+%\let\oldbibitem=\bibitem \def\bibitem[#1]#2{\oldbibitem{#2}}
 
 \bibitem[{web({Página web})}]{webUS2a}
- ({Página web}).
-\newblock Universidad de sevilla.
-\newblock Disponible en \url{https://www.us.es}.
+\datebegin {Página web}.
+  \newblock \bibtitle{\enquote{Universidad de Sevilla}}.
+  \newblock Disponible en \url{https://www.us.es}\dateend{{Página
+  web}}\finalpoint{}
 
-\bibitem[{Allaire et~al.(2021)Allaire, Xie, McPherson, Luraschi, Ushey, Atkins,
-  Wickham, Cheng, Chang, \& Iannone}]{R-rmarkdown}
-Allaire, J., Xie, Y., McPherson, J., Luraschi, J., Ushey, K., Atkins, A.,
-  Wickham, H., Cheng, J., Chang, W., \& Iannone, R. (2021).
-\newblock {\em rmarkdown: Dynamic Documents for R\/}.
-\newblock R package version 2.11.
-\newline\urlprefix\url{https://CRAN.R-project.org/package=rmarkdown}
+\bibitem[{\citenamefont{Allaire}
+  \citetalfont{\bbletal{}}(2021)\citenamefont{Allaire}, \citenamefont{Xie},
+  \citenamefont{McPherson}, \citenamefont{Luraschi}, \citenamefont{Ushey},
+  \citenamefont{Atkins}, \citenamefont{Wickham}, \citenamefont{Cheng},
+  \citenamefont{Chang} \citeandfont{\bbland{}}
+  \citenamefont{Iannone}}]{R-rmarkdown}
+\bibnamefont{Allaire}, \bibfnamefont{JJ}\nameseparator{} \bibnamefont{Xie},
+  \bibfnamefont{Yihui}\nameseparator{} \bibnamefont{McPherson},
+  \bibfnamefont{Jonathan}\nameseparator{} \bibnamefont{Luraschi},
+  \bibfnamefont{Javier}\nameseparator{} \bibnamefont{Ushey},
+  \bibfnamefont{Kevin}\nameseparator{} \bibnamefont{Atkins},
+  \bibfnamefont{Aron}\nameseparator{} \bibnamefont{Wickham},
+  \bibfnamefont{Hadley}\nameseparator{} \bibnamefont{Cheng},
+  \bibfnamefont{Joe}\nameseparator{} \bibnamefont{Chang},
+  \bibfnamefont{Winston} \bibandfont{\bbland{}} \bibnamefont{Iannone},
+  \bibfnamefont{Richard}\namesend{}\datebegin 2021.
+  \newblock \bibtitle{\emph{rmarkdown: Dynamic Documents for R}}\dateend{2021}.
+  \newblock \preurl{} \url{https://CRAN.R-project.org/package=rmarkdown}.
+  \newblock R package version 2.11\finalpoint{}
 
-\bibitem[{{Facultad de Matemáticas (Univ.
-  Sevilla)}({s.f.})}]{webfacmatematicasus1}
-{Facultad de Matemáticas (Univ. Sevilla)} ({s.f.}).
-\newline\urlprefix\url{https://www.matematicas.us.es}
+\bibitem[{\citenamefont{{Facultad de Matemáticas (Univ.
+  Sevilla)}}({s.f.})}]{webfacmatematicasus1}
+\bibnamefont{{Facultad de Matemáticas (Univ. Sevilla)}}\namesend{}\datebegin
+  {s.f.}.\dateend{{s.f.}}
+  \newblock \preurl{} \url{https://www.matematicas.us.es}\finalpoint{}
 
-\bibitem[{Lopez et~al.(2007)Lopez, Fernández~Henao, \&
-  Morales}]{lopez2007aplicacion}
-Lopez, J.~F., Fernández~Henao, S., \& Morales, M.~M. (2007).
-\newblock Aplicación de la programación por metas en la distribución de
-  servicios entre empresas operadoras del sistema de transporte masivo.
-\newblock {\em Scientia et technica\/}, {\em 13\/}(37), 339--343.
+\bibitem[{\citenamefont{Lopez}
+  \citetalfont{\bbletal{}}(2007)\citenamefont{Lopez},
+  \citenamefont{Fernández~Henao} \citeandfont{\bbland{}}
+  \citenamefont{Morales}}]{lopez2007aplicacion}
+\bibnamefont{Lopez}, \bibfnamefont{Juan~Fernando}\nameseparator{}
+  \bibnamefont{Fernández~Henao}, \bibfnamefont{Sergio} \bibandfont{\bbland{}}
+  \bibnamefont{Morales}, \bibfnamefont{Marcela~María}\namesend{}\datebegin
+  2007.
+  \newblock \bibtitle{\enquote{Aplicación de la programación por metas en la
+  distribución de servicios entre empresas operadoras del sistema de
+  transporte masivo}}.
+  \newblock \emph{Scientia et technica}\dateend{2007}, \bibvolfont{13(37)},
+  \bblpp{} 339--343\finalpoint{}
 
-\bibitem[{Luque~Calvo(2017)}]{Luque2017}
-Luque~Calvo, P.~L. (2017).
-\newblock {\em Escribir un Trabajo Fin de Estudios con R Markdown\/}.
-\newline\urlprefix\url{http://destio.us.es/calvo}
+\bibitem[{\citenamefont{Luque~Calvo}(2017)}]{Luque2017}
+\bibnamefont{Luque~Calvo}, \bibfnamefont{Pedro~L.}\namesend{}\datebegin 2017.
+  \newblock \bibtitle{\emph{Escribir un Trabajo Fin de Estudios con R
+  Markdown}}\dateend{2017}.
+  \newblock \preurl{} \url{http://destio.us.es/calvo}\finalpoint{}
 
-\bibitem[{Luque~Calvo(2019)}]{Luque2019}
-Luque~Calvo, P.~L. (2019).
-\newblock {\em Cómo crear Tablas de información en R Markdown\/}.
-\newline\urlprefix\url{http://destio.us.es/calvo}
+\bibitem[{\citenamefont{Luque~Calvo}(2019)}]{Luque2019}
+ \namereplace{\bibnamefont{Luque~Calvo},
+  \bibfnamefont{Pedro~L.}}\namesend{}\datebegin 2019.
+  \newblock \bibtitle{\emph{Cómo crear Tablas de información en R
+  Markdown}}\dateend{2019}.
+  \newblock \preurl{} \url{http://destio.us.es/calvo}\finalpoint{}
 
-\bibitem[{{Luque Calvo, Pedro L.}({2021})}]{webPedroLuque}
-{Luque Calvo, Pedro L.} ({2021}).
-\newblock {Página personal de Pedro L. Luque}.
-\newline\urlprefix\url{http://destio.us.es/calvo}
+\bibitem[{\citenamefont{{Luque Calvo, Pedro L.}}({2021})}]{webPedroLuque}
+\bibnamefont{{Luque Calvo, Pedro L.}}\namesend{}\datebegin {2021}.
+  \newblock \bibtitle{\enquote{{Página personal de Pedro L.
+  Luque}}}\dateend{{2021}}.
+  \newblock \preurl{} \url{http://destio.us.es/calvo}\finalpoint{}
 
-\bibitem[{{R Core Team}(2016)}]{R-base2}
-{R Core Team} (2016).
-\newblock {\em R: A Language and Environment for Statistical Computing\/}.
-\newblock R Foundation for Statistical Computing, Vienna, Austria.
-\newline\urlprefix\url{https://www.R-project.org/}
+\bibitem[{\citenamefont{{R Core Team}}(2016)}]{R-base2}
+\bibnamefont{{R Core Team}}\namesend{}\datebegin 2016.
+  \newblock \bibtitle{\emph{R: A Language and Environment for Statistical
+  Computing}}.
+  \newblock R Foundation for Statistical Computing, Vienna,
+  Austria\dateend{2016}.
+  \newblock \preurl{} \url{https://www.R-project.org/}\finalpoint{}
 
-\bibitem[{{RStudio Team}(2015)}]{RStudio}
-{RStudio Team} (2015).
-\newblock {\em RStudio: Integrated Development Environment for R\/}.
-\newblock RStudio, Inc., Boston, MA.
-\newline\urlprefix\url{http://www.rstudio.com/}
+\bibitem[{\citenamefont{{RStudio Team}}(2015)}]{RStudio}
+\bibnamefont{{RStudio Team}}\namesend{}\datebegin 2015.
+  \newblock \bibtitle{\emph{RStudio: Integrated Development Environment for
+  R}}.
+  \newblock RStudio, Inc., Boston, MA\dateend{2015}.
+  \newblock \preurl{} \url{http://www.rstudio.com/}\finalpoint{}
 
-\bibitem[{Techopedia(2017)}]{Techopedia}
-Techopedia (2017).
-\newblock "definition - what does business intelligence (bi) mean?".
-\newblock Disponible en
-  \url{https://www.techopedia.com/definition/345/business-intelligence-bi}.
+\bibitem[{\citenamefont{Techopedia}(2017)}]{Techopedia}
+\bibnamefont{Techopedia}\namesend{}\datebegin 2017.
+  \newblock \bibtitle{\enquote{"Definition - What does Business Intelligence
+  (BI) mean?"}}.
+  \newblock Disponible en
+  \url{https://www.techopedia.com/definition/345/business-intelligence-bi}\dateend{2017}\finalpoint{}
 
-\bibitem[{Wickham et~al.(2021{\natexlab{a}})Wickham, Chang, Henry, Pedersen,
-  Takahashi, Wilke, Woo, Yutani, \& Dunnington}]{R-ggplot2}
-Wickham, H., Chang, W., Henry, L., Pedersen, T.~L., Takahashi, K., Wilke, C.,
-  Woo, K., Yutani, H., \& Dunnington, D. (2021{\natexlab{a}}).
-\newblock {\em ggplot2: Create Elegant Data Visualisations Using the Grammar of
-  Graphics\/}.
-\newblock R package version 3.3.5.
-\newline\urlprefix\url{https://CRAN.R-project.org/package=ggplot2}
+\bibitem[{\citenamefont{Wickham}
+  \citetalfont{\bbletal{}}(2021{\natexlab{a}})\citenamefont{Wickham},
+  \citenamefont{Chang}, \citenamefont{Henry}, \citenamefont{Pedersen},
+  \citenamefont{Takahashi}, \citenamefont{Wilke}, \citenamefont{Woo},
+  \citenamefont{Yutani} \citeandfont{\bbland{}}
+  \citenamefont{Dunnington}}]{R-ggplot2}
+\bibnamefont{Wickham}, \bibfnamefont{Hadley}\nameseparator{}
+  \bibnamefont{Chang}, \bibfnamefont{Winston}\nameseparator{}
+  \bibnamefont{Henry}, \bibfnamefont{Lionel}\nameseparator{}
+  \bibnamefont{Pedersen}, \bibfnamefont{Thomas~Lin}\nameseparator{}
+  \bibnamefont{Takahashi}, \bibfnamefont{Kohske}\nameseparator{}
+  \bibnamefont{Wilke}, \bibfnamefont{Claus}\nameseparator{} \bibnamefont{Woo},
+  \bibfnamefont{Kara}\nameseparator{} \bibnamefont{Yutani},
+  \bibfnamefont{Hiroaki} \bibandfont{\bbland{}} \bibnamefont{Dunnington},
+  \bibfnamefont{Dewey}\namesend{}\datebegin 2021{\natexlab{a}}.
+  \newblock \bibtitle{\emph{ggplot2: Create Elegant Data Visualisations Using
+  the Grammar of Graphics}}\dateend{2021{\natexlab{a}}}.
+  \newblock \preurl{} \url{https://CRAN.R-project.org/package=ggplot2}.
+  \newblock R package version 3.3.5\finalpoint{}
 
-\bibitem[{Wickham et~al.(2021{\natexlab{b}})Wickham, François, Henry, \&
-  Müller}]{R-dplyr}
-Wickham, H., François, R., Henry, L., \& Müller, K. (2021{\natexlab{b}}).
-\newblock {\em dplyr: A Grammar of Data Manipulation\/}.
-\newblock R package version 1.0.7.
-\newline\urlprefix\url{https://CRAN.R-project.org/package=dplyr}
+\bibitem[{\citenamefont{Wickham}
+  \citetalfont{\bbletal{}}(2021{\natexlab{b}})\citenamefont{Wickham},
+  \citenamefont{François}, \citenamefont{Henry} \citeandfont{\bbland{}}
+  \citenamefont{Müller}}]{R-dplyr}
+\bibnamefont{Wickham}, \bibfnamefont{Hadley}\nameseparator{}
+  \bibnamefont{François}, \bibfnamefont{Romain}\nameseparator{}
+  \bibnamefont{Henry}, \bibfnamefont{Lionel} \bibandfont{\bbland{}}
+  \bibnamefont{Müller}, \bibfnamefont{Kirill}\namesend{}\datebegin
+  2021{\natexlab{b}}.
+  \newblock \bibtitle{\emph{dplyr: A Grammar of Data
+  Manipulation}}\dateend{2021{\natexlab{b}}}.
+  \newblock \preurl{} \url{https://CRAN.R-project.org/package=dplyr}.
+  \newblock R package version 1.0.7\finalpoint{}
 
-\bibitem[{Xie(2021)}]{R-knitr}
-Xie, Y. (2021).
-\newblock {\em knitr: A General-Purpose Package for Dynamic Report Generation
-  in R\/}.
-\newblock R package version 1.36.
-\newline\urlprefix\url{https://yihui.org/knitr/}
+\bibitem[{\citenamefont{Wickham} \citeandfont{\bbland{}}
+  \citenamefont{Grolemund}(2017)}]{Wickham2017}
+\bibnamefont{Wickham}, \bibfnamefont{Hadley} \bibandfont{\bbland{}}
+  \bibnamefont{Grolemund}, \bibfnamefont{Garrett}\namesend{}\datebegin 2017.
+  \newblock \bibtitle{\emph{R for Data Science: Import, Tidy, Transform,
+  Visualize, and Model Data}}.
+  \newblock O'Reilly, first edition\bbledition{}\dateend{2017}\finalpoint{}
+
+\bibitem[{\citenamefont{Xie}(2021)}]{R-knitr}
+\bibnamefont{Xie}, \bibfnamefont{Yihui}\namesend{}\datebegin 2021.
+  \newblock \bibtitle{\emph{knitr: A General-Purpose Package for Dynamic Report
+  Generation in R}}\dateend{2021}.
+  \newblock \preurl{} \url{https://yihui.org/knitr/}.
+  \newblock R package version 1.36\finalpoint{}
 
 \end{thebibliography}

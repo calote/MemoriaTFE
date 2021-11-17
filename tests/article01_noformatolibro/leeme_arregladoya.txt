@@ -1,0 +1,53 @@
+- En la plantilla habría que considerar que cuando se usa "article" no debe aparecer: "chapter" en:
+
+
+CORREGIDO SERÍA:
+
+... EN LÍNEAS 28x
+
+
+% Define el estilo texto theorem para cada tipo definido anteriormente
+\newcounter{dummy} 
+\numberwithin{dummy}{section}
+\theoremstyle{ocrenumbox}
+\newtheorem{theoremeT}[dummy]{Teorema}  % (Pedro: Theorem)
+\newtheorem{problem}{Problema}[section]  % (Pedro: Problem)
+\newtheorem{exerciseT}{Ejercicio}[section] % (Pedro: Exercise)
+\theoremstyle{blacknumex}
+\newtheorem{exampleT}{Ejemplo}[section] % (Pedro: Example)
+\theoremstyle{blacknumbox}
+\newtheorem{vocabulary}{Vocabulario}[section]  % (Pedro: Vocabulary)
+\newtheorem{definitionT}{Definición}[section]  % (Pedro: Definition)
+\newtheorem{corollaryT}[dummy]{Corolario}  % (Pedro: Corollary)
+\theoremstyle{ocrenum}
+\newtheorem{proposition}[dummy]{Proposición} % (Pedro: Proposition)
+
+
+\usepackage[framemethod=default]{mdframed}
+
+
+
+\newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
+\newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
+\newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
+\newtheorem{notation}{Notation}[section]
+
+
+
+.... AL FINAL
+
+\addcontentsline{toc}{section}{Bibliografía}
+
+
+
+--------
+
+- También habría que ver los saltos de página en el fichero "tfe_principal.Rmd".
+
+- Usar "twoside" como opción de documentclass añdiendo:
+
+documentclass: article
+classoption: twoside  (sería mejor usar: oneside, pero \fancyhead no conoce la opción "E")
+
+
+- Podría ser conveniente que no hubiera separación de páginas en lista de figuras y tablas (o no presentarlas).

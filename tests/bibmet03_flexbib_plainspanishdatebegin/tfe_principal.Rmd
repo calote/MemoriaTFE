@@ -3,10 +3,6 @@ documentclass: book
 principal: true
 forprint: true  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
-#fontfamily: inconsolata
-#fontmathfamily: mathptmx
-#codigoajusta: true
-#codigofuente: "normalsize"
 geometry: margin = 2.5cm
 bibliography: ["bib/library.bib", "bib/paquetes.bib"]
 #biblio-title: "Referencias"
@@ -15,7 +11,7 @@ bibliography: ["bib/library.bib", "bib/paquetes.bib"]
 metodobib: true
 #biblio-style con natbib
 #natbib: plainnat, abbrvnat, unsrtnat
-#natbib: chicago, apalike, acm
+#natbib: chicago, apalike
 #natbib: apalike2 (https://ctan.org/pkg/apalike2)
 #biblio-style: "apa-good"
 #natbiboptions: "numbers" # "square,numbers" # ver: https://www.ctan.org/pkg/natbib
@@ -29,7 +25,6 @@ csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
 flexbib: true
 #flexbiboptions: "spanish,plain"
 flexbiboptions: spanish, plain, datebegin,sortcompress,nocomment, noabstract
-#flexbiboptions: "spanish"
 link-citations: yes
 output: 
   pdf_document:

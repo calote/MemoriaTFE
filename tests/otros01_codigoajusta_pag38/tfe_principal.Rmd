@@ -5,8 +5,7 @@ forprint: true  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
 #fontfamily: inconsolata
 #fontmathfamily: mathptmx
-#codigoajusta: true
-#codigofuente: "normalsize"
+codigoajusta: true
 geometry: margin = 2.5cm
 bibliography: ["bib/library.bib", "bib/paquetes.bib"]
 #biblio-title: "Referencias"
@@ -15,7 +14,7 @@ bibliography: ["bib/library.bib", "bib/paquetes.bib"]
 metodobib: true
 #biblio-style con natbib
 #natbib: plainnat, abbrvnat, unsrtnat
-#natbib: chicago, apalike, acm
+#natbib: chicago, apalike
 #natbib: apalike2 (https://ctan.org/pkg/apalike2)
 #biblio-style: "apa-good"
 #natbiboptions: "numbers" # "square,numbers" # ver: https://www.ctan.org/pkg/natbib
