@@ -5,9 +5,16 @@ Repositorio que mantiene actualizado el proyecto MemoriaTFE que se encuentra pub
 <http://destio.us.es/calvo/post/escribir-un-trabajo-fin-de-estudios-con-rmarkdown/>.
 
 
+- [Los sistemas de bibliografía](#sistemabibliograficos)
+- [Simplificar cabeceras de ficheros de capítulos](#simpflificadoficheroscapitulos)
+- [Uso de diferentes familias de fuentes](#usodefuentes)
+- [Crear un documento que no sea un libro (no tenga capítulos, no sea "book")](#nobook)
+- [Otros ajustes](#otrosajustes)
+- [Referencias](#referencias)
+
 # Algunos consejos
 
-## Los sistemas de bibliografía
+## Los sistemas de bibliografía {#sistemabibliograficos}
 
 ### Método 1: El sistema de bibiografía basado en natbib
 
@@ -138,7 +145,7 @@ Se muestran algunos ejemplos a continuación:
 1. Si se cambia de método bibliográfico, se recomienda borrar previamente los ficheros con extensión: ".bbl" y ".blg", si no se hace podría producirse errores lo que impediría la creación del fichero pdf final.
 
 
-## Simplificar cabeceras de ficheros de capítulos
+## Simplificar cabeceras de ficheros de capítulos {#simpflificadoficheroscapitulos}
 
 La idea se pudo concretar usando la información en: [Stackoverflow: "Importing common YAML in rstudio/knitr document"](https://stackoverflow.com/questions/39885363/importing-common-yaml-in-rstudio-knitr-document).
 
@@ -155,17 +162,32 @@ Se han creado unos ficheros cuyos nombres empiezan por "cabecera_*.*" que contie
 
 
 
-## Uso de diferentes familias de fuentes
+## Uso de diferentes familias de fuentes {#usodefuentes}
 
 En la cabecera "yaml" del fichero "tfe_principal.Rmd" se puede usar (por defecto: "fontfamily: lmodern"):
 
 
-- Familia: "avant", y familia matemática: "mathptmx"
+- Familia "lmodern" pero con "sans serif" (paloseco)
+
+    ```yaml
+    paloseco: true
+    ```
+
+Nota: también se podría usar esta opción con otras fuentes, por ejemplo: "inconsolata".
+
+- Familia: "helvet", y familia matemática: "mathptmx"
 
     ```yaml
     fontfamily: helvet
     fontmathfamily: mathptmx
     ```
+
+    ```yaml
+    fontfamily: helvet
+    fontfamilyoptions: scaled
+    fontmathfamily: mathptmx
+    ```
+
 
 - Familia: "avant", y familia matemática: "mathptmx"
 
@@ -193,6 +215,21 @@ En la cabecera "yaml" del fichero "tfe_principal.Rmd" se puede usar (por defecto
     ```yaml
     fontfamily: inconsolata
     ```
+
+
+- Familia: "FiraSans", y familia matemática: "newtxsf"
+
+    ```yaml
+    #paloseco: true # con fuente por defecto (lmodern)
+    fontfamily: FiraSans
+    fontfamilyoptions: "sfdefault,scaled=.85"
+    negritastt: "0.85"
+    fontmathfamily: newtxsf
+    fontmathfamilyoptions: cmintegrals
+    ```
+
+- Nota: la opción `negritastt: "0.85"` añade el manejo de las fuentes typewriter en negrita y además 
+mejora el uso de las fuentes typewriter (o verbatim).
 
 Se puede encontrar más información en: [Github del libro: "LaTeX-Beginner"](https://github.com/PacktPublishing/LaTeX-Beginner-s-Guide-Second-Edition/tree/main/Chapter_10_-_Using_Fonts).
 
@@ -227,6 +264,20 @@ usepackage{inconsolata} %buena
 \usepackage{cmbright}
 \usepackage{arev}
 
+\usepackage[sfdefault,scaled=.85]{FiraSans}
+\usepackage[cmintegrals]{newtxsf}
+
+% https://tex.stackexchange.com/questions/215482/how-do-i-get-texttt-with-bold-face-in-latex
+\usepackage[sfdefault,scaled=0.95]{FiraSans}
+\usepackage{bold-extra}
+\usepackage[scaled=0.95]{beramono}
+\usepackage[cmintegrals]{newtxsf}
+
+\let\openbox\relax
+\let\Bbox\relax
+\usepackage{amssymb,amsmath}
+%\usepackage[varqu,varl]{zi4}% inconsolata typewriter
+
 ```
 
 
@@ -239,7 +290,7 @@ Otras pruebas:
     fontfamilyoptions: default   #\usepackage[default]{sourcecodepro}
     ```
 
-## Crear un documento que no sea un libro (no tenga capítulos, no sea "book")
+## Crear un documento que no sea un libro (no tenga capítulos, no sea "book") {#nobook}
 
 Cambiar la cabecera yaml del siguiente modo:
 
@@ -251,7 +302,7 @@ article: true
 En el fichero "tfe_principal.Rmd", eliminar los saltos de página no adecuados, quitar la lista de tablas y/o figuras si fuera necesario, etc.
 
 
-## Otros ajustes
+## Otros ajustes {#otrosajustes}
 
 
 ### Evitar que el código R fuente no sobrepase el ancho del texto
@@ -312,36 +363,61 @@ plot(v_y~v_x,type="o",col="red")
 
 ````
 
+### Cambiar el color del texto en teoremas
+
+Introducir después del primer chunk del fichero "tfe_principal.Rmd" el siguiente comando LaTeX (se cambia a color negro en el modo pdf digital):
+
+```tex
+\definecolor{ocre}{RGB}{0,0,0}
+```
 
 
+### En lugar de "Apéndice" llamarlo "Anexo"
 
-# Por Hacer
+Modificar en el fichero "tfe_principal.Rmd" las líneas que aparecen junto a la instrucción LaTeX `\appendix`:
 
-- Crear una pdf (o puesto al final) con el código fuente del capitulo05.Rmd numerando las líneas de código usado.
+```
+\renewcommand\appendixname{Anexo}
+```
 
-- Crear la realease 1.3
+Se podría personalizar también la numeración de los apéndices añadiendo: 
 
-- Crear vídeos-tutoriales de:
+```
+\renewcommand\thechapter{\Alph{chapter}}                
+\renewcommand\thesection{\Alph{chapter}.\Roman{section}} 
+\setcounter{chapter}{0}
+```
 
-    + Cómo utilizar editor visual de RStudio con:
-        
-        + bibliografía (zotero, ...)
-
-- Actualizar los ficheros pdf: "tfe_principal_librodigital.pdf" y "tfe_principal_imprimir2caras.pdf".
-
-- Poner una pequeña tabla de contenido al fichero README.md.
-
-- Enlazar a ficheros pdf de "tests" en README.md.
-
-# Referencias
+# Referencias  {#referencias}
 
 ## Ficheros pdf resultado de diferentes variantes de la plantilla
 
+- Ficheros pdf modelos:
+
+    + [Modelo para imprimir a doble cara y en blanco y negro (fuente: lmodern)](https://raw.githack.com/calote/MemoriaTFE/master/tfe_principal_imprimir2caras.pdf)
+
+    + [Modelo en su versión de libro digital (fuente: lmodern, enlaces resaltados en color, no saltos de páginas extras, etc)](https://raw.githack.com/calote/MemoriaTFE/master/tfe_principal_librodigital.pdf)
+
+
+    + [Uso de plantilla sin capítulos, mostrando solamente el capítulo 5: "Utiliddes para documentos R Markdown
+(con la plantilla TFE)". Opciones: portada especial, versión digital, etc](https://raw.githack.com/calote/MemoriaTFE/master/tests/article02_noformatolibro_solocap05/tfe_principal_solocap05.pdf)
+
+- Fichero pdf con el código R Markdown de los principales ficheros de la plantilla TFE:
+
+    + [código R Markdown de los principales ficheros de la plantilla TFE](https://raw.githack.com/calote/MemoriaTFE/master/tests/FicherosRmdNumerados.pdf)
+
+
+
 - Uso de fuentes:
 
-    + [Inconsolata y mathptmx](https://raw.githack.com/calote/MemoriaTFE/master/tests/fuentes01_inconsolata_mathptmx/tfe_principal.pdf)
+    + [lmodern con paloseco (sans serif)](https://raw.githack.com/calote/MemoriaTFE/master/tests/fuentes01_lmodern_sansserif_paloseco/tfe_principal.pdf)
 
-    + [helvet y mathptmx](https://raw.githack.com/calote/MemoriaTFE/master/tests/fuentes01_helvet_mathptmx/tfe_principal.pdf)
+    + [helvet y mathptmx](https://raw.githack.com/calote/MemoriaTFE/master/tests/fuentes02_helvet_mathptmx/tfe_principal.pdf)
+
+    + [Inconsolata y mathptmx](https://raw.githack.com/calote/MemoriaTFE/master/tests/fuentes03_inconsolata_mathptmx/tfe_principal.pdf)
+
+    + [fireSans y newtxsf (manejo de negritas tipewriter)](https://raw.githack.com/calote/MemoriaTFE/master/tests/fuentes04_fireSans_newtxsf_negritastt/tfe_principal.pdf)
+
 
 - Ajustando el código:
 
@@ -350,7 +426,13 @@ plot(v_y~v_x,type="o",col="red")
     + [Uso de codigofuente sobre echo y CodigoFuente (ver página 29)](https://raw.githack.com/calote/MemoriaTFE/master/tests/otros03_codigofuente_echo_y_CodigoFuente_parcial/tfe_principal.pdf)
     
     
+- Usando los sistemas de bibliografía:
 
+    + [Método 1: natbib y estilo apa-good (numerado)](https://raw.githack.com/calote/MemoriaTFE/master/tests/bibmet01_natbib_apa-good_numbers/tfe_principal.pdf)
+
+    + [Método 2: csl y estilo ecology ...](https://raw.githack.com/calote/MemoriaTFE/master/tests/bibmet02_csl_ecology/tfe_principal.pdf)
+
+    + [Método 3: flexbib (spanish) y estilo plain (numerado) con año detrás del autor](https://raw.githack.com/calote/MemoriaTFE/master/tests/bibmet03_flexbib_plainspanishdatebegin/tfe_principal.pdf)
 
 
 ## Sobre Pandoc

@@ -1,0 +1,2689 @@
+\documentclass[11pt,a4paper,oneside,]{article}
+\def\ifdoblecara{} %% set to true
+\let\ifdoblecara\undefined %% set to false
+\def\ifprincipal{} %% set to true
+\def\ifcitapandoc{} %% set to true
+\usepackage{lmodern}
+% sin fontmathfamily
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+%\usepackage{fixltx2e} % provides \textsubscript %PLLC
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin = 2.5cm]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+              pdfborder={0 0 0},
+              breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+  \usepackage[usenames,dvipsnames]{xcolor}  %new PLLC
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+
+% PLLC modifica-ini
+\renewcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+\usepackage{fvextra}
+\makeatletter
+\newcommand{\verbatimfont}[1]{\renewcommand{\verbatim@font}{\ttfamily#1}}
+\makeatother
+
+%\newcommand{\CodigoFuente}{\small}
+\newcommand{\CodigoFuente}{\normalsize}
+%%\verbatimfont{\small}%
+%\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines, fontsize=\small,commandchars=\\\{\}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines, fontsize=\CodigoFuente,commandchars=\\\{\}}
+% PLLC modifica-fin
+
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+
+  \title{}
+    \author{}
+    \date{}
+  
+
+%%%%%%% inicio: latex_preambulo.tex PLLC
+
+
+%% UTILIZA CODIFICACIÓN UTF-8
+%% MODIFICARLO CONVENIENTEMENTE PARA USARLO CON OTRAS CODIFICACIONES
+
+
+%\usepackage[spanish,es-nodecimaldot,es-noshorthands]{babel}
+\usepackage[spanish,es-nodecimaldot,es-noshorthands,es-tabla]{babel}
+% Ver: es-tabla (en: https://osl.ugr.es/CTAN/macros/latex/contrib/babel-contrib/spanish/spanish.pdf)
+% es-tabla (en: https://tex.stackexchange.com/questions/80443/change-the-word-table-in-table-captions)
+ 
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{fancyhdr}
+% Solucion: ! LaTeX Error: Command \counterwithout already defined.
+% https://tex.stackexchange.com/questions/425600/latex-error-command-counterwithout-already-defined
+\let\counterwithout\relax
+\let\counterwithin\relax
+\usepackage{chngcntr}
+%\usepackage{microtype}  %antes en template PLLC
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % Usa codificación 8-bit que tiene 256 glyphs
+
+%\usepackage[dvipsnames]{xcolor}
+%\usepackage[usenames,dvipsnames]{xcolor}  %new
+\usepackage{pdfpages}
+%\usepackage{natbib}
+
+
+
+
+% Para portada: latex_paginatitulo_mod_ST02.tex (inicio)
+\usepackage{tikz}
+\usepackage{epigraph}
+\input{portadas/latex_paginatitulo_mod_ST02_add.sty}
+% Para portada: latex_paginatitulo_mod_ST02.tex (fin)
+
+% Para portada: latex_paginatitulo_mod_OV01.tex (inicio)
+\usepackage{cpimod}
+% Para portada: latex_paginatitulo_mod_OV01.tex (fin)
+
+% Para portada: latex_paginatitulo_mod_OV03.tex (inicio)
+\usepackage{KTHEEtitlepage}
+% Para portada: latex_paginatitulo_mod_OV03.tex (fin)
+
+\renewcommand{\contentsname}{Índice}
+\renewcommand{\listfigurename}{Índice de figuras}
+\renewcommand{\listtablename}{Índice de tablas}
+\newcommand{\bcols}{}
+\newcommand{\ecols}{}
+\newcommand{\bcol}[1]{\begin{minipage}{#1\linewidth}}
+\newcommand{\ecol}{\end{minipage}}
+\newcommand{\balertblock}[1]{\begin{alertblock}{#1}}
+\newcommand{\ealertblock}{\end{alertblock}}
+\newcommand{\bitemize}{\begin{itemize}}
+\newcommand{\eitemize}{\end{itemize}}
+\newcommand{\benumerate}{\begin{enumerate}}
+\newcommand{\eenumerate}{\end{enumerate}}
+\newcommand{\saltopagina}{\newpage}
+\newcommand{\bcenter}{\begin{center}}
+\newcommand{\ecenter}{\end{center}}
+\newcommand{\beproof}{\begin{proof}} %new
+\newcommand{\eeproof}{\end{proof}} %new
+%De: https://texblog.org/2007/11/07/headerfooter-in-latex-with-fancyhdr/
+% \fancyhead
+% E: Even page
+% O: Odd page
+% L: Left field
+% C: Center field
+% R: Right field
+% H: Header
+% F: Footer
+%\fancyhead[CO,CE]{Resultados}
+
+%OPCION 1
+% \fancyhead[LE,RO]{\slshape \rightmark}
+% \fancyhead[LO,RE]{\slshape \leftmark}
+% \fancyfoot[C]{\thepage}
+% \renewcommand{\headrulewidth}{0.4pt}
+% \renewcommand{\footrulewidth}{0pt}
+
+%OPCION 2
+% \fancyhead[LE,RO]{\slshape \rightmark}
+% \fancyfoot[LO,RE]{\slshape \leftmark}
+% \fancyfoot[LE,RO]{\thepage}
+% \renewcommand{\headrulewidth}{0.4pt}
+% \renewcommand{\footrulewidth}{0.4pt}
+%%%%%%%%%%
+\usepackage{calc,amsfonts}
+% Elimina la cabecera de páginas impares vacías al finalizar los capítulos
+\usepackage{emptypage}
+\makeatletter
+
+%\definecolor{ocre}{RGB}{25,25,243} % Define el color azul (naranja) usado para resaltar algunas salidas
+\definecolor{ocre}{RGB}{0,0,0} % Define el color a negro (aparece en los teoremas
+
+%\usepackage{calc} 
+
+
+%era if(csl-refs) con dolares
+% metodobib: false
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+%\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+
+\usepackage{lipsum}
+
+%\usepackage{tikz} % Requerido para dibujar formas personalizadas
+
+%\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{amsthm}
+
+
+% Boxed/framed environments
+\newtheoremstyle{ocrenumbox}% % Theorem style name
+{0pt}% Space above
+{0pt}% Space below
+{\normalfont}% % Body font
+{}% Indent amount
+{\small\bf\sffamily\color{ocre}}% % Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily\color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
+\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
+
+\newtheoremstyle{blacknumex}% Theorem style name
+{5pt}% Space above
+{5pt}% Space below
+{\normalfont}% Body font
+{} % Indent amount
+{\small\bf\sffamily}% Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily{\tiny\ensuremath{\blacksquare}}\nobreakspace\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreakspace#3.}}% Optional theorem note
+
+\newtheoremstyle{blacknumbox} % Theorem style name
+{0pt}% Space above
+{0pt}% Space below
+{\normalfont}% Body font
+{}% Indent amount
+{\small\bf\sffamily}% Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreakspace#3.}}% Optional theorem note
+
+% Non-boxed/non-framed environments
+\newtheoremstyle{ocrenum}% % Theorem style name
+{5pt}% Space above
+{5pt}% Space below
+{\normalfont}% % Body font
+{}% Indent amount
+{\small\bf\sffamily\color{ocre}}% % Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily\color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
+\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
+\makeatother
+
+
+
+
+% Define el estilo texto theorem para cada tipo definido anteriormente
+\newcounter{dummy} 
+\numberwithin{dummy}{section}
+\theoremstyle{ocrenumbox}
+\newtheorem{theoremeT}[dummy]{Teorema}  % (Pedro: Theorem)
+\newtheorem{problem}{Problema}[section]  % (Pedro: Problem)
+\newtheorem{exerciseT}{Ejercicio}[section] % (Pedro: Exercise)
+\theoremstyle{blacknumex}
+\newtheorem{exampleT}{Ejemplo}[section] % (Pedro: Example)
+\theoremstyle{blacknumbox}
+\newtheorem{vocabulary}{Vocabulario}[section]  % (Pedro: Vocabulary)
+\newtheorem{definitionT}{Definición}[section]  % (Pedro: Definition)
+\newtheorem{corollaryT}[dummy]{Corolario}  % (Pedro: Corollary)
+\theoremstyle{ocrenum}
+\newtheorem{proposition}[dummy]{Proposición} % (Pedro: Proposition)
+
+
+\usepackage[framemethod=default]{mdframed}
+
+
+
+\newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
+\newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
+\newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
+\newtheorem{notation}{Notation}[section]
+
+
+\mdfdefinestyle{exampledefault}{%
+rightline=true,innerleftmargin=10,innerrightmargin=10,
+frametitlerule=true,frametitlerulecolor=green,
+frametitlebackgroundcolor=yellow,
+frametitlerulewidth=2pt}
+
+
+% Theorem box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+backgroundcolor=black!5,
+linecolor=ocre,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=10pt,%5pt
+leftmargin=0cm,
+rightmargin=0cm,
+innerbottommargin=5pt]{tBox}
+
+% Exercise box	  
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=ocre!10,
+linecolor=ocre,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=10pt,%5pt
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{eBox}	
+
+% Definition box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=ocre,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=10pt,%0pt
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt,
+innerbottommargin=0pt]{dBox}	
+
+% Corollary box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=gray,
+backgroundcolor=black!5,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=10pt,%5pt
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt,
+innerbottommargin=5pt]{cBox}
+
+% Crea un entorno para cada tipo de theorem y le asigna un estilo 
+% con ayuda de las cajas coloreadas anteriores
+\newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
+\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}				  
+\newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
+\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}		
+\newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}	
+
+%	ENVIRONMENT remark
+\newenvironment{remark}{\par\vspace{10pt}\small 
+% Espacio blanco vertical sobre la nota y tamaño de fuente menor
+\begin{list}{}{
+\leftmargin=35pt % Indentación sobre la izquierda
+\rightmargin=25pt}\item\ignorespaces % Indentación sobre la derecha
+\makebox[-2.5pt]{\begin{tikzpicture}[overlay]
+\node[draw=ocre!60,line width=1pt,circle,fill=ocre!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{ocre}{N}}; \end{tikzpicture}} % R naranja en un círculo (Pedro)
+\advance\baselineskip -1pt}{\end{list}\vskip5pt} 
+% Espaciado de línea más estrecho y espacio en blanco después del comentario
+
+
+\newenvironment{solutionExe}{\par\vspace{10pt}\small 
+\begin{list}{}{
+\leftmargin=35pt 
+\rightmargin=25pt}\item\ignorespaces 
+\makebox[-2.5pt]{\begin{tikzpicture}[overlay]
+\node[draw=ocre!60,line width=1pt,circle,fill=ocre!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{ocre}{S}}; \end{tikzpicture}} 
+\advance\baselineskip -1pt}{\end{list}\vskip5pt} 
+
+\newenvironment{solutionExa}{\par\vspace{10pt}\small 
+\begin{list}{}{
+\leftmargin=35pt 
+\rightmargin=25pt}\item\ignorespaces 
+\makebox[-2.5pt]{\begin{tikzpicture}[overlay]
+\node[draw=ocre!60,line width=1pt,circle,fill=ocre!55,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{ocre}{S}}; \end{tikzpicture}} 
+\advance\baselineskip -1pt}{\end{list}\vskip5pt} 
+
+\usepackage{tcolorbox}
+
+\usetikzlibrary{trees}
+
+\theoremstyle{ocrenum}
+\newtheorem{solutionT}[dummy]{Solución}  % (Pedro: Corollary)
+\newenvironment{solution}{\begin{cBox}\begin{solutionT}}{\end{solutionT}\end{cBox}}	
+
+
+\newcommand{\tcolorboxsolucion}[2]{%
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=#1] 
+ #2
+ %\tcblower  % pone una línea discontinua
+\end{tcolorbox}
+}% final definición comando
+
+\newtcbox{\mybox}[1][green]{on line,
+arc=0pt,outer arc=0pt,colback=#1!10!white,colframe=#1!50!black, boxsep=0pt,left=1pt,right=1pt,top=2pt,bottom=2pt, boxrule=0pt,bottomrule=1pt,toprule=1pt}
+
+
+
+\mdfdefinestyle{exampledefault}{%
+rightline=true,innerleftmargin=10,innerrightmargin=10,
+frametitlerule=true,frametitlerulecolor=green,
+frametitlebackgroundcolor=yellow,
+frametitlerulewidth=2pt}
+
+
+
+
+
+\newcommand{\betheorem}{\begin{theorem}}
+\newcommand{\eetheorem}{\end{theorem}}
+\newcommand{\bedefinition}{\begin{definition}}
+\newcommand{\eedefinition}{\end{definition}}
+
+\newcommand{\beremark}{\begin{remark}}
+\newcommand{\eeremark}{\end{remark}}
+\newcommand{\beexercise}{\begin{exercise}}
+\newcommand{\eeexercise}{\end{exercise}}
+\newcommand{\beexample}{\begin{example}}
+\newcommand{\eeexample}{\end{example}}
+\newcommand{\becorollary}{\begin{corollary}}
+\newcommand{\eecorollary}{\end{corollary}}
+
+
+\newcommand{\besolutionExe}{\begin{solutionExe}}
+\newcommand{\eesolutionExe}{\end{solutionExe}}
+\newcommand{\besolutionExa}{\begin{solutionExa}}
+\newcommand{\eesolutionExa}{\end{solutionExa}}
+
+
+%%%%%%%%
+
+
+% Caja Salida Markdown
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=GreenYellow!10,
+linecolor=GreenYellow!80,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=10pt,%5pt
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{mBox}	
+
+%% RMarkdown
+\newenvironment{markdownsal}{\begin{mBox}}{\end{mBox}}	
+
+\newcommand{\bmarkdownsal}{\begin{markdownsal}}
+\newcommand{\emarkdownsal}{\end{markdownsal}}
+
+
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{subfig} %new
+%\usepackage{booktabs,dcolumn,rotating,thumbpdf,longtable}
+\usepackage{dcolumn,rotating}  %new
+\usepackage[graphicx]{realboxes} %new de: https://stackoverflow.com/questions/51633434/prevent-pagebreak-in-kableextra-landscape-table
+
+%define el interlineado vertical
+%\renewcommand{\baselinestretch}{1.5}
+
+%define etiqueta para las Tablas o Cuadros
+%\renewcommand\spanishtablename{Tabla}
+
+%%\bibliographystyle{plain} %new no necesario
+
+
+%%%%%%%%%%%% PARA USO CON biblatex
+% \DefineBibliographyStrings{english}{%
+%   backrefpage = {ver pag.\adddot},%
+%   backrefpages = {ver pags.\adddot}%
+% }
+
+% \DefineBibliographyStrings{spanish}{%
+%   backrefpage = {ver pag.\adddot},%
+%   backrefpages = {ver pags.\adddot}%
+% }
+% 
+% \DeclareFieldFormat{pagerefformat}{\mkbibparens{{\color{red}\mkbibemph{#1}}}}
+% \renewbibmacro*{pageref}{%
+%   \iflistundef{pageref}
+%     {}
+%     {\printtext[pagerefformat]{%
+%        \ifnumgreater{\value{pageref}}{1}
+%          {\bibstring{backrefpages}\ppspace}
+%          {\bibstring{backrefpage}\ppspace}%
+%        \printlist[pageref][-\value{listtotal}]{pageref}}}}
+% 
+%%% de kableExtra
+\usepackage{booktabs}
+\usepackage{longtable}
+%\usepackage{array}
+%\usepackage{multirow}
+%\usepackage{wrapfig}
+%\usepackage{float}
+%\usepackage{colortbl}
+%\usepackage{pdflscape}
+%\usepackage{tabu}
+%\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+%\usepackage{xcolor}
+
+%%%%%%% fin: latex_preambulo.tex PLLC
+
+
+\begin{document}
+
+
+
+
+
+\setlength{\parindent}{1em}
+
+\pagestyle{fancy}
+\ifdefined\ifdoblecara
+\fancyhead[LE,RO]{}
+\fancyhead[LO,RE]{}
+\else
+\fancyhead[RO]{}
+\fancyhead[LO]{}
+\fi
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\pagenumbering{arabic}
+
+\large
+\bcenter
+
+\textbf{Código fuente numerado de algunos ficheros R Markdown}
+
+\textbf{Pedro L. Luque}
+
+\textbf{Fecha: 18-11-2021}
+
+\ecenter
+
+\normalsize
+
+\setcounter{tocdepth}{4}
+\subpdfbookmark{Índice General}{indice}
+\tableofcontents
+
+\tiny
+
+\hypertarget{fichero-tfe_principal.rmd}{%
+\section{Fichero: tfe\_principal.Rmd}\label{fichero-tfe_principal.rmd}}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\SpecialCharTok{{-}{-}{-}}
+\NormalTok{documentclass}\SpecialCharTok{:}\NormalTok{ book}
+\NormalTok{principal}\SpecialCharTok{:}\NormalTok{ true}
+\NormalTok{forprint}\SpecialCharTok{:}\NormalTok{ true  }\CommentTok{\# true: imprime a dos caras, false: libro digital}
+\NormalTok{fontsize}\SpecialCharTok{:}\NormalTok{ 12pt }\CommentTok{\# 10pt,11pt}
+\CommentTok{\#paloseco: true \# con fuente por defecto (lmodern)}
+\CommentTok{\#fontfamily: inconsolata}
+\CommentTok{\#fontmathfamily: mathptmx}
+\CommentTok{\#codigoajusta: true}
+\CommentTok{\#codigofuente: "normalsize"}
+\NormalTok{geometry}\SpecialCharTok{:}\NormalTok{ margin }\OtherTok{=} \FloatTok{2.5}\NormalTok{cm}
+\NormalTok{bibliography}\SpecialCharTok{:}\NormalTok{ [}\StringTok{"bib/library.bib"}\NormalTok{, }\StringTok{"bib/paquetes.bib"}\NormalTok{]}
+\CommentTok{\#biblio{-}title: "Referencias"}
+\CommentTok{\# metodobib {-}\textgreater{} true: natbib (descomentar: citation\_package: natbib) }
+\CommentTok{\#           {-}\textgreater{} false: pandoc (comentar: citation\_package: natbib)}
+\NormalTok{metodobib}\SpecialCharTok{:}\NormalTok{ true}
+\CommentTok{\#biblio{-}style con natbib}
+\CommentTok{\#natbib: plainnat, abbrvnat, unsrtnat}
+\CommentTok{\#natbib: chicago, apalike, acm}
+\CommentTok{\#natbib: apalike2 (https://ctan.org/pkg/apalike2)}
+\CommentTok{\#biblio{-}style: "apa{-}good"}
+\CommentTok{\#natbiboptions: "numbers" \# "square,numbers" \# ver: https://www.ctan.org/pkg/natbib}
+\CommentTok{\# más info: authoryear,numbers,  super, angle, sort, compress}
+\CommentTok{\# https://ctan.javinator9889.com/macros/latex/contrib/natbib/natnotes.pdf}
+\CommentTok{\#Método 2 (pandoc): descomente una línea de las 2 siguientes en caso de usarlo}
+\NormalTok{csl}\SpecialCharTok{:}\NormalTok{ methods}\SpecialCharTok{{-}}\ControlFlowTok{in}\SpecialCharTok{{-}}\NormalTok{ecology}\SpecialCharTok{{-}}\NormalTok{and}\SpecialCharTok{{-}}\NormalTok{evolution.csl      }\CommentTok{\# no numera mejor en las citas}
+\CommentTok{\#csl: acm{-}sig{-}proceedings{-}long{-}author{-}list.csl  \# numera peor en las citas}
+\CommentTok{\#csl: apa.csl  \# apa.csl, ieee.csl}
+\CommentTok{\# Método 3 (flexbib):}
+\NormalTok{flexbib}\SpecialCharTok{:}\NormalTok{ true}
+\CommentTok{\#flexbiboptions: "spanish,plain"}
+\NormalTok{flexbiboptions}\SpecialCharTok{:}\NormalTok{ spanish, plain, datebegin,sortcompress,nocomment, noabstract}
+\CommentTok{\#flexbiboptions: "spanish"}
+\NormalTok{link}\SpecialCharTok{{-}}\NormalTok{citations}\SpecialCharTok{:}\NormalTok{ yes}
+\NormalTok{output}\SpecialCharTok{:} 
+\NormalTok{  pdf\_document}\SpecialCharTok{:}
+\NormalTok{    keep\_tex}\SpecialCharTok{:}\NormalTok{ yes}
+\NormalTok{    number\_sections}\SpecialCharTok{:}\NormalTok{ yes}
+\NormalTok{    citation\_package}\SpecialCharTok{:}\NormalTok{ natbib  }\CommentTok{\# coméntelo si usa: pandoc{-}citeproc (metodobib: false)}
+    \CommentTok{\#toc: yes}
+\NormalTok{    fig\_caption}\SpecialCharTok{:}\NormalTok{ yes}
+\NormalTok{    template}\SpecialCharTok{:}\NormalTok{ latex}\SpecialCharTok{/}\NormalTok{templateMemoriaTFE.tex}
+\NormalTok{    includes}\SpecialCharTok{:}
+\NormalTok{      before\_body}\SpecialCharTok{:}\NormalTok{ portadas}\SpecialCharTok{/}\NormalTok{latex\_paginatitulo\_modTFE.tex}
+\CommentTok{\#      before\_body: portadas/latex\_paginatitulo\_modTFGE.tex}
+\CommentTok{\#      before\_body: portadas/latex\_paginatitulo\_modTFGM.tex}
+\CommentTok{\#      before\_body: portadas/latex\_paginatitulo\_modTFDGME.tex}
+\CommentTok{\#      before\_body: portadas/latex\_paginatitulo\_modTFMDS.tex}
+\CommentTok{\#      before\_body: portadas/latex\_paginatitulo\_mod\_OV01.tex}
+      \CommentTok{\#in\_header: latex/latex\_preambulo.tex}
+      \CommentTok{\#after\_body: latex/latex\_antes\_enddoc.tex}
+\SpecialCharTok{{-}{-}{-}}
+
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ Si }\StringTok{"metodobib: false"}\NormalTok{, modificar este }\StringTok{"nocite:"}  \SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ Si }\StringTok{"metodobib: true"}\NormalTok{, modificar el }\StringTok{"nocite:"}\NormalTok{ del final de este fichero  }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\SpecialCharTok{{-}{-}{-}}
+\NormalTok{nocite}\SpecialCharTok{:} \ErrorTok{|} 
+  \ErrorTok{@}\NormalTok{Luque2017,}\SpecialCharTok{@}\NormalTok{Luque2019,}\SpecialCharTok{@}\NormalTok{RStudio,}\SpecialCharTok{@}\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{base2,}
+  \SpecialCharTok{@}\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{knitr,}\SpecialCharTok{@}\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{rmarkdown,}\SpecialCharTok{@}\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{dplyr,}\SpecialCharTok{@}\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{ggplot2,}\SpecialCharTok{@}\NormalTok{Techopedia}
+\NormalTok{...}
+
+
+\SpecialCharTok{\textless{}!{-}{-}}\NormalTok{ \textbackslash{}newcommand\textbackslash{}Mycite[}\DecValTok{1}\NormalTok{]\{\textbackslash{}citeauthor\{}\CommentTok{\#1\}\textasciitilde{}[\textbackslash{}citeyear\{\#1\}]\} {-}{-}\textgreater{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r global\_options, include=FALSE\}}
+\AttributeTok{\#Sys.setlocale(\textquotesingle{}LC\_ALL\textquotesingle{},\textquotesingle{}C\textquotesingle{}) \# corrige problema con (ocasionaba problemas con acentos en fig.cap)}
+\AttributeTok{options(kableExtra.latex.load\_packages = F)}
+\AttributeTok{\#options(tinytex.latexmk.emulation = FALSE)}
+\AttributeTok{knitr::opts\_chunk$set(fig.path = \textquotesingle{}figurasR/\textquotesingle{},}
+\AttributeTok{                      echo = TRUE, warning = FALSE, message = FALSE,}
+\AttributeTok{                      fig.pos="H",fig.align="center",out.width="95\%",}
+\AttributeTok{                      cache=FALSE) \# }
+\AttributeTok{knitr::write\_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),}
+\AttributeTok{                 file="bib/paquetes.bib", width = 60)}
+\AttributeTok{\# .packages() incluirá los paquetes utilizados}
+\AttributeTok{\# knitr::write\_bib(c(.packages(),"rmarkdown"),   }
+\AttributeTok{\#                 file="bib/paquetes.bib", width = 60)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\SpecialCharTok{\textless{}!{-}{-}}\NormalTok{ Indentar el texto al inicio de cada nuevo párrafo }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\NormalTok{\textbackslash{}setlength\{\textbackslash{}parindent\}\{1em\}}
+
+\NormalTok{\textbackslash{}pagestyle\{fancy\}}
+\NormalTok{\textbackslash{}ifdefined\textbackslash{}ifdoblecara}
+\NormalTok{\textbackslash{}fancyhead[LE,RO]\{\}}
+\NormalTok{\textbackslash{}fancyhead[LO,RE]\{\}}
+\NormalTok{\textbackslash{}}\ControlFlowTok{else}
+\NormalTok{\textbackslash{}fancyhead[RO]\{\}}
+\NormalTok{\textbackslash{}fancyhead[LO]\{\}}
+\NormalTok{\textbackslash{}fi}
+\NormalTok{\textbackslash{}renewcommand\{\textbackslash{}headrulewidth\}\{0pt\}}
+\NormalTok{\textbackslash{}renewcommand\{\textbackslash{}footrulewidth\}\{0pt\}}
+\NormalTok{\textbackslash{}pagenumbering\{roman\}}
+
+\NormalTok{\textbackslash{}setcounter\{tocdepth\}\{}\DecValTok{4}\NormalTok{\}}
+\NormalTok{\textbackslash{}subpdfbookmark\{Índice General\}\{indice\}}
+\NormalTok{\textbackslash{}tableofcontents}
+
+
+\NormalTok{\textbackslash{}cleardoublepage   }
+\SpecialCharTok{\textless{}!{-}{-}}\NormalTok{  \textbackslash{}clearpage }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\NormalTok{\textbackslash{}section}\SpecialCharTok{*}\NormalTok{\{Prólogo\}}
+\NormalTok{\textbackslash{}addcontentsline\{toc\}\{section\}\{Prólogo\}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r child = \textquotesingle{}prologo.Rmd\textquotesingle{}\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{\textbackslash{}cleardoublepage   }
+\SpecialCharTok{\textless{}!{-}{-}}\NormalTok{  \textbackslash{}clearpage }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\NormalTok{\textbackslash{}section}\SpecialCharTok{*}\NormalTok{\{Resumen\}}
+\NormalTok{\textbackslash{}addcontentsline\{toc\}\{section\}\{Resumen\}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r child = \textquotesingle{}resumen.Rmd\textquotesingle{}\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{\textbackslash{}clearpage}
+\NormalTok{\textbackslash{}section}\SpecialCharTok{*}\NormalTok{\{Abstract\}}
+\NormalTok{\textbackslash{}addcontentsline\{toc\}\{section\}\{Abstract\}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r child = \textquotesingle{}abstract.Rmd\textquotesingle{}\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{\textbackslash{}cleardoublepage   }
+\NormalTok{\textbackslash{}listoffigures}
+\NormalTok{\textbackslash{}addcontentsline\{toc\}\{section\}\{Índice de Figuras\}}
+
+\NormalTok{\textbackslash{}cleardoublepage   }
+
+\NormalTok{\textbackslash{}listoftables}
+\SpecialCharTok{\textless{}!{-}{-}}\NormalTok{ \textbackslash{}addcontentsline\{toc\}\{section\}\{Índice de Cuadros\} }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\NormalTok{\textbackslash{}addcontentsline\{toc\}\{section\}\{Índice de Tablas\}}
+
+\NormalTok{\textbackslash{}cleardoublepage   }
+
+\NormalTok{\textbackslash{}pagenumbering\{arabic\}}
+
+\NormalTok{\textbackslash{}ifdefined\textbackslash{}ifdoblecara}
+\NormalTok{\textbackslash{}fancyhead[LE,RO]\{\textbackslash{}scriptsize\textbackslash{}rightmark\}}
+\NormalTok{\textbackslash{}fancyfoot[LO,RE]\{\textbackslash{}scriptsize\textbackslash{}slshape \textbackslash{}leftmark\}}
+\NormalTok{\textbackslash{}fancyfoot[C]\{\}}
+\NormalTok{\textbackslash{}fancyfoot[LE,RO]\{\textbackslash{}footnotesize\textbackslash{}thepage\}}
+\NormalTok{\textbackslash{}}\ControlFlowTok{else}
+\NormalTok{\textbackslash{}fancyhead[RO]\{\textbackslash{}scriptsize\textbackslash{}rightmark\}}
+\NormalTok{\textbackslash{}fancyfoot[LO]\{\textbackslash{}scriptsize\textbackslash{}slshape \textbackslash{}leftmark\}}
+\NormalTok{\textbackslash{}fancyfoot[C]\{\}}
+\NormalTok{\textbackslash{}fancyfoot[RO]\{\textbackslash{}footnotesize\textbackslash{}thepage\}}
+\NormalTok{\textbackslash{}fi}
+
+\NormalTok{\textbackslash{}renewcommand\{\textbackslash{}headrulewidth\}\{}\FloatTok{0.4}\NormalTok{pt\}}
+\NormalTok{\textbackslash{}renewcommand\{\textbackslash{}footrulewidth\}\{}\FloatTok{0.4}\NormalTok{pt\}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r child = \textquotesingle{}capitulo01n.Rmd\textquotesingle{}\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{\textbackslash{}FloatBarrier}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r child = \textquotesingle{}capitulo02n.Rmd\textquotesingle{}\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{\textbackslash{}FloatBarrier}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r child = \textquotesingle{}capitulo03n.Rmd\textquotesingle{}\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{\textbackslash{}FloatBarrier}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r child = \textquotesingle{}capitulo04n.Rmd\textquotesingle{}\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\SpecialCharTok{\textless{}!{-}{-}} 
+\NormalTok{Descomentarlo para incluir el capítulo }\DecValTok{5}\NormalTok{ el cual contiene utilidades de ejemplo}
+\NormalTok{para copiar y pegar.}
+\NormalTok{Atención}\SpecialCharTok{:}\NormalTok{ necesitará la instalación de algunos paquetes R }
+\NormalTok{que puede no tener instalados. Son}\SpecialCharTok{:}
+\FunctionTok{install.packages}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{,}\StringTok{"kableExtra"}\NormalTok{,}\StringTok{"dplyr"}\NormalTok{))}
+\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+
+\NormalTok{\textbackslash{}FloatBarrier}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r child = \textquotesingle{}capitulo05.Rmd\textquotesingle{}\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+
+\NormalTok{\textbackslash{}FloatBarrier}
+
+\NormalTok{\textbackslash{}appendix}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r child = \textquotesingle{}apendice01n.Rmd\textquotesingle{}\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r child = \textquotesingle{}apendice02n.Rmd\textquotesingle{}\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+
+\NormalTok{\textbackslash{}FloatBarrier}
+\NormalTok{\textbackslash{}cleardoublepage}
+
+\NormalTok{\textbackslash{}ifdefined\textbackslash{}ifdoblecara}
+\NormalTok{  \textbackslash{}fancyhead[LE,RO]\{\}}
+\NormalTok{  \textbackslash{}fancyfoot[LO,RE]\{\}}
+\NormalTok{  \textbackslash{}fancyhead[CO,CE]\{Bibliografía\}}
+\NormalTok{\textbackslash{}}\ControlFlowTok{else}
+\NormalTok{  \textbackslash{}fancyhead[RO]\{\}}
+\NormalTok{  \textbackslash{}fancyfoot[LO]\{\}}
+\NormalTok{  \textbackslash{}fancyhead[CO]\{Bibliografía\}}
+\NormalTok{\textbackslash{}fi}
+
+
+\NormalTok{\textbackslash{}ifdefined\textbackslash{}ifcitapandoc}
+
+\NormalTok{\textbackslash{}hypertarget\{bibliografuxeda\}\{\%}
+\NormalTok{\textbackslash{}chapter}\SpecialCharTok{*}\NormalTok{\{Bibliografía\}\textbackslash{}label\{bibliografuxeda\}\}}
+\NormalTok{\textbackslash{}addcontentsline\{toc\}\{chapter\}\{Bibliografía\}}
+
+
+\NormalTok{\textbackslash{}}\ControlFlowTok{else}
+
+\SpecialCharTok{\textless{}!{-}{-}}\NormalTok{ Si }\StringTok{"metodobib: true"}\NormalTok{, modificar este }\StringTok{"nocite:"}  \SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ Si }\StringTok{"metodobib: false"}\NormalTok{, modificar el }\StringTok{"nocite:"}\NormalTok{ del inicio de este fichero  }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ \textbackslash{}nocite\{}\SpecialCharTok{*}\NormalTok{\} }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\NormalTok{\textbackslash{}nocite\{Luque2017,Luque2019,RStudio,R}\SpecialCharTok{{-}}\NormalTok{base2,}
+\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{knitr,R}\SpecialCharTok{{-}}\NormalTok{rmarkdown,R}\SpecialCharTok{{-}}\NormalTok{dplyr,R}\SpecialCharTok{{-}}\NormalTok{ggplot2,Techopedia,}
+\NormalTok{webfacmatematicasus1,webUS2a,webPedroLuque,}
+\NormalTok{lopez2007aplicacion\}}
+
+\NormalTok{\textbackslash{}fi }
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+\hypertarget{fichero-capitulo01n.rmd}{%
+\section{Fichero: capitulo01n.Rmd}\label{fichero-capitulo01n.rmd}}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\SpecialCharTok{{-}{-}{-}}
+\NormalTok{output}\SpecialCharTok{:}
+\NormalTok{  pdf\_document}\SpecialCharTok{:}
+\NormalTok{    keep\_tex}\SpecialCharTok{:}\NormalTok{ yes}
+\NormalTok{    number\_sections}\SpecialCharTok{:}\NormalTok{ yes}
+\NormalTok{    citation\_package}\SpecialCharTok{:}\NormalTok{ natbib  }\CommentTok{\# comentado usa: pandoc{-}citeproc}
+\NormalTok{    template}\SpecialCharTok{:}\NormalTok{ latex}\SpecialCharTok{/}\NormalTok{templateMemoriaTFE.tex}
+\NormalTok{    pandoc\_args}\SpecialCharTok{:}\NormalTok{ [}\StringTok{"{-}{-}metadata{-}file=cabecera\_capitulos.yaml"}\NormalTok{]}
+\NormalTok{  html\_document}\SpecialCharTok{:}\NormalTok{ default}
+\SpecialCharTok{{-}{-}{-}}
+
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ escribir }\DecValTok{2}\NormalTok{ para capítulo }\DecValTok{3} \SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ \textbackslash{}setcounter\{chapter\}\{}\DecValTok{2}\NormalTok{\} }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ \textbackslash{}pagenumbering\{arabic\} }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\StringTok{\textasciigrave{}}\AttributeTok{r xfun::file\_string(\textquotesingle{}cabecera\_capitulos.tex\textquotesingle{})}\StringTok{\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r include=FALSE\}}
+\AttributeTok{source("cabecera\_chunk\_inicio.R")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\CommentTok{\# Título del Capítulo}
+
+\DocumentationTok{\#\# Primera sección}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+\hypertarget{fichero-capitulo05.rmd}{%
+\section{Fichero: capitulo05.Rmd}\label{fichero-capitulo05.rmd}}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\SpecialCharTok{{-}{-}{-}}
+\NormalTok{author}\SpecialCharTok{:} \StringTok{"Nombre Completo Autor"}
+\NormalTok{date}\SpecialCharTok{:} \StringTok{"27/10/2017"}
+\NormalTok{documentclass}\SpecialCharTok{:}\NormalTok{ book}
+\NormalTok{forprint}\SpecialCharTok{:}\NormalTok{ true  }\CommentTok{\# true: imprime a dos caras, false: libro digital}
+\NormalTok{fontsize}\SpecialCharTok{:}\NormalTok{ 12pt }\CommentTok{\# 10pt,11pt}
+\NormalTok{geometry}\SpecialCharTok{:}\NormalTok{ margin }\OtherTok{=} \FloatTok{2.5}\NormalTok{cm }
+\NormalTok{bibliography}\SpecialCharTok{:}\NormalTok{ [}\StringTok{"bib/library.bib"}\NormalTok{, }\StringTok{"bib/paquetes.bib"}\NormalTok{]}
+\CommentTok{\# metodobib {-}\textgreater{} true: natbib (descomentar: citation\_package: natbib) }
+\CommentTok{\#           {-}\textgreater{} false: pandoc (comentar: citation\_package: natbib)}
+\NormalTok{metodobib}\SpecialCharTok{:}\NormalTok{ true}
+\CommentTok{\#natbib: plainnat, abbrvnat, unsrtnat}
+\CommentTok{\#natbib: chicago, apalike, newapa}
+\NormalTok{biblio}\SpecialCharTok{{-}}\NormalTok{style}\SpecialCharTok{:} \StringTok{"apa{-}good"}
+\NormalTok{natbiboptions}\SpecialCharTok{:} \StringTok{"numbers"}
+\CommentTok{\#Método 2 (pandoc): descomente una línea de las 2 siguientes en caso de usarlo}
+\NormalTok{csl}\SpecialCharTok{:}\NormalTok{ methods}\SpecialCharTok{{-}}\ControlFlowTok{in}\SpecialCharTok{{-}}\NormalTok{ecology}\SpecialCharTok{{-}}\NormalTok{and}\SpecialCharTok{{-}}\NormalTok{evolution.csl      }\CommentTok{\# no numera mejor en las citas}
+\CommentTok{\#csl: acm{-}sig{-}proceedings{-}long{-}author{-}list.csl  \# numera peor en las citas}
+\NormalTok{link}\SpecialCharTok{{-}}\NormalTok{citations}\SpecialCharTok{:}\NormalTok{ yes}
+\NormalTok{output}\SpecialCharTok{:} 
+\NormalTok{  pdf\_document}\SpecialCharTok{:}
+\NormalTok{    keep\_tex}\SpecialCharTok{:}\NormalTok{ no}
+\NormalTok{    number\_sections}\SpecialCharTok{:}\NormalTok{ yes}
+\NormalTok{    citation\_package}\SpecialCharTok{:}\NormalTok{ natbib  }\CommentTok{\# comentado usa: pandoc{-}citeproc}
+    \CommentTok{\#toc: yes}
+\NormalTok{    fig\_caption}\SpecialCharTok{:}\NormalTok{ yes}
+\NormalTok{    template}\SpecialCharTok{:}\NormalTok{ latex}\SpecialCharTok{/}\NormalTok{templateMemoriaTFE.tex}
+\NormalTok{    includes}\SpecialCharTok{:}
+      \CommentTok{\#before\_body: portadas/latex\_paginatitulo\_modTFE.tex}
+      \CommentTok{\#in\_header: latex/latex\_preambulo.tex}
+      \CommentTok{\#after\_body: latex/latex\_antes\_enddoc.tex}
+\SpecialCharTok{{-}{-}{-}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r include=FALSE\}}
+\AttributeTok{\#Sys.setlocale(\textquotesingle{}LC\_ALL\textquotesingle{},\textquotesingle{}C\textquotesingle{}) \# corrige problema con }
+\AttributeTok{options(kableExtra.latex.load\_packages = F)}
+\AttributeTok{\#options(tinytex.latexmk.emulation = FALSE)}
+\AttributeTok{knitr::opts\_chunk$set(fig.path = \textquotesingle{}figurasR/\textquotesingle{},}
+\AttributeTok{                      echo = TRUE, warning = FALSE, message = FALSE,}
+\AttributeTok{                      fig.pos="H",fig.align="center",out.width="95\%",}
+\AttributeTok{                      cache=FALSE)}
+\AttributeTok{knitr::write\_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),}
+\AttributeTok{                 file="bib/paquetes.bib", width = 60)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\SpecialCharTok{\textless{}!{-}{-}}\NormalTok{ \textbackslash{}setcounter\{chapter\}\{}\DecValTok{2}\NormalTok{\} }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ \textbackslash{}setcounter\{chapter\}\{}\DecValTok{2}\NormalTok{\} escribir }\DecValTok{2}\NormalTok{ para capítulo }\DecValTok{3}  \SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ \textbackslash{}pagenumbering\{arabic\} }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+
+\NormalTok{\textbackslash{}ifdefined\textbackslash{}ifprincipal}
+\NormalTok{\textbackslash{}}\ControlFlowTok{else}
+\NormalTok{\textbackslash{}setlength\{\textbackslash{}parindent\}\{1em\}}
+\NormalTok{\textbackslash{}pagestyle\{fancy\}}
+\NormalTok{\textbackslash{}setcounter\{tocdepth\}\{}\DecValTok{4}\NormalTok{\}}
+\NormalTok{\textbackslash{}tableofcontents}
+\SpecialCharTok{\textless{}!{-}{-}}\NormalTok{ \textbackslash{}subpdfbookmark\{Índice General\}\{indice\} }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\NormalTok{\textbackslash{}nocite\{Luque2017,Luque2019,RStudio,R}\SpecialCharTok{{-}}\NormalTok{base2,}
+\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{knitr,R}\SpecialCharTok{{-}}\NormalTok{rmarkdown,R}\SpecialCharTok{{-}}\NormalTok{dplyr,R}\SpecialCharTok{{-}}\NormalTok{ggplot2,Techopedia\}}
+
+\NormalTok{\textbackslash{}fi}
+
+\NormalTok{\textbackslash{}ifdefined\textbackslash{}ifdoblecara}
+\NormalTok{\textbackslash{}fancyhead\{\}\{\}}
+\NormalTok{\textbackslash{}fancyhead[LE,RO]\{\textbackslash{}scriptsize\textbackslash{}rightmark\}}
+\NormalTok{\textbackslash{}fancyfoot[LO,RE]\{\textbackslash{}scriptsize\textbackslash{}slshape \textbackslash{}leftmark\}}
+\NormalTok{\textbackslash{}fancyfoot[C]\{\}}
+\NormalTok{\textbackslash{}fancyfoot[LE,RO]\{\textbackslash{}footnotesize\textbackslash{}thepage\}}
+\NormalTok{\textbackslash{}}\ControlFlowTok{else}
+\NormalTok{\textbackslash{}fancyhead\{\}\{\}}
+\NormalTok{\textbackslash{}fancyhead[RO]\{\textbackslash{}scriptsize\textbackslash{}rightmark\}}
+\NormalTok{\textbackslash{}fancyfoot[LO]\{\textbackslash{}scriptsize\textbackslash{}slshape \textbackslash{}leftmark\}}
+\NormalTok{\textbackslash{}fancyfoot[C]\{\}}
+\NormalTok{\textbackslash{}fancyfoot[RO]\{\textbackslash{}footnotesize\textbackslash{}thepage\}}
+\NormalTok{\textbackslash{}fi}
+
+\NormalTok{\textbackslash{}renewcommand\{\textbackslash{}headrulewidth\}\{}\FloatTok{0.4}\NormalTok{pt\}}
+\NormalTok{\textbackslash{}renewcommand\{\textbackslash{}footrulewidth\}\{}\FloatTok{0.4}\NormalTok{pt\}}
+
+
+\CommentTok{\# Tareas habituales al escribir documentos R Markdown}
+
+
+
+
+\NormalTok{Este capítulo está escrito en el fichero R Markdown }\SpecialCharTok{**}\StringTok{"capitulo05.Rmd"}\SpecialCharTok{**}\NormalTok{ y se ha incluido para }
+\NormalTok{que pueda copiar y pegar en su trabajo la solución a algunas de las cuestiones más habituales}
+\NormalTok{al escribir un trabajo escrito. }
+
+
+
+\DocumentationTok{\#\# Mostrar los chunks de código R y las opciones}
+
+
+\NormalTok{Un chunk de código R comienza con tres acentos abiertos}\SpecialCharTok{:}  \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}} \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r\} }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{ donde }\StringTok{\textasciigrave{}}\NormalTok{r}\StringTok{\textasciigrave{}}\AttributeTok{ indica el nombre del lenguaje\^{}[No se limita al lenguaje R, se pueden usar otros lenguajes, ver: [Ingenierías de lenguaje con knitr](https://rmarkdown.rstudio.com/authoring\_knitr\_engines.html\%23sql).] y finaliza con tres acentos abiertos. Pueden escribirse opciones adicionales a un chunk en las llaves (por ejemplo, se define la altura de un gráfico en 5 centímetros: }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{ }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{\{r fig.height}\OtherTok{=}\StringTok{\textquotesingle{}5cm\textquotesingle{}}\NormalTok{\} }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\ErrorTok{)}\NormalTok{. }
+
+\SpecialCharTok{**}\NormalTok{Nota importante}\SpecialCharTok{**}\ErrorTok{:}\NormalTok{ las opciones de un chunk deben estar escritas en una misma línea de texto.}
+
+\NormalTok{Una }\StringTok{"expresión R en línea"}\NormalTok{ o en el interior de un párrafo comienza con }\StringTok{\textasciigrave{}\textasciigrave{}} \StringTok{\textasciigrave{}}\AttributeTok{r }\StringTok{\textasciigrave{}\textasciigrave{}}\AttributeTok{ y finaliza con un acento abierto }\StringTok{\textasciigrave{}\textasciigrave{}}\AttributeTok{ }\StringTok{\textasciigrave{}} \StringTok{\textasciigrave{}\textasciigrave{}}\NormalTok{.}
+
+\NormalTok{Para marcar texto como }\StringTok{"código en línea"}\NormalTok{ use un par de acentos abiertos, por ejemplo, }\StringTok{\textasciigrave{}\textasciigrave{}} \StringTok{\textasciigrave{}}\AttributeTok{code}\StringTok{\textasciigrave{}} \StringTok{\textasciigrave{}\textasciigrave{}}\NormalTok{. Para incluir }\SpecialCharTok{$}\NormalTok{n}\SpecialCharTok{$}\NormalTok{ acentos abiertos literalmente, se deben usar al menos }\SpecialCharTok{$}\NormalTok{n}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{$}\NormalTok{ acentos abiertos que los envuelvan, por ejemplo, pueden usarse }\DecValTok{4}\NormalTok{ acentos abiertos para preservar }\DecValTok{3}\NormalTok{ acentos abiertos dentro}\SpecialCharTok{:} \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{ }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{ }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{code}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{ }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{ }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{, lo cual se mostrará como}\SpecialCharTok{:} \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}} \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{code}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}} \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{.}
+
+\NormalTok{Si lo que se quiere es mostrar literalmente los chunks de código junto a las opciones seleccionadas, ver el código utilizado en el siguiente ejemplo}\SpecialCharTok{:} 
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\AttributeTok{código markdown que quiera mostrarse}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\NormalTok{Esto es un párrafo en un documento R Markdown.}
+
+\NormalTok{A continuación se muestra un chunk de código R}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r\}}
+\AttributeTok{fit = lm(dist \textasciitilde{} speed, data = cars)}
+\AttributeTok{b   = coef(fit)}
+\AttributeTok{plot(cars)}
+\AttributeTok{abline(fit)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{La pendiente de la regresión es }\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}}\SpecialCharTok{\textbackslash{}x60}\AttributeTok{r b[1]}\SpecialCharTok{\textbackslash{}x60}\AttributeTok{\textquotesingle{}}\StringTok{\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{La última frase se mostraría así}\SpecialCharTok{:}
+
+\NormalTok{\textbackslash{}bmarkdownsal}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE\}}
+\AttributeTok{fit = lm(dist \textasciitilde{} speed, data = cars)}
+\AttributeTok{b   = coef(fit)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{La pendiente de la regresión es }\StringTok{\textasciigrave{}}\AttributeTok{r b[1]}\StringTok{\textasciigrave{}}\NormalTok{.}
+
+\NormalTok{\textbackslash{}emarkdownsal}
+
+
+\NormalTok{Hay una gran cantidad de opciones para los chunks en knitr documentadas en }\SpecialCharTok{\textless{}}\NormalTok{https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{yihui.name}\SpecialCharTok{/}\NormalTok{knitr}\SpecialCharTok{/}\NormalTok{options}\SpecialCharTok{\textgreater{}}\NormalTok{. }
+\NormalTok{A continuación, enumeramos un subconjunto de ellas}\SpecialCharTok{:}
+
+\SpecialCharTok{{-}} \ErrorTok{**}\NormalTok{eval}\SpecialCharTok{**}\ErrorTok{:}\NormalTok{ si evalúa un fragmento de código o no.}
+
+\SpecialCharTok{{-}} \ErrorTok{**}\NormalTok{echo}\SpecialCharTok{**}\ErrorTok{:}\NormalTok{ si se debe hacer eco o presentar el código fuente en el documento de }\FunctionTok{salida}\NormalTok{ (en algunas ocasiones es posible no quiera leer el código fuente, solamente los resultados).}
+
+\SpecialCharTok{{-}} \ErrorTok{**}\NormalTok{result}\SpecialCharTok{**}\ErrorTok{:} 
+
+    \SpecialCharTok{+}\NormalTok{ cuando se establece en }\StringTok{\textasciigrave{}}\AttributeTok{\textquotesingle{}hide\textquotesingle{}}\StringTok{\textasciigrave{}}\NormalTok{ (ocultar), la salida de texto se ocultará; }
+        
+\NormalTok{        \textbackslash{}bmarkdownsal}
+        \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=TRUE,results=\textquotesingle{}hide\textquotesingle{}\}}
+\AttributeTok{        cat(\textquotesingle{}**Markdown** es genial. }\SpecialCharTok{\textbackslash{}n}\AttributeTok{\textquotesingle{})}
+\AttributeTok{        }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{        \textbackslash{}emarkdownsal}
+    
+    \SpecialCharTok{+}\NormalTok{ cuando se establece en }\StringTok{\textasciigrave{}}\AttributeTok{\textquotesingle{}asis\textquotesingle{}}\StringTok{\textasciigrave{}}\NormalTok{, la salida de texto se escribe }\StringTok{"tal cual"}\NormalTok{, por ejemplo, puede escribirse el texto markdown sin procesar el código }\FunctionTok{R}\NormalTok{ (como }\StringTok{\textasciigrave{}}\AttributeTok{cat(\textquotesingle{}**Markdown** es genial. }\SpecialCharTok{\textbackslash{}n}\AttributeTok{\textquotesingle{})}\StringTok{\textasciigrave{}}\NormalTok{). }
+
+\NormalTok{        \textbackslash{}bmarkdownsal}
+        \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=TRUE,results=\textquotesingle{}asis\textquotesingle{}\}}
+\AttributeTok{        cat(\textquotesingle{}**Markdown** es genial. }\SpecialCharTok{\textbackslash{}n}\AttributeTok{\textquotesingle{})}
+\AttributeTok{        }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{        \textbackslash{}emarkdownsal}
+        
+    \SpecialCharTok{+}\NormalTok{ De forma }\FunctionTok{predeterminada}\NormalTok{ (}\StringTok{\textasciigrave{}}\AttributeTok{\textquotesingle{}markup\textquotesingle{}}\StringTok{\textasciigrave{}}\NormalTok{ y }\StringTok{\textasciigrave{}}\AttributeTok{\textquotesingle{}hold\textquotesingle{}}\StringTok{\textasciigrave{}}\NormalTok{), la salida de texto se envolverá en elementos }\FunctionTok{textuales}\NormalTok{ (generalmente bloques de código simple).}
+
+\NormalTok{        \textbackslash{}bmarkdownsal}
+        \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=TRUE\}}
+\AttributeTok{        cat(\textquotesingle{}**Markdown** es genial. }\SpecialCharTok{\textbackslash{}n}\AttributeTok{\textquotesingle{})}
+\AttributeTok{        }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{        \textbackslash{}emarkdownsal}
+        
+\SpecialCharTok{{-}} \ErrorTok{**}\NormalTok{warning}\SpecialCharTok{**}\NormalTok{, }\SpecialCharTok{**}\NormalTok{message}\SpecialCharTok{**}\NormalTok{, y }\SpecialCharTok{**}\NormalTok{error}\SpecialCharTok{**}\ErrorTok{:}\NormalTok{ si se muestran o no advertencias, mensajes y errores en el documento de salida. Tenga en cuenta que si establece }\StringTok{\textasciigrave{}}\AttributeTok{error = FALSE}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{rmarkdown::render()}\StringTok{\textasciigrave{}}\NormalTok{ se detendrá al encontrar un error en un fragmento de código, y el error se mostrará en la consola R, si }\StringTok{\textasciigrave{}}\AttributeTok{error = TRUE}\StringTok{\textasciigrave{}}\NormalTok{, no se detendrá cuando encuentre un error en el chunk y mostrará el mensaje de error. De manera similar, cuando }\StringTok{\textasciigrave{}}\AttributeTok{warning = FALSE}\StringTok{\textasciigrave{}}\NormalTok{ o }\StringTok{\textasciigrave{}}\AttributeTok{message = FALSE}\StringTok{\textasciigrave{}}\NormalTok{, estos mensajes se mostrarán en la consola R.}
+
+\NormalTok{    \textbackslash{}bmarkdownsal}
+    \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=TRUE,error=TRUE\}}
+\AttributeTok{    si(3.2)}
+\AttributeTok{    }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{    \textbackslash{}emarkdownsal}
+    
+\SpecialCharTok{{-}} \ErrorTok{**}\NormalTok{child}\SpecialCharTok{**}\ErrorTok{:}\NormalTok{ puede incluir un documento hijo a un documento principal. Esta opción toma una ruta a un archivo externo.}
+
+\NormalTok{En este enlace [url}\SpecialCharTok{{-}}\NormalTok{bookdown](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{bookdown.org}\SpecialCharTok{/}\NormalTok{yihui}\SpecialCharTok{/}\NormalTok{rmarkdown}\SpecialCharTok{/}\NormalTok{r}\SpecialCharTok{{-}}\NormalTok{code.html) puede obtenerse más información sobre las opciones en un chunk de código R.}
+
+
+
+\DocumentationTok{\#\# Cómo incluir un gráfico \{\#sec:incluirgrafico\}}
+
+
+\DocumentationTok{\#\#\# Incluir un fichero gráfico en el documento}
+
+\NormalTok{Se tiene el fichero gráfico }\StringTok{"capitulo05ejemplo01.png"}\NormalTok{ en la subcarpeta }\StringTok{"graficos"}\NormalTok{. Este fichero gráfico}
+\NormalTok{puede proceder de }
+
+\SpecialCharTok{{-}}\NormalTok{ un fichero gráfico descargado de internet,}
+\SpecialCharTok{{-}}\NormalTok{ una captura de pantalla que hemos obtenido de nuestro ordenador,}
+\SpecialCharTok{{-}}\NormalTok{ una ilustración que hemos diseñado con carácter didáctico que hemos guardado en un fichero gráfico, etc.}
+
+\NormalTok{A continuación se ha escrito el comando LaTeX}\SpecialCharTok{:} \StringTok{"\textasciigrave{}\textbackslash{}clearpage\textasciigrave{}"}\NormalTok{, el cual provoca un salto de página en el punto del texto en el que se ha escrito.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\NormalTok{\textbackslash{}clearpage}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{\textbackslash{}clearpage}
+
+
+\DocumentationTok{\#\#\#\# Gráfico sin leyenda y justo aquí}
+
+\NormalTok{Si queremos incluirlo sin ningún tipo de leyenda explicativa y justamente en la posición que lo hemos colocado, podríamos hacerlo con ayuda del siguiente }\StringTok{"chunk de código R"}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE,out.width=\textquotesingle{}70\%\textquotesingle{},fig.align=\textquotesingle{}center\textquotesingle{},fig.pos="H"\}}
+\AttributeTok{knitr::include\_graphics("graficos/capitulo05ejemplo01.png")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE,out.width=\textquotesingle{}70\%\textquotesingle{},fig.align=\textquotesingle{}center\textquotesingle{},fig.pos="H"\}}
+\AttributeTok{knitr::include\_graphics("graficos/capitulo05ejemplo01.png")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+
+\DocumentationTok{\#\#\#\# Gráfico con leyenda y justo aquí}
+
+\NormalTok{Si queremos incluirlo con una leyenda explicativa con una numeración que lo identifica para poder hacer referencia a él en cualquier parte del documento y además aparezca justamente en la posición que lo hemos colocado, podríamos hacerlo con ayuda del siguiente }\StringTok{"chunk de código R"}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE,out.width=\textquotesingle{}8cm\textquotesingle{},fig.align=\textquotesingle{}center\textquotesingle{},}
+\AttributeTok{fig.cap="}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{label\{fig:c05ej01\}Se muestra el panel Files de RStudio }
+\AttributeTok{(fuente: elaboraci}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}on propia)",fig.pos="H"\}}
+\AttributeTok{knitr::include\_graphics("graficos/capitulo05ejemplo01.png")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE,out.width=\textquotesingle{}8cm\textquotesingle{},fig.align=\textquotesingle{}center\textquotesingle{},fig.cap="}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{label\{fig:c05ej01\}Se muestra el panel Files de RStudio (fuente: elaboraci}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}on propia)",fig.pos="H"\}}
+\AttributeTok{knitr::include\_graphics("graficos/capitulo05ejemplo01.png")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{En cualquier parte del documento, delante o detrás del gráfico, puede }
+\NormalTok{hacerse referencia a la figura \textbackslash{}ref\{fig}\SpecialCharTok{:}\NormalTok{c05ej01\} y además puede indicarse }
+\NormalTok{la página en la que se encuentra}\SpecialCharTok{:}\NormalTok{ página \textbackslash{}pageref\{fig}\SpecialCharTok{:}\NormalTok{c05ej01\}.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\NormalTok{En cualquier parte del documento, delante o detrás del gráfico, puede }
+\NormalTok{hacerse referencia a la figura \textbackslash{}ref\{fig}\SpecialCharTok{:}\NormalTok{c05ej01\} y además puede indicarse }
+\NormalTok{la página en la que se encuentra}\SpecialCharTok{:}\NormalTok{ página \textbackslash{}pageref\{fig}\SpecialCharTok{:}\NormalTok{c05ej01\}.}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\DocumentationTok{\#\#\#\# Gráfico con leyenda y posición flotante: superior o inferior}
+
+\NormalTok{En muchos tipos de publicaciones se recomienda que las figuras y tablas se coloquen por motivos estéticos en la parte superior o inferior de una página. }
+
+\NormalTok{Esta forma de trabajar evita un efecto no deseado de espacios verticales en blanco. Ya que cuando se quiere colocar una figura en una posición particular, muchas veces se queda un espacio en blanco, debido a que por su tamaño tenga que llevarse a la página }\FunctionTok{siguiente}\NormalTok{ (LaTeX actúa automáticamente repartiendo ese espacio vertical sobrante entre los elementos de la página, ver lo que ocurre en la página \textbackslash{}pageref\{sec}\SpecialCharTok{:}\NormalTok{incluirgrafico\}).}
+
+\NormalTok{Esto requerirá que cuando se habla de la Figura o Tabla, se utilice un elemento que la identifique. Para ello, se utilizará la pareja }\StringTok{"label{-}ref"}\NormalTok{ vista en el apartado anterior.}
+
+\NormalTok{Lo habitual es hacer la primera referencia cerca de donde esté ubicada. Como vemos en la Figura \textbackslash{}ref\{fig}\SpecialCharTok{:}\NormalTok{c05ej02\} (ver [url](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{resource}\SpecialCharTok{{-}}\NormalTok{cms.springernature.com}\SpecialCharTok{/}\NormalTok{springer}\SpecialCharTok{{-}}\NormalTok{cms}\SpecialCharTok{/}\NormalTok{rest}\SpecialCharTok{/}\NormalTok{v1}\SpecialCharTok{/}\NormalTok{content}\SpecialCharTok{/}\DecValTok{19112}\SpecialCharTok{/}\NormalTok{data}\SpecialCharTok{/}\NormalTok{v5)).}
+
+\NormalTok{En R Markdown se tiene que utilizar en la opción del chunk correspondiente}\SpecialCharTok{:} \ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{fig.pos="t"}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{  para colocarla en la parte superior, }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{fig.pos="b"}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{  para colocarla en la parte inferior de una página y }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{fig.pos="htbp"}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{ para colocarla por orden}\SpecialCharTok{:} \StringTok{"aquí{-}superior{-}inferior{-}páginasolotablas"}\NormalTok{, pero a partir de la página en la que se haya colocado la }\FunctionTok{figura}\NormalTok{ (se decide automáticamente).}
+
+\SpecialCharTok{**}\NormalTok{Nota}\SpecialCharTok{**}\NormalTok{. Se recomienda el uso de la opción }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{fig.pos="htbp"}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{ o }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{fig.pos="!htbp"}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{ para que no aparezcan espacios en blanco }\FunctionTok{adicionales}\NormalTok{ (}\StringTok{\textasciigrave{}}\AttributeTok{!}\StringTok{\textasciigrave{}}\NormalTok{ obliga). Se puede obligar a que en el caso que no se especifique se comporte obligadamente como indiquemos con }\StringTok{\textasciigrave{}}\AttributeTok{floatplacement\{figure\}\{\}}\StringTok{\textasciigrave{}}\NormalTok{ o }\StringTok{\textasciigrave{}}\AttributeTok{floatplacement\{table\}\{\}}\StringTok{\textasciigrave{}}\NormalTok{ . Por ejemplo, si queremos obligar que las figuras se coloquen como}\SpecialCharTok{:} \StringTok{"!bthp"}\NormalTok{.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\SpecialCharTok{\textbackslash{}f}\AttributeTok{loatplacement\{figure\}\{!bthp\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\SpecialCharTok{**}\NormalTok{Nota}\SpecialCharTok{**}\NormalTok{. El comando LaTeX}\SpecialCharTok{:} \ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{\textbackslash{}clearpage}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{ produce salto de página pero obliga a que todas las figuras o tablas que se hayan incluido anteriormente sean mostradas.}
+\NormalTok{Ver más en [ayuda overleaf](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{es.overleaf.com}\SpecialCharTok{/}\NormalTok{learn}\SpecialCharTok{/}\NormalTok{latex}\SpecialCharTok{/}\NormalTok{Line\_breaks\_and\_blank\_spaces}\CommentTok{\#Espacios\_verticales\_en\_blanco).}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE,out.width=\textquotesingle{}8cm\textquotesingle{},fig.align=\textquotesingle{}center\textquotesingle{},}
+\AttributeTok{fig.cap="}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{label\{fig:c05ej02\}Un ejemplo de figura colocada }
+\AttributeTok{en la parte superior de un documento }
+\AttributeTok{(Fuente: }\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{url\{http://destio.us.es/calvo\})",fig.pos="t"\}}
+\AttributeTok{knitr::include\_graphics("graficos/capitulo05ejemplo01.png")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE,out.width=\textquotesingle{}8cm\textquotesingle{},fig.align=\textquotesingle{}center\textquotesingle{},fig.cap="}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{label\{fig:c05ej02\}Un ejemplo de figura colocada en la parte superior de un documento. (fuente: }\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{url\{http://destio.us.es/calvo\})",fig.pos="t"\}}
+\AttributeTok{knitr::include\_graphics("graficos/capitulo05ejemplo01.png")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+\DocumentationTok{\#\#\# Incluir un gráfico creado con R en el documento}
+
+
+\NormalTok{Se tienen las mismas posibilidades que el caso de un fichero gráfico, pero habitualmente en este caso el gráfico se construye con funciones de R en un chunk de código R. }
+
+\NormalTok{También es posible construir el gráfico con funciones R en un fichero de script R y guardar el resultado en un fichero gráfico (ver comandos}\SpecialCharTok{:} \ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{png()}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{ y }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{dev.off()}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{, }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{ggplot2::ggsave()}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{). Para incluirlo en el documento R Markdown se haría lo visto en la sección anterior.}
+
+\NormalTok{El siguiente código ilustra cómo crear un fichero con ayuda del paquete }\StringTok{"ggplot2"}\NormalTok{ y lo grabamos en un fichero }\StringTok{".png"}\NormalTok{ con ayuda de la función }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{ggsave()}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=TRUE\}}
+\AttributeTok{library(ggplot2)}
+\AttributeTok{p = ggplot(mtcars, aes(mpg, wt)) + }
+\AttributeTok{  geom\_point()}
+\AttributeTok{ggsave("figurasR/capi05mtcars.png",plot=p)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{Para incluirlo en el documento se podría utilizar el siguiente chunk de código }\FunctionTok{R}\NormalTok{ (lo coloca aquí porque por defecto se ha definido }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{fig.pos="H"}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{)}\SpecialCharTok{:} 
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE,out.width=\textquotesingle{}70\%\textquotesingle{},fig.align=\textquotesingle{}center\textquotesingle{}\}}
+\AttributeTok{knitr::include\_graphics("figurasR/capi05mtcars.png")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE,out.width=\textquotesingle{}70\%\textquotesingle{},fig.align=\textquotesingle{}center\textquotesingle{}\}}
+\AttributeTok{knitr::include\_graphics("figurasR/capi05mtcars.png")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{También se pueden grabar con las funciones }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{png()}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{, }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{jpeg()}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{, }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{pdf()}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{, etc, y }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{dev.off()}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{, como se ilustra en los siguientes ejemplos de código R}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r eval=FALSE,echo=TRUE\}}
+\AttributeTok{png(file = "figurasR/capi05myplot.png", bg = "transparent")}
+\AttributeTok{plot(1:10)}
+\AttributeTok{rect(1, 5, 3, 7, col = "white")}
+\AttributeTok{dev.off()}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r eval=FALSE,echo=TRUE\}}
+\AttributeTok{ \# creará myplot1.jpg y myplot2.jpg}
+\AttributeTok{jpeg(file = "figurasR/capi05myplot\%d.jpg")}
+\AttributeTok{example(rect)}
+\AttributeTok{dev.off()}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\DocumentationTok{\#\#\#\# Incluir un gráfico creado con R sin leyenda y justo aquí}
+
+\NormalTok{Se demuestra con un ejemplo que usa el paquete }\StringTok{"ggplot2"}\NormalTok{, en el que además el gráfico aparece }\FunctionTok{centrado}\NormalTok{ (se ha indicado}\SpecialCharTok{:} \StringTok{\textasciigrave{}}\AttributeTok{fig.align=\textquotesingle{}center\textquotesingle{}}\StringTok{\textasciigrave{}}\NormalTok{, pero hay otros valores para esta opción}\SpecialCharTok{:} \StringTok{\textasciigrave{}}\AttributeTok{\textquotesingle{}left\textquotesingle{}}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{\textquotesingle{}right\textquotesingle{}}\StringTok{\textasciigrave{}}\NormalTok{. Si no se utiliza aparece justificada a la izquierda).}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE,out.width=\textquotesingle{}80\%\textquotesingle{},fig.align=\textquotesingle{}center\textquotesingle{},fig.pos=\textquotesingle{}H\textquotesingle{}\}}
+\AttributeTok{library(ggplot2)}
+\AttributeTok{p = ggplot(mtcars, aes(mpg, wt)) + }
+\AttributeTok{  geom\_point()}
+\AttributeTok{p  }
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE,out.width=\textquotesingle{}80\%\textquotesingle{},fig.align=\textquotesingle{}center\textquotesingle{},fig.pos=\textquotesingle{}H\textquotesingle{}\}}
+\AttributeTok{library(ggplot2)}
+\AttributeTok{p = ggplot(mtcars, aes(mpg, wt)) + }
+\AttributeTok{  geom\_point()}
+\AttributeTok{p}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+
+\DocumentationTok{\#\#\#\# Incluir un gráfico creado con R con leyenda y situado en la parte superior}
+
+\NormalTok{El gráfico de la Figura \textbackslash{}ref\{fig}\SpecialCharTok{:}\NormalTok{cap05gg02\} es un ejemplo de gráfico creado con R y aparece con una leyenda explicativa y colocado en la parte superior de la página.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE,out.width=\textquotesingle{}80\%\textquotesingle{},fig.align=\textquotesingle{}center\textquotesingle{},fig.pos=\textquotesingle{}htbp\textquotesingle{},}
+\AttributeTok{fig.cap="}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{label\{fig:cap05gg02\}Gr}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}afico de L}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}\{}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{i\}neas creado }
+\AttributeTok{         con ggplot2 (fuente: elaboraci}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}on propia)"\}}
+\AttributeTok{library(ggplot2)}
+\AttributeTok{ggplot(mtcars, aes(mpg, wt)) + }
+\AttributeTok{  geom\_line(col="blue")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE,out.width=\textquotesingle{}80\%\textquotesingle{},fig.align=\textquotesingle{}center\textquotesingle{},fig.pos=\textquotesingle{}htbp\textquotesingle{},fig.cap="}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{label\{fig:cap05gg02\}Gr}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}afico de L}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}\{}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{i\}neas creado con ggplot2 (fuente: elaboraci}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}on propia)"\}}
+\AttributeTok{library(ggplot2)}
+\AttributeTok{ggplot(mtcars, aes(mpg, wt)) + }
+\AttributeTok{  geom\_line(col="blue")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+
+
+\SpecialCharTok{\textless{}!{-}{-}}\NormalTok{ \textbackslash{}pagebreak\textbackslash{}FloatBarrier }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\DocumentationTok{\#\#\#\# Varios gráficos creados con R con varias leyendas}
+
+\NormalTok{Con el siguiente código se pueden presentar dos gráficos en una única figura y además se puede colocar una leyenda explicativa a cada gráfico (obtenido en}\SpecialCharTok{:}\NormalTok{ [stackoverflow](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{stackoverflow.com}\SpecialCharTok{/}\NormalTok{questions}\SpecialCharTok{/}\DecValTok{53850299}\SpecialCharTok{/}\NormalTok{how}\SpecialCharTok{{-}}\NormalTok{to}\SpecialCharTok{{-}}\NormalTok{get}\SpecialCharTok{{-}}\NormalTok{a}\SpecialCharTok{{-}}\NormalTok{newline}\SpecialCharTok{{-}}\ControlFlowTok{in}\SpecialCharTok{{-}}\NormalTok{a}\SpecialCharTok{{-}}\NormalTok{figure}\SpecialCharTok{{-}}\NormalTok{caption}\SpecialCharTok{{-}}\ControlFlowTok{in}\SpecialCharTok{{-}}\NormalTok{rmarkdown}\SpecialCharTok{{-}}\NormalTok{bookdown}\SpecialCharTok{{-}}\NormalTok{pdfdocument2)).}
+
+
+\SpecialCharTok{**}\NormalTok{Observe}\SpecialCharTok{**}\NormalTok{ que no se ha usado }\SpecialCharTok{**}\NormalTok{label}\SpecialCharTok{**}\NormalTok{ en }\StringTok{\textasciigrave{}}\AttributeTok{fig.cap}\StringTok{\textasciigrave{}}\NormalTok{, el identificador se ha construido del identificador del chunk}\SpecialCharTok{:} \StringTok{"plot{-}cars"}\NormalTok{ al que se le ha añadido como prefijo}\SpecialCharTok{:} \StringTok{"fig:"}\NormalTok{, quedando el identificador para usar con }\SpecialCharTok{**}\NormalTok{ref}\SpecialCharTok{**}\ErrorTok{:} \StringTok{"fig:plot{-}cars"}\NormalTok{. A las subfiguras se les ha añadido números consecutivos.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+
+\NormalTok{Vea la Figura \textbackslash{}ref\{fig}\SpecialCharTok{:}\NormalTok{plot}\SpecialCharTok{{-}}\NormalTok{cars\}, la cual contiene la Figura }
+\NormalTok{\textbackslash{}ref\{fig}\SpecialCharTok{:}\NormalTok{plot}\SpecialCharTok{{-}}\NormalTok{cars}\DecValTok{{-}1}\NormalTok{\} y la Figura \textbackslash{}ref\{fig}\SpecialCharTok{:}\NormalTok{plot}\SpecialCharTok{{-}}\NormalTok{cars}\DecValTok{{-}2}\NormalTok{\}.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r plot{-}cars, fig.height = 3, fig.width = 4,out.width=\textquotesingle{}49\%\textquotesingle{}, }
+\AttributeTok{fig.cap="Dos gr}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}aficos", fig.subcap = c("Regresi}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}on", }
+\AttributeTok{"Gr}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}afico sobre cars"),fig.pos="htbp"\}}
+\AttributeTok{plot(mpg \textasciitilde{} wt, data = mtcars)}
+\AttributeTok{plot(cars)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+\NormalTok{Vea la Figura \textbackslash{}ref\{fig}\SpecialCharTok{:}\NormalTok{plot}\SpecialCharTok{{-}}\NormalTok{cars\}, la cual contiene la Figura }
+\NormalTok{\textbackslash{}ref\{fig}\SpecialCharTok{:}\NormalTok{plot}\SpecialCharTok{{-}}\NormalTok{cars}\DecValTok{{-}1}\NormalTok{\} y la Figura \textbackslash{}ref\{fig}\SpecialCharTok{:}\NormalTok{plot}\SpecialCharTok{{-}}\NormalTok{cars}\DecValTok{{-}2}\NormalTok{\}.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r plot{-}cars, fig.height = 3, fig.width = 4, out.width=\textquotesingle{}49\%\textquotesingle{}, fig.cap="Dos gr}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}aficos", fig.subcap = c("Regresi}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}on", "Gr}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}afico sobre cars"),fig.pos="htbp"\}}
+\AttributeTok{plot(mpg \textasciitilde{} wt, data = mtcars)}
+\AttributeTok{plot(cars)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+
+
+\NormalTok{Otro ejemplo en el que solamente se usa una leyenda para los dos gráficos (también se modifican los márgenes). Importante el uso de la opción de chunk}\SpecialCharTok{:} \ErrorTok{**}\AttributeTok{fig.show=}\StringTok{"hold"}\SpecialCharTok{**}\NormalTok{.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r out.width=\textquotesingle{}45\%\textquotesingle{},fig.show="hold",}
+\AttributeTok{        fig.cap="Dos gr}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}aficos R cara a cara",fig.pos="htbp"\}}
+\AttributeTok{par(mar = c(4, 4, 0.1, 0.1))}
+\AttributeTok{plot(pressure, pch = 19, type = "b")}
+\AttributeTok{plot(cars, pch = 19)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{Produce la Figura \textbackslash{}ref\{fig}\SpecialCharTok{:}\NormalTok{fig2\}.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r fig2, out.width=\textquotesingle{}45\%\textquotesingle{},fig.show="hold",fig.cap="Dos gr}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}aficos R cara a cara",fig.pos="htbp"\}}
+\AttributeTok{par(mar = c(4, 4, 0.1, 0.1))}
+\AttributeTok{plot(pressure, pch = 19, type = "b")}
+\AttributeTok{plot(cars, pch = 19)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\DocumentationTok{\#\# Cómo incluir una tabla o cuadro con información}
+
+\NormalTok{Para profundizar en el tema de la presentación de tablas de información se recomienda visitar la siguiente url}\SpecialCharTok{:}\NormalTok{ [Cómo Crear tablas de información en  R Markdown](http}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{destio.us.es}\SpecialCharTok{/}\NormalTok{calvo}\SpecialCharTok{/}\NormalTok{post}\SpecialCharTok{/}\NormalTok{como}\SpecialCharTok{{-}}\NormalTok{crear}\SpecialCharTok{{-}}\NormalTok{tablas}\SpecialCharTok{{-}}\NormalTok{de}\SpecialCharTok{{-}}\NormalTok{informacion}\SpecialCharTok{{-}}\NormalTok{en}\SpecialCharTok{{-}}\NormalTok{r}\SpecialCharTok{{-}}\NormalTok{markdown}\SpecialCharTok{/}\NormalTok{).}
+
+
+\DocumentationTok{\#\#\# Incluir una tabla con leyenda}
+
+
+\NormalTok{La presentación de las primeras }\DecValTok{10}\NormalTok{ filas de un data.frame de R, por ejemplo, el dataset }\StringTok{\textasciigrave{}}\AttributeTok{iris}\StringTok{\textasciigrave{}}\NormalTok{, puede hacerse del siguiente modo}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=TRUE\}}
+\AttributeTok{head(iris,10)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{Pero para mejorar la presentación se pueden utilizar paquetes R especializados, como}\SpecialCharTok{:}\NormalTok{ [knitr](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{cran.r}\SpecialCharTok{{-}}\NormalTok{project.org}\SpecialCharTok{/}\NormalTok{web}\SpecialCharTok{/}\NormalTok{packages}\SpecialCharTok{/}\NormalTok{knitr}\SpecialCharTok{/}\NormalTok{index.html), [kableExtra](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{cran.r}\SpecialCharTok{{-}}\NormalTok{project.org}\SpecialCharTok{/}\NormalTok{web}\SpecialCharTok{/}\NormalTok{packages}\SpecialCharTok{/}\NormalTok{kableExtra}\SpecialCharTok{/}\NormalTok{index.html), [huxtable](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{cran.r}\SpecialCharTok{{-}}\NormalTok{project.org}\SpecialCharTok{/}\NormalTok{web}\SpecialCharTok{/}\NormalTok{packages}\SpecialCharTok{/}\NormalTok{huxtable}\SpecialCharTok{/}\NormalTok{) (trata aspectos muy avanzados), etc. El siguiente ejemplo ilustra el uso de }\StringTok{"kableExtra"}\NormalTok{. Se comentan algunas de las opciones usadas}\SpecialCharTok{:}
+
+\SpecialCharTok{{-}} \ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{"hold\_position"}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\ErrorTok{:}\NormalTok{ usa el posicionamiento como en las figuras }\SpecialCharTok{**}\StringTok{"h"}\SpecialCharTok{**}\NormalTok{.}
+\SpecialCharTok{{-}} \ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{position="center"}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\ErrorTok{:}\NormalTok{ presenta la tabla centrada.}
+\SpecialCharTok{{-}} \ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{"striped"}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\ErrorTok{:}\NormalTok{ alterna el color de las filas.}
+\SpecialCharTok{{-}} \ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{caption="}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{label\{\}Explicación..."}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\ErrorTok{:}\NormalTok{ Añade una leyenda que explique el contenido de la tabla junto a un identificador para hacer referencia a ella con }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\SpecialCharTok{\textbackslash{}r}\AttributeTok{ef\{\}}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r\}}
+\AttributeTok{library(knitr)}
+\AttributeTok{library(kableExtra) }
+\AttributeTok{head(iris,10) \%\textgreater{}\%}
+\AttributeTok{ kable(booktabs = TRUE,format = "latex",}
+\AttributeTok{  caption = "}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{label\{tabla02\}Leyenda explicativa de la segunda tabla") \%\textgreater{}\%}
+\AttributeTok{ kable\_styling(}
+\AttributeTok{  latex\_options = c("striped", "condensed","hold\_position"), }
+\AttributeTok{  position = "center",full\_width = FALSE)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{Produce el siguiente resultado}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r\}}
+\AttributeTok{library(knitr)}
+\AttributeTok{library(kableExtra) }
+\AttributeTok{head(iris,10) \%\textgreater{}\%}
+\AttributeTok{  kable(booktabs = TRUE,format = "latex",}
+\AttributeTok{    caption = "}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{label\{tabla02\}Leyenda explicativa de la segunda tabla") \%\textgreater{}\%}
+\AttributeTok{  kable\_styling(}
+\AttributeTok{    latex\_options = c("striped", "condensed","hold\_position"), }
+\AttributeTok{    position = "center",full\_width = FALSE)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+\DocumentationTok{\#\#\# Incluir una tabla que ocupe varias páginas}
+
+\NormalTok{Para corregir esa situación, la librería }\StringTok{"kableExtra"}\NormalTok{ nos permite presentar tablas que ocupen varias páginas utilizando los siguientes argumentos, como puede comprobarse en el ejemplo que se muestra}\SpecialCharTok{:}
+
+\SpecialCharTok{{-}}\NormalTok{ Se ha añadido a }\SpecialCharTok{**}\NormalTok{latex\_options}\SpecialCharTok{**}\NormalTok{ la opción}\SpecialCharTok{:} \ErrorTok{**}\NormalTok{repeat\_header}\SpecialCharTok{**}\NormalTok{.}
+
+\SpecialCharTok{{-}}\NormalTok{ Se ha indicado el texto que aparecerá antes de pasar a la siguiente página}\SpecialCharTok{:}
+\ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{repeat\_header\_continued="contin}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}ua en la siguiente p}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}agina"}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{.}
+
+\SpecialCharTok{{-}}\NormalTok{ Se ha indicado también el texto que aparecerá antes de escribir información de la tabla en la siguiente página}\SpecialCharTok{:} \ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{repeat\_header\_text = "continuaci}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}on"}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{.}
+
+\NormalTok{El siguiente código}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r\}}
+\AttributeTok{library(kableExtra) }
+\AttributeTok{iris[1:50,] \%\textgreater{}\% }
+\AttributeTok{  kable(booktabs = TRUE,format = "latex",digits = 1, longtable=TRUE) \%\textgreater{}\%}
+\AttributeTok{  kable\_styling(}
+\AttributeTok{   latex\_options = c("striped", "condensed","repeat\_header"), }
+\AttributeTok{   position = "center",full\_width = FALSE,}
+\AttributeTok{   repeat\_header\_text = "continuaci}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}on", }
+\AttributeTok{   repeat\_header\_continued="contin}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}ua en la siguiente p}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}agina"}
+\AttributeTok{  )}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{Produce el siguiente resultado}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r\}}
+\AttributeTok{library(kableExtra) }
+\AttributeTok{iris[1:50,] \%\textgreater{}\% }
+\AttributeTok{  kable(booktabs = TRUE,format = "latex",digits = 1, longtable=TRUE) \%\textgreater{}\%}
+\AttributeTok{  kable\_styling(}
+\AttributeTok{   latex\_options = c("striped", "condensed","repeat\_header"), }
+\AttributeTok{   position = "center",full\_width = FALSE,}
+\AttributeTok{   repeat\_header\_text = "continuaci}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}on", }
+\AttributeTok{   repeat\_header\_continued="contin}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}ua en la siguiente p}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}agina"}
+\AttributeTok{  )}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\DocumentationTok{\#\#\# Incluir una tabla con aspecto de lista{-}diccionario}
+
+\NormalTok{El siguiente código}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r\}}
+\AttributeTok{text\_tbl \textless{}{-} data.frame(}
+\AttributeTok{  Items = c("Item 1", "Item 2", "Item 3"), }
+\AttributeTok{  Features = c(}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. "}
+\AttributeTok{    ) }
+\AttributeTok{  )}
+
+\AttributeTok{kable(text\_tbl, "latex", booktabs = T) \%\textgreater{}\% }
+\AttributeTok{  kable\_styling(full\_width = F) \%\textgreater{}\% }
+\AttributeTok{  column\_spec(1, bold = T, color = "red") \%\textgreater{}\% }
+\AttributeTok{  column\_spec(2, width = "30em")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{Produce el siguiente resultado}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r\}}
+\AttributeTok{text\_tbl \textless{}{-} data.frame(}
+\AttributeTok{  Items = c("Item 1", "Item 2", "Item 3"), }
+\AttributeTok{  Features = c(}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. "}
+\AttributeTok{    ) }
+\AttributeTok{  )}
+
+\AttributeTok{kable(text\_tbl, "latex", booktabs = T) \%\textgreater{}\% }
+\AttributeTok{  kable\_styling(full\_width = F) \%\textgreater{}\% }
+\AttributeTok{  column\_spec(1, bold = T, color = "red") \%\textgreater{}\% }
+\AttributeTok{  column\_spec(2, width = "30em")}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\DocumentationTok{\#\#\# Incluir una tabla con notas a pie de tabla}
+
+\NormalTok{El siguiente código }
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r\}}
+\AttributeTok{library(kableExtra)}
+\AttributeTok{dt \textless{}{-} mtcars[1:5, 1:6]}
+
+\AttributeTok{kable(dt, "latex", align = "cccrcc", booktabs = T) \%\textgreater{}\%}
+\AttributeTok{    kable\_styling(position = "left") \%\textgreater{}\% }
+\AttributeTok{    footnote(general = "Elaboración propia. ",}
+\AttributeTok{             number = c("Footnote 1; ", "Footnote 2; "),}
+\AttributeTok{             alphabet = c("Footnote A; ", "Footnote B; "),}
+\AttributeTok{             symbol = c("Footnote Symbol 1; ", "Footnote Symbol 2"), }
+\AttributeTok{             general\_title = "Fuente: ", }
+\AttributeTok{             number\_title = "Type I: ", }
+\AttributeTok{             alphabet\_title = "Type II: ", }
+\AttributeTok{             symbol\_title = "Type III: ", }
+\AttributeTok{             footnote\_as\_chunk = T, }
+\AttributeTok{             title\_format = c("italic", "underline") )}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{Produce la siguiente }\FunctionTok{salida}\NormalTok{ (la tabla está justificada a la izquierda }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{position = "left"}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{)}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r\}}
+\AttributeTok{library(kableExtra)}
+\AttributeTok{dt \textless{}{-} mtcars[1:5, 1:6]}
+
+\AttributeTok{kable(dt, "latex", align = "cccrcc", booktabs = T) \%\textgreater{}\%}
+\AttributeTok{    kable\_styling(position = "left") \%\textgreater{}\% }
+\AttributeTok{    footnote(general = "Elaboración propia. ",}
+\AttributeTok{             number = c("Footnote 1; ", "Footnote 2; "),}
+\AttributeTok{             alphabet = c("Footnote A; ", "Footnote B; "),}
+\AttributeTok{             symbol = c("Footnote Symbol 1; ", "Footnote Symbol 2"), }
+\AttributeTok{             general\_title = "Fuente: ", }
+\AttributeTok{             number\_title = "Type I: ", }
+\AttributeTok{             alphabet\_title = "Type II: ", }
+\AttributeTok{             symbol\_title = "Type III: ", }
+\AttributeTok{             footnote\_as\_chunk = T, }
+\AttributeTok{             title\_format = c("italic", "underline") )}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\DocumentationTok{\#\#\# Presentar una tabla en modo apaisado}
+
+\NormalTok{Se presentan tres ejemplos de tablas apaisadas.}
+
+\FloatTok{1.}\NormalTok{ La tabla \textbackslash{}ref\{tab}\SpecialCharTok{:}\NormalTok{apaisada\} tiene de especial que se usa la función }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{landscape()}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r\}}
+\AttributeTok{text\_tbl \textless{}{-} data.frame(}
+\AttributeTok{  Items = c("Item 1", "Item 2", "Item 3","Item 4", "Item 5", "Item 6",}
+\AttributeTok{    "Item 7", "Item 8", "Item 9"), }
+\AttributeTok{  Features = c(}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. ",}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. ",}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. "}
+\AttributeTok{    ) }
+\AttributeTok{  )}
+\AttributeTok{text\_tbl \%\textgreater{}\%}
+\AttributeTok{  kable(booktabs = TRUE,caption="}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{label\{tab:apaisada\}Esta tabla }
+\AttributeTok{          est}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}a apaisada y en una p}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}agina separada") \%\textgreater{}\% }
+\AttributeTok{      column\_spec(c(1), }
+\AttributeTok{          width = "2cm") \%\textgreater{}\% }
+\AttributeTok{      column\_spec(c(2), }
+\AttributeTok{          width = "10cm") \%\textgreater{}\% }
+\AttributeTok{      landscape()}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,firstnumber=701,]
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\FloatTok{2.}\NormalTok{ La tabla \textbackslash{}ref\{tab}\SpecialCharTok{:}\NormalTok{apaisada2\} tiene las siguientes características}\SpecialCharTok{:}
+
+    \SpecialCharTok{{-}} \StringTok{\textasciigrave{}}\AttributeTok{\textbackslash{}hspace\{2cm\}}\StringTok{\textasciigrave{}}\SpecialCharTok{:}\NormalTok{ desplaza la tabla hacia la derecha desde el margen izquierdo}\SpecialCharTok{{-}}\NormalTok{largo.}
+    \SpecialCharTok{{-}} \StringTok{\textasciigrave{}}\AttributeTok{skip=50pt}\StringTok{\textasciigrave{}}\SpecialCharTok{:}\NormalTok{ desplaza verticalmente la tabla hacia abajo.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+
+\NormalTok{\textbackslash{}begingroup}
+\NormalTok{\textbackslash{}captionsetup\{type}\OtherTok{=}\NormalTok{table,skip}\OtherTok{=}\NormalTok{50pt\}}
+\NormalTok{\textbackslash{}caption\{Es una tabla apaisada ...\} \textbackslash{}label\{tab}\SpecialCharTok{:}\NormalTok{apaisada2\}}
+\NormalTok{\textbackslash{}hspace\{2cm\}}
+\NormalTok{\textbackslash{}Rotatebox\{}\DecValTok{90}\NormalTok{\}\{}
+\StringTok{\textasciigrave{}}\AttributeTok{r \textquotesingle{}\textquotesingle{}}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE, warning=FALSE\}}
+\AttributeTok{library(knitr)}
+\AttributeTok{library(kableExtra)}
+\AttributeTok{library(dplyr)}
+
+\AttributeTok{text\_tbl \%\textgreater{}\%}
+\AttributeTok{  kable(booktabs = TRUE) \%\textgreater{}\% }
+\AttributeTok{      column\_spec(c(1), width = "2cm") \%\textgreater{}\% }
+\AttributeTok{      column\_spec(c(2), width = "14cm")}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{\}}
+\NormalTok{\textbackslash{}endgroup}
+
+\NormalTok{\textbackslash{}newpage}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\FloatTok{3.}\NormalTok{ La tabla \textbackslash{}ref\{tab}\SpecialCharTok{:}\NormalTok{sidewaystable\} es un ejemplo de uso del entorno LaTeX }\StringTok{"sidewaystable"}\NormalTok{ (en el paquete }\StringTok{"rotating"}\NormalTok{ incluido) que rota la tabla y la leyenda.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r\}}
+\AttributeTok{text\_tbl \textless{}{-} data.frame(}
+\AttributeTok{  Items = c("Item 1", "Item 2", "Item 3","Item 4", "Item 5", "Item 6", }
+\AttributeTok{            "Item 7", "Item 8", "Item 9"), }
+\AttributeTok{  Features = c(}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. ",}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. ",}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. "}
+\AttributeTok{    ) }
+\AttributeTok{  )}
+\AttributeTok{text\_tbl \%\textgreater{}\%}
+\AttributeTok{  kable(booktabs = TRUE,caption="}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{label\{tab:apaisada\}Esta tabla }
+\AttributeTok{          est}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}a apaisada y en una p}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{\textquotesingle{}agina separada") \%\textgreater{}\% }
+\AttributeTok{      column\_spec(c(1), }
+\AttributeTok{          width = "2cm") \%\textgreater{}\% }
+\AttributeTok{      column\_spec(c(2), }
+\AttributeTok{          width = "10cm") \%\textgreater{}\% }
+\AttributeTok{      landscape()}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+\NormalTok{\textbackslash{}newpage}
+
+\SpecialCharTok{\textless{}!{-}{-}}\NormalTok{ https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{stackoverflow.com}\SpecialCharTok{/}\NormalTok{questions}\SpecialCharTok{/}\DecValTok{51633434}\SpecialCharTok{/}\NormalTok{prevent}\SpecialCharTok{{-}}\NormalTok{pagebreak}\SpecialCharTok{{-}}\ControlFlowTok{in}\SpecialCharTok{{-}}\NormalTok{kableextra}\SpecialCharTok{{-}}\NormalTok{landscape}\SpecialCharTok{{-}}\NormalTok{table }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ \textbackslash{}floatplacement\{table\}\{}\SpecialCharTok{!}\NormalTok{htbp\} }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ \textbackslash{}captionsetup\{type}\OtherTok{=}\NormalTok{table,format}\OtherTok{=}\NormalTok{plain, font}\OtherTok{=}\NormalTok{small, labelfont}\OtherTok{=}\NormalTok{bf,skip}\OtherTok{=}\NormalTok{100pt\} }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\NormalTok{\textbackslash{}begingroup}
+\NormalTok{\textbackslash{}captionsetup\{type}\OtherTok{=}\NormalTok{table,skip}\OtherTok{=}\NormalTok{50pt\}}
+\NormalTok{\textbackslash{}caption\{Es una tabla apaisada ...\} \textbackslash{}label\{tab}\SpecialCharTok{:}\NormalTok{apaisada2\}}
+\NormalTok{\textbackslash{}hspace\{2cm\}}
+\NormalTok{\textbackslash{}Rotatebox\{}\DecValTok{90}\NormalTok{\}\{}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE, warning=FALSE\}}
+\AttributeTok{library(knitr)}
+\AttributeTok{library(kableExtra)}
+\AttributeTok{library(dplyr)}
+\AttributeTok{text\_tbl \textless{}{-} data.frame(}
+\AttributeTok{  Items = c("Item 1", "Item 2", "Item 3","Item 4", "Item 5", "Item 6","Item 7", "Item 8", "Item 9"), }
+\AttributeTok{  Features = c(}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. ",}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. ",}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. "}
+\AttributeTok{    ) }
+\AttributeTok{  )}
+
+\AttributeTok{text\_tbl \%\textgreater{}\%}
+\AttributeTok{  kable(booktabs = TRUE) \%\textgreater{}\% }
+\AttributeTok{      column\_spec(c(1), width = "2cm") \%\textgreater{}\% }
+\AttributeTok{      column\_spec(c(2), width = "14cm")}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{\}}
+\NormalTok{\textbackslash{}endgroup}
+
+\NormalTok{\textbackslash{}newpage}
+
+
+
+\NormalTok{\textbackslash{}begingroup}
+\NormalTok{\textbackslash{}begin\{sidewaystable\}}
+\NormalTok{\textbackslash{}centering}
+\NormalTok{\textbackslash{}caption\{Es una tabla apaisada ...\} \textbackslash{}label\{tab}\SpecialCharTok{:}\NormalTok{sidewaystable\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r echo=FALSE, warning=FALSE\}}
+\AttributeTok{library(knitr)}
+\AttributeTok{library(kableExtra)}
+\AttributeTok{library(dplyr)}
+\AttributeTok{text\_tbl \textless{}{-} data.frame(}
+\AttributeTok{  Items = c("Item 1", "Item 2", "Item 3","Item 4", "Item 5", "Item 6","Item 7", "Item 8", "Item 9"), }
+\AttributeTok{  Features = c(}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. ",}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. ",}
+\AttributeTok{    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\AttributeTok{    Proin vehicula tempor ex. Morbi malesuada sagittis turpis,}
+\AttributeTok{    at venenatis nisl luctus a. ",}
+\AttributeTok{    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit}
+\AttributeTok{    varius, posuere risus et, cursus augue. Duis eleifend aliquam ante,}
+\AttributeTok{    a aliquet ex tincidunt in. ",}
+\AttributeTok{    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.}
+\AttributeTok{    Aliquam molestie erat et sollicitudin venenatis. In ac lacus at}
+\AttributeTok{    velit scelerisque mattis. "}
+\AttributeTok{    ) }
+\AttributeTok{  )}
+
+\AttributeTok{text\_tbl \%\textgreater{}\%}
+\AttributeTok{  kable(booktabs = TRUE) \%\textgreater{}\% }
+\AttributeTok{      column\_spec(c(1), width = "2cm") \%\textgreater{}\% }
+\AttributeTok{      column\_spec(c(2), width = "14cm")}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{\textbackslash{}end\{sidewaystable\}}
+\NormalTok{\textbackslash{}endgroup}
+
+\NormalTok{\textbackslash{}clearpage}
+
+
+
+\DocumentationTok{\#\#\# Cambiar la etiqueta "Tabla"}
+
+\NormalTok{Para que en lugar de }\StringTok{"Tabla"}\NormalTok{ aparezca }\StringTok{"Cuadro"}\NormalTok{ (este término es el que recomienda la RAE), se deberían hacer las siguientes modificaciones en}\SpecialCharTok{:} 
+
+\SpecialCharTok{{-}}\NormalTok{ en el fichero principal }\StringTok{"tfe\_principal.Rmd"}
+
+    \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\AttributeTok{    }\SpecialCharTok{\textbackslash{}a}\AttributeTok{ddcontentsline\{toc\}\{section\}\{Índice de Tablas\}}
+\AttributeTok{    }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\SpecialCharTok{{-}}\NormalTok{ Quitar la opción }\StringTok{"es{-}tabla"}\NormalTok{ en el fichero }\StringTok{"latex/templateMemoriaTFE.tex"} 
+
+    \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\AttributeTok{    \%\textbackslash{}usepackage[spanish,es{-}nodecimaldot,es{-}noshorthands,es{-}tabla]\{babel\}}
+\AttributeTok{    \textbackslash{}usepackage[spanish,es{-}nodecimaldot,es{-}noshorthands]\{babel\}}
+\AttributeTok{    }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{Más información en la url siguiente}\SpecialCharTok{:}\NormalTok{ [Documentación babel}\SpecialCharTok{{-}}\NormalTok{spanish en CTAN](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{osl.ugr.es}\SpecialCharTok{/}\NormalTok{CTAN}\SpecialCharTok{/}\NormalTok{macros}\SpecialCharTok{/}\NormalTok{latex}\SpecialCharTok{/}\NormalTok{contrib}\SpecialCharTok{/}\NormalTok{babel}\SpecialCharTok{{-}}\NormalTok{contrib}\SpecialCharTok{/}\NormalTok{spanish}\SpecialCharTok{/}\NormalTok{spanish.pdf).}
+
+\SpecialCharTok{\textless{}!{-}{-}} \DocumentationTok{\#\#\# Cambiar la etiqueta "Cuadro" {-}{-}\textgreater{}}
+
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ Para que en lugar de }\StringTok{"Cuadro"}\NormalTok{ aparezca }\StringTok{"Tabla"}\NormalTok{, se debería incluir una de las siguientes opciones en el fichero principal  }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex {-}{-}\textgreater{}}
+\AttributeTok{\textless{}!{-}{-} }\SpecialCharTok{\textbackslash{}r}\AttributeTok{enewcommand}\SpecialCharTok{\textbackslash{}t}\AttributeTok{ablename\{Tabla\} {-}{-}\textgreater{}}
+\AttributeTok{\textless{}!{-}{-} }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}} \SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ Con el paquete babel y la opción }\StringTok{"spanish"}\NormalTok{ (o al final de}\SpecialCharTok{:} \StringTok{"latex/latex\_preambulo.tex"}\NormalTok{)}\SpecialCharTok{:} \SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex {-}{-}\textgreater{}}
+\AttributeTok{\textless{}!{-}{-} }\SpecialCharTok{\textbackslash{}r}\AttributeTok{enewcommand\textbackslash{}spanishtablename\{Tabla\} {-}{-}\textgreater{}}
+\AttributeTok{\textless{}!{-}{-} }\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}} \SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+
+\DocumentationTok{\#\# Uso de expresiones matemáticas}
+
+
+\NormalTok{En el siguiente enlace [overleaf}\SpecialCharTok{:}\NormalTok{ alfabeto griego y símbolos matemáticos](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{www.overleaf.com}\SpecialCharTok{/}\NormalTok{learn}\SpecialCharTok{/}\NormalTok{latex}\SpecialCharTok{/}\NormalTok{List\_of\_Greek\_letters\_and\_math\_symbols) puede encontrarse una recopilación de los comandos LaTeX para representar todo el alfabeto griego y muchos de los símbolos más usados en expresiones matemáticas.}
+
+
+
+
+\DocumentationTok{\#\#\# Algunas expresiones matemáticas}
+
+
+\NormalTok{Las fracciones pueden usarse en el texto, por ejemplo }\SpecialCharTok{$}\NormalTok{\textbackslash{}frac\{}\DecValTok{1}\NormalTok{\}\{}\DecValTok{2}\NormalTok{\}}\SpecialCharTok{$}\NormalTok{, y en un estilo matemático centrado como puede verse a continuación}\SpecialCharTok{:}
+ 
+\NormalTok{\textbackslash{}[\textbackslash{}frac\{}\DecValTok{1}\NormalTok{\}\{}\DecValTok{2}\NormalTok{\}\textbackslash{}]}
+
+\NormalTok{El código utilizado ha sido}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\AttributeTok{Las fracciones pueden usarse en el texto, por ejemplo \textbackslash{}( }\SpecialCharTok{\textbackslash{}f}\AttributeTok{rac\{1\}\{2\} \textbackslash{}), }
+\AttributeTok{y en un estilo matemático centrado como puede verse a continuación:}
+\AttributeTok{ }
+\AttributeTok{\textbackslash{}[}\SpecialCharTok{\textbackslash{}f}\AttributeTok{rac\{1\}\{2\}\textbackslash{}]}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\SpecialCharTok{{-}}\NormalTok{ Como puede verse }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{\textbackslash{}( \textbackslash{})}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{ se utiliza para modo matemático en el texto. También se puede escribir la expresión matemática entre un signo de dólar a cada lado}\SpecialCharTok{:} \ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{$  $}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{.}
+
+\SpecialCharTok{{-}}\NormalTok{ Como puede verse }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{\textbackslash{}[ \textbackslash{}]}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{ se utiliza para modo matemático centrado en el texto. También se puede escribir la expresión matemática entre un doble signo de dólar a cada lado}\SpecialCharTok{:} \ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{$$  $$}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{.}
+
+
+\SpecialCharTok{**}\NormalTok{Nota}\SpecialCharTok{**}\NormalTok{. Cuando se usa el modo matemático visto anteriormente no es posible añadir etiquetado de ecuaciones para hacer referencia a ellas. Para el etiquetado se usa el entorno LaTeX}\SpecialCharTok{:} \ErrorTok{**}\StringTok{\textasciigrave{}}\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{equation\} \textbackslash{}label\{identificador\} ... }\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{equation\}}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{, el cual se verá en el apartado \textbackslash{}ref\{etiquetadomatematico\}.}
+
+\NormalTok{Veamos más ejemplos de uso de LaTeX en R Markdown para escribir expresiones matemáticas}\SpecialCharTok{:}
+
+\NormalTok{\textbackslash{}[ \textbackslash{}int\_0}\SpecialCharTok{\^{}}\DecValTok{1}\NormalTok{ x}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ y}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{ \textbackslash{} dx \textbackslash{}]}
+
+\NormalTok{\textbackslash{}[ \textbackslash{}int\textbackslash{}limits\_0}\SpecialCharTok{\^{}}\DecValTok{1}\NormalTok{ x}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ y}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{ \textbackslash{} dx \textbackslash{}]}
+
+\NormalTok{\textbackslash{}[ a\_1}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ a\_2}\SpecialCharTok{\^{}}\DecValTok{2} \OtherTok{=}\NormalTok{ a\_3}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{ \textbackslash{}]}
+
+\NormalTok{\textbackslash{}[ x}\SpecialCharTok{\^{}}\NormalTok{\{}\DecValTok{2}\NormalTok{ \textbackslash{}alpha\} }\SpecialCharTok{{-}} \DecValTok{1} \OtherTok{=}\NormalTok{ y\_\{ij\} }\SpecialCharTok{+}\NormalTok{ y\_\{ij\}  \textbackslash{}]}
+
+\NormalTok{\textbackslash{}[ (a}\SpecialCharTok{\^{}}\NormalTok{n)}\SpecialCharTok{\^{}}\NormalTok{\{r}\SpecialCharTok{+}\NormalTok{s\} }\OtherTok{=}\NormalTok{ a}\SpecialCharTok{\^{}}\NormalTok{\{nr}\SpecialCharTok{+}\NormalTok{ns\}  \textbackslash{}]}
+
+\NormalTok{\textbackslash{}[ \textbackslash{}sum\_\{i}\OtherTok{=}\DecValTok{1}\NormalTok{\}}\SpecialCharTok{\^{}}\NormalTok{\{\textbackslash{}infty\} \textbackslash{}frac\{}\DecValTok{1}\NormalTok{\}\{n}\SpecialCharTok{\^{}}\NormalTok{s\} }
+\OtherTok{=}\NormalTok{ \textbackslash{}prod\_p \textbackslash{}frac\{}\DecValTok{1}\NormalTok{\}\{}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ p}\SpecialCharTok{\^{}}\NormalTok{\{}\SpecialCharTok{{-}}\NormalTok{s\}\} \textbackslash{}]}
+
+
+
+\SpecialCharTok{$}\ErrorTok{$} 
+\NormalTok{F }\OtherTok{=}\NormalTok{ G \textbackslash{}}\FunctionTok{left}\NormalTok{( \textbackslash{}frac\{m\_1 m\_2\}\{r}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{\} \textbackslash{}right)}
+\SpecialCharTok{$}\ErrorTok{$}
+
+
+
+\ErrorTok{$$} 
+\NormalTok{ \textbackslash{}left[  \textbackslash{}frac\{ N \} \{ \textbackslash{}}\FunctionTok{left}\NormalTok{( \textbackslash{}frac\{L\}\{p\} \textbackslash{}right)  }\SpecialCharTok{{-}}\NormalTok{ (m}\SpecialCharTok{+}\NormalTok{n) \}  \textbackslash{}right]}
+\SpecialCharTok{$}\ErrorTok{$}
+
+\NormalTok{Controlando el tamaño de los elementos separadores}\SpecialCharTok{:}
+
+\ErrorTok{$$}
+\NormalTok{ \textbackslash{}Bigg \textbackslash{}langle 3x}\SpecialCharTok{+}\DecValTok{7}\NormalTok{ \textbackslash{}bigg \textbackslash{}rangle}
+\SpecialCharTok{$}\ErrorTok{$}
+
+\NormalTok{El código LaTeX utilizado respectivamente ha sido}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\AttributeTok{\textbackslash{}[ \textbackslash{}int\_0\^{}1 x\^{}2 + y\^{}2 \textbackslash{} dx \textbackslash{}]}
+
+\AttributeTok{\textbackslash{}[ \textbackslash{}int\textbackslash{}limits\_0\^{}1 x\^{}2 + y\^{}2 \textbackslash{} dx \textbackslash{}]}
+
+\AttributeTok{\textbackslash{}[ a\_1\^{}2 + a\_2\^{}2 = a\_3\^{}2 \textbackslash{}]}
+
+\AttributeTok{\textbackslash{}[ x\^{}\{2 }\SpecialCharTok{\textbackslash{}a}\AttributeTok{lpha\} {-} 1 = y\_\{ij\} + y\_\{ij\}  \textbackslash{}]}
+
+\AttributeTok{\textbackslash{}[ (a\^{}n)\^{}\{r+s\} = a\^{}\{nr+ns\}  \textbackslash{}]}
+
+\AttributeTok{\textbackslash{}[ \textbackslash{}sum\_\{i=1\}\^{}\{\textbackslash{}infty\} }\SpecialCharTok{\textbackslash{}f}\AttributeTok{rac\{1\}\{n\^{}s\} }
+\AttributeTok{= \textbackslash{}prod\_p }\SpecialCharTok{\textbackslash{}f}\AttributeTok{rac\{1\}\{1 {-} p\^{}\{{-}s\}\} \textbackslash{}]}
+
+\AttributeTok{$$ }
+\AttributeTok{F = G \textbackslash{}left( }\SpecialCharTok{\textbackslash{}f}\AttributeTok{rac\{m\_1 m\_2\}\{r\^{}2\} }\SpecialCharTok{\textbackslash{}r}\AttributeTok{ight)}
+\AttributeTok{$$}
+
+\AttributeTok{$$ }
+\AttributeTok{ \textbackslash{}left[  }\SpecialCharTok{\textbackslash{}f}\AttributeTok{rac\{ N \} \{ \textbackslash{}left( }\SpecialCharTok{\textbackslash{}f}\AttributeTok{rac\{L\}\{p\} }\SpecialCharTok{\textbackslash{}r}\AttributeTok{ight)  {-} (m+n) \}  }\SpecialCharTok{\textbackslash{}r}\AttributeTok{ight]}
+\AttributeTok{$$}
+
+\AttributeTok{$$}
+\AttributeTok{ \textbackslash{}Bigg \textbackslash{}langle 3x+7 }\SpecialCharTok{\textbackslash{}b}\AttributeTok{igg }\SpecialCharTok{\textbackslash{}r}\AttributeTok{angle}
+\AttributeTok{$$}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\DocumentationTok{\#\#\# Expresiones matriciales}
+
+\NormalTok{El uso de }\StringTok{\textasciigrave{}}\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{array\}\{\} ... }\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{array\}}\StringTok{\textasciigrave{}}\NormalTok{ nos permite escribir expresiones en forma de tabla. Veamos con algunos ejemplos su uso básico.}
+
+\SpecialCharTok{{-}}\NormalTok{ Ejemplo }\DecValTok{1}\SpecialCharTok{:}
+
+\NormalTok{El  \textbackslash{}emph\{polinomio característico\} }\SpecialCharTok{$}\NormalTok{\textbackslash{}}\FunctionTok{chi}\NormalTok{(\textbackslash{}lambda)}\SpecialCharTok{$}\NormalTok{ de la matriz}
+\SpecialCharTok{$}\DecValTok{3}\NormalTok{ \textbackslash{}times }\DecValTok{3}\SpecialCharTok{$}
+\NormalTok{\textbackslash{}[ \textbackslash{}}\FunctionTok{left}\NormalTok{( \textbackslash{}begin\{array\}\{ccc\}}
+\NormalTok{a }\SpecialCharTok{\&}\NormalTok{ b }\SpecialCharTok{\&}\NormalTok{ c \textbackslash{}}\SpecialCharTok{\textbackslash{}}
+\NormalTok{d }\SpecialCharTok{\&}\NormalTok{ e }\SpecialCharTok{\&}\NormalTok{ f \textbackslash{}}\SpecialCharTok{\textbackslash{}}
+\NormalTok{g }\SpecialCharTok{\&}\NormalTok{ h }\SpecialCharTok{\&}\NormalTok{ i \textbackslash{}end\{array\} \textbackslash{}right)\textbackslash{}] }
+\NormalTok{viene dado por la fórmula}
+\NormalTok{\textbackslash{}[ }
+\NormalTok{\textbackslash{}}\FunctionTok{chi}\NormalTok{(\textbackslash{}lambda) }\OtherTok{=} 
+\NormalTok{\textbackslash{}left}\SpecialCharTok{|} 
+\NormalTok{\textbackslash{}begin\{array\}\{ccc\}}
+\NormalTok{\textbackslash{}lambda }\SpecialCharTok{{-}}\NormalTok{ a }\SpecialCharTok{\&} \SpecialCharTok{{-}}\NormalTok{b }\SpecialCharTok{\&} \SpecialCharTok{{-}}\NormalTok{c \textbackslash{}\textbackslash{}}
+\SpecialCharTok{{-}}\NormalTok{d }\SpecialCharTok{\&}\NormalTok{ \textbackslash{}lambda }\SpecialCharTok{{-}}\NormalTok{ e }\SpecialCharTok{\&} \SpecialCharTok{{-}}\NormalTok{f \textbackslash{}\textbackslash{}}
+\SpecialCharTok{{-}}\NormalTok{g }\SpecialCharTok{\&} \SpecialCharTok{{-}}\NormalTok{h }\SpecialCharTok{\&}\NormalTok{ \textbackslash{}lambda }\SpecialCharTok{{-}}\NormalTok{ i }
+\NormalTok{\textbackslash{}end\{array\} }
+\NormalTok{\textbackslash{}right}\SpecialCharTok{|}\NormalTok{.}
+\NormalTok{\textbackslash{}] }
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\AttributeTok{El  }\SpecialCharTok{\textbackslash{}e}\AttributeTok{mph\{polinomio característico\} $\textbackslash{}chi(\textbackslash{}lambda)$ de la matriz}
+\AttributeTok{$3 }\SpecialCharTok{\textbackslash{}t}\AttributeTok{imes 3$}
+\AttributeTok{\textbackslash{}[ \textbackslash{}left( }\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{array\}\{ccc\}}
+\AttributeTok{a \& b \& c }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\AttributeTok{d \& e \& f }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\AttributeTok{g \& h \& i }\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{array\} }\SpecialCharTok{\textbackslash{}r}\AttributeTok{ight)\textbackslash{}] }
+\AttributeTok{viene dado por la fórmula}
+\AttributeTok{\textbackslash{}[ }
+\AttributeTok{\textbackslash{}chi(\textbackslash{}lambda) = }
+\AttributeTok{\textbackslash{}left| }
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{array\}\{ccc\}}
+\AttributeTok{\textbackslash{}lambda {-} a \& {-}b \& {-}c }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\AttributeTok{{-}d \& \textbackslash{}lambda {-} e \& {-}f }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\AttributeTok{{-}g \& {-}h \& \textbackslash{}lambda {-} i }
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{array\} }
+\SpecialCharTok{\textbackslash{}r}\AttributeTok{ight|.}
+\AttributeTok{\textbackslash{}] }
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{Otros ejemplos de uso de }\StringTok{\textasciigrave{}}\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{array\}\{\} ... }\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{array\}}\StringTok{\textasciigrave{}}\SpecialCharTok{:}
+
+\SpecialCharTok{{-}}\NormalTok{ Ejemplo }\DecValTok{2}\SpecialCharTok{:}
+
+\NormalTok{\textbackslash{}[ }
+\NormalTok{\textbackslash{}begin\{array\}\{lcr\}}
+\NormalTok{\textbackslash{}mbox\{First number\} }\SpecialCharTok{\&}\NormalTok{ x }\SpecialCharTok{\&} \DecValTok{8}\NormalTok{ \textbackslash{}\textbackslash{}}
+\NormalTok{\textbackslash{}mbox\{Second number\} }\SpecialCharTok{\&}\NormalTok{ y }\SpecialCharTok{\&} \DecValTok{15}\NormalTok{ \textbackslash{}\textbackslash{}}
+\NormalTok{\textbackslash{}mbox\{Sum\} }\SpecialCharTok{\&}\NormalTok{ x }\SpecialCharTok{+}\NormalTok{ y }\SpecialCharTok{\&} \DecValTok{23}\NormalTok{ \textbackslash{}\textbackslash{}}
+\NormalTok{\textbackslash{}mbox\{Difference\} }\SpecialCharTok{\&}\NormalTok{ x }\SpecialCharTok{{-}}\NormalTok{ y }\SpecialCharTok{\&} \SpecialCharTok{{-}}\DecValTok{7}\NormalTok{ \textbackslash{}\textbackslash{}}
+\NormalTok{\textbackslash{}mbox\{Product\} }\SpecialCharTok{\&}\NormalTok{ xy }\SpecialCharTok{\&} \DecValTok{120}\NormalTok{ \textbackslash{}end\{array\}}
+\NormalTok{\textbackslash{}] }
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\AttributeTok{\textbackslash{}[ }
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{array\}\{lcr\}}
+\AttributeTok{\textbackslash{}mbox\{First number\} \& x \& 8 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\AttributeTok{\textbackslash{}mbox\{Second number\} \& y \& 15 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\AttributeTok{\textbackslash{}mbox\{Sum\} \& x + y \& 23 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\AttributeTok{\textbackslash{}mbox\{Difference\} \& x {-} y \& {-}7 }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\AttributeTok{\textbackslash{}mbox\{Product\} \& xy \& 120 }\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{array\}}
+\AttributeTok{\textbackslash{}] }
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\SpecialCharTok{{-}}\NormalTok{ Ejemplo }\DecValTok{3}\SpecialCharTok{:}
+
+\NormalTok{\textbackslash{}[ }\SpecialCharTok{|}\NormalTok{x}\SpecialCharTok{|} \ErrorTok{=}\NormalTok{ \textbackslash{}left\textbackslash{}\{ \textbackslash{}begin\{array\}\{ll\}}
+\NormalTok{         x }\SpecialCharTok{\&}\NormalTok{ \textbackslash{}mbox\{}\ControlFlowTok{if} \SpecialCharTok{$}\NormalTok{x \textbackslash{}geq }\DecValTok{0}\SpecialCharTok{$}\NormalTok{\};\textbackslash{}\textbackslash{}}
+        \SpecialCharTok{{-}}\NormalTok{x }\SpecialCharTok{\&}\NormalTok{ \textbackslash{}mbox\{}\ControlFlowTok{if} \SpecialCharTok{$}\NormalTok{x }\SpecialCharTok{\textless{}} \DecValTok{0}\SpecialCharTok{$}\NormalTok{\}.\textbackslash{}end\{array\} \textbackslash{}right. \textbackslash{}] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,firstnumber=1101,]
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\AttributeTok{\textbackslash{}[ |x| = \textbackslash{}left\textbackslash{}\{ }\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{array\}\{ll\}}
+\AttributeTok{         x \& \textbackslash{}mbox\{if $x \textbackslash{}geq 0$\};}\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\AttributeTok{        {-}x \& \textbackslash{}mbox\{if $x \textless{} 0$\}.}\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{array\} }\SpecialCharTok{\textbackslash{}r}\AttributeTok{ight. \textbackslash{}] }
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\SpecialCharTok{{-}}\NormalTok{ Ejemplo }\DecValTok{4}\SpecialCharTok{:}
+\ErrorTok{$$}
+\FunctionTok{f}\NormalTok{(n) }\OtherTok{=} 
+\NormalTok{\textbackslash{}begin\{cases\} }
+\NormalTok{  n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,  }\SpecialCharTok{\&}\NormalTok{ \textbackslash{}mbox\{}\ControlFlowTok{if}\NormalTok{ \} n\textbackslash{}mbox\{ is even\} \textbackslash{}\textbackslash{} }
+\NormalTok{  3n}\SpecialCharTok{+}\DecValTok{1}\NormalTok{, }\SpecialCharTok{\&}\NormalTok{ \textbackslash{}mbox\{}\ControlFlowTok{if}\NormalTok{ \} n\textbackslash{}mbox\{ is odd\} }
+\NormalTok{\textbackslash{}end\{cases\}}
+\SpecialCharTok{$}\ErrorTok{$}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\AttributeTok{$$}
+\AttributeTok{f(n) = }
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{cases\} }
+\AttributeTok{  n/2,  \& \textbackslash{}mbox\{if \} n\textbackslash{}mbox\{ is even\} }\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{ }
+\AttributeTok{  3n+1, \& \textbackslash{}mbox\{if \} n\textbackslash{}mbox\{ is odd\} }
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{cases\}}
+\AttributeTok{$$}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+\DocumentationTok{\#\#\# Alineando ecuaciones y etiquetado \{\#etiquetadomatematico\}}
+
+\NormalTok{Para alinear ecuaciones en R Markdown habrá que utilizar las habilidades de los paquetes LaTeX. Ver [overleaf](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{www.overleaf.com}\SpecialCharTok{/}\NormalTok{learn}\SpecialCharTok{/}\NormalTok{latex}\SpecialCharTok{/}\NormalTok{Aligning\_equations\_with\_amsmath).}
+
+\NormalTok{A continuación se mostrará el código LaTeX necesario para construir expresiones matemáticas.}
+
+
+\SpecialCharTok{{-}}\NormalTok{ Uso de }\StringTok{"equation{-}split"}\NormalTok{ y etiquetado con }\StringTok{"label"}\NormalTok{ (ver la ecuación \textbackslash{}ref\{eq1\})}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\AttributeTok{(ver la ecuación }\SpecialCharTok{\textbackslash{}r}\AttributeTok{ef\{eq1\})}
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{equation\} \textbackslash{}label\{eq1\}}
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{split\}}
+\AttributeTok{A \& = }\SpecialCharTok{\textbackslash{}f}\AttributeTok{rac\{\textbackslash{}pi r\^{}2\}\{2\} }\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\AttributeTok{ \& = }\SpecialCharTok{\textbackslash{}f}\AttributeTok{rac\{1\}\{2\} \textbackslash{}pi r\^{}2}
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{split\}}
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{equation\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{\textbackslash{}begin\{equation\} \textbackslash{}label\{eq1\}}
+\NormalTok{\textbackslash{}begin\{split\}}
+\NormalTok{A }\SpecialCharTok{\&} \ErrorTok{=}\NormalTok{ \textbackslash{}frac\{\textbackslash{}pi r}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{\}\{}\DecValTok{2}\NormalTok{\} \textbackslash{}\textbackslash{}}
+ \SpecialCharTok{\&} \ErrorTok{=}\NormalTok{ \textbackslash{}frac\{}\DecValTok{1}\NormalTok{\}\{}\DecValTok{2}\NormalTok{\} \textbackslash{}pi r}\SpecialCharTok{\^{}}\DecValTok{2}
+\NormalTok{\textbackslash{}end\{split\}}
+\NormalTok{\textbackslash{}end\{equation\}}
+
+
+\SpecialCharTok{{-}}\NormalTok{ Uso de }\StringTok{"\textasciigrave{}multline*\textasciigrave{}"}\NormalTok{ para mostrar ecuaciones largas}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{multline*\}}
+\AttributeTok{p(x) = 3x\^{}6 + 14x\^{}5y + 590x\^{}4y\^{}2 + 19x\^{}3y\^{}3 }
+\AttributeTok{            {-} 32x\^{}2y\^{}4 {-} 22xy\^{}5 + 12y\^{}6 {-} 7a\^{}3b\^{}3}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{ }
+\AttributeTok{{-} 12x\^{}2y\^{}4 {-} 12xy\^{}5 + 2y\^{}6 {-} a\^{}3b\^{}3}
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{multline*\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{\textbackslash{}begin\{multline}\SpecialCharTok{*}\NormalTok{\}}
+\FunctionTok{p}\NormalTok{(x) }\OtherTok{=}\NormalTok{ 3x}\SpecialCharTok{\^{}}\DecValTok{6} \SpecialCharTok{+}\NormalTok{ 14x}\SpecialCharTok{\^{}}\NormalTok{5y }\SpecialCharTok{+}\NormalTok{ 590x}\SpecialCharTok{\^{}}\NormalTok{4y}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ 19x}\SpecialCharTok{\^{}}\NormalTok{3y}\SpecialCharTok{\^{}}\DecValTok{3} 
+            \SpecialCharTok{{-}}\NormalTok{ 32x}\SpecialCharTok{\^{}}\NormalTok{2y}\SpecialCharTok{\^{}}\DecValTok{4} \SpecialCharTok{{-}}\NormalTok{ 22xy}\SpecialCharTok{\^{}}\DecValTok{5} \SpecialCharTok{+}\NormalTok{ 12y}\SpecialCharTok{\^{}}\DecValTok{6} \SpecialCharTok{{-}}\NormalTok{ 7a}\SpecialCharTok{\^{}}\NormalTok{3b}\SpecialCharTok{\^{}}\DecValTok{3}\NormalTok{ \textbackslash{}\textbackslash{} }
+\SpecialCharTok{{-}}\NormalTok{ 12x}\SpecialCharTok{\^{}}\NormalTok{2y}\SpecialCharTok{\^{}}\DecValTok{4} \SpecialCharTok{{-}}\NormalTok{ 12xy}\SpecialCharTok{\^{}}\DecValTok{5} \SpecialCharTok{+}\NormalTok{ 2y}\SpecialCharTok{\^{}}\DecValTok{6} \SpecialCharTok{{-}}\NormalTok{ a}\SpecialCharTok{\^{}}\NormalTok{3b}\SpecialCharTok{\^{}}\DecValTok{3}
+\NormalTok{\textbackslash{}end\{multline}\SpecialCharTok{*}\NormalTok{\}}
+
+
+\SpecialCharTok{{-}}\NormalTok{ Uso de }\StringTok{"\textasciigrave{}align\textasciigrave{}"}\NormalTok{ y }\StringTok{"\textasciigrave{}align*\textasciigrave{}"}\NormalTok{ (diferencia entre incluir }\StringTok{"*"}\NormalTok{ y no incluirlo) para alinear varias ecuaciones}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{align\} }
+\AttributeTok{2x {-} 5y \&=  8  \textbackslash{}label\{eqalign01\}}\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{ }
+\AttributeTok{3x + 9y \&=  {-}12 \textbackslash{}label\{eqalign02\}}
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{align\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{\textbackslash{}begin\{align\} }
+\NormalTok{2x }\SpecialCharTok{{-}}\NormalTok{ 5y }\SpecialCharTok{\&}\ErrorTok{=}  \DecValTok{8}\NormalTok{  \textbackslash{}label\{eqalign01\}\textbackslash{}\textbackslash{} }
+\NormalTok{3x }\SpecialCharTok{+}\NormalTok{ 9y }\SpecialCharTok{\&}\ErrorTok{=}  \SpecialCharTok{{-}}\DecValTok{12}\NormalTok{ \textbackslash{}label\{eqalign02\}}
+\NormalTok{\textbackslash{}end\{align\}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{align*\}}
+\AttributeTok{x\&=y           \&  w \&=z              \&  a\&=b+c}\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\AttributeTok{2x\&={-}y         \&  3w\&=}\SpecialCharTok{\textbackslash{}f}\AttributeTok{rac\{1\}\{2\}z   \&  a\&=b}\SpecialCharTok{\textbackslash{}\textbackslash{}}
+\AttributeTok{{-}4 + 5x\&=2+y   \&  w+2\&={-}1+w          \&  ab\&=cb}
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{align*\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{\textbackslash{}begin\{align}\SpecialCharTok{*}\NormalTok{\}}
+\NormalTok{x}\SpecialCharTok{\&}\ErrorTok{=}\NormalTok{y           }\SpecialCharTok{\&}\NormalTok{  w }\SpecialCharTok{\&}\ErrorTok{=}\NormalTok{z              }\SpecialCharTok{\&}\NormalTok{  a}\SpecialCharTok{\&}\ErrorTok{=}\NormalTok{b}\SpecialCharTok{+}\NormalTok{c\textbackslash{}\textbackslash{}}
+\NormalTok{2x}\SpecialCharTok{\&}\ErrorTok{=}\SpecialCharTok{{-}}\NormalTok{y         }\SpecialCharTok{\&}\NormalTok{  3w}\SpecialCharTok{\&}\ErrorTok{=}\NormalTok{\textbackslash{}frac\{}\DecValTok{1}\NormalTok{\}\{}\DecValTok{2}\NormalTok{\}z   }\SpecialCharTok{\&}\NormalTok{  a}\SpecialCharTok{\&}\ErrorTok{=}\NormalTok{b\textbackslash{}\textbackslash{}}
+\SpecialCharTok{{-}}\DecValTok{4} \SpecialCharTok{+}\NormalTok{ 5x}\SpecialCharTok{\&}\ErrorTok{=}\DecValTok{2}\SpecialCharTok{+}\NormalTok{y   }\SpecialCharTok{\&}\NormalTok{  w}\SpecialCharTok{+}\DecValTok{2}\SpecialCharTok{\&}\ErrorTok{=}\SpecialCharTok{{-}}\DecValTok{1}\SpecialCharTok{+}\NormalTok{w          }\SpecialCharTok{\&}\NormalTok{  ab}\SpecialCharTok{\&}\ErrorTok{=}\NormalTok{cb}
+\NormalTok{\textbackslash{}end\{align}\SpecialCharTok{*}\NormalTok{\}}
+
+\SpecialCharTok{{-}}\NormalTok{ Uso de }\StringTok{"\textasciigrave{}gather*\textasciigrave{}"}\NormalTok{ para agrupar y centrar ecuaciones}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{gather*\} }
+\AttributeTok{2x {-} 5y =  8 }\SpecialCharTok{\textbackslash{}\textbackslash{}}\AttributeTok{ }
+\AttributeTok{3x\^{}2 + 9y =  3a + c}
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{gather*\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{\textbackslash{}begin\{gather}\SpecialCharTok{*}\NormalTok{\} }
+\NormalTok{2x }\SpecialCharTok{{-}}\NormalTok{ 5y }\OtherTok{=}  \DecValTok{8}\NormalTok{ \textbackslash{}\textbackslash{} }
+\NormalTok{3x}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ 9y }\OtherTok{=}\NormalTok{  3a }\SpecialCharTok{+}\NormalTok{ c}
+\NormalTok{\textbackslash{}end\{gather}\SpecialCharTok{*}\NormalTok{\}}
+
+
+
+
+\DocumentationTok{\#\#\# Escribiendo resultados matemáticos}
+
+\NormalTok{Se pueden utilizar entornos matemáticos para establecer}\SpecialCharTok{:} \StringTok{"Definiciones"}\NormalTok{, }\StringTok{"Teoremas"}\NormalTok{, }\StringTok{"Corolarios"}\NormalTok{, }\StringTok{"Demostraciones"}\NormalTok{, }\StringTok{"Ejemplos"}\NormalTok{, etc. Se ha dado un aspecto personalizado a estas construcciones, que pueden }\FunctionTok{consultarse}\NormalTok{ (y modificarse) en el interior del fichero de estilos LaTeX}\SpecialCharTok{:} \StringTok{"latex/latex\_preambulo.tex"}\NormalTok{.}
+
+\NormalTok{A continuación se recoge un ejemplo con el código necesario.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{edefinition}
+\AttributeTok{Se **define**... }
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{edefinition}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{\textbackslash{}bedefinition}
+\NormalTok{Se }\SpecialCharTok{**}\NormalTok{define}\SpecialCharTok{**}\NormalTok{... }
+\NormalTok{\textbackslash{}eedefinition}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{etheorem}
+\AttributeTok{Dado...}
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{etheorem}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{\textbackslash{}betheorem}
+\NormalTok{Dado...}
+\NormalTok{\textbackslash{}eetheorem}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{ecorollary}
+\AttributeTok{Se verifica...}
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{ecorollary}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{\textbackslash{}becorollary}
+\NormalTok{Se verifica...}
+\NormalTok{\textbackslash{}eecorollary}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{eproof}
+\AttributeTok{Para demostrar...}
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{eproof}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{\textbackslash{}beproof}
+\NormalTok{Para demostrar...}
+\NormalTok{\textbackslash{}eeproof}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{eexample}
+\AttributeTok{Se considera el siguiente ejemplo...}
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{eexample}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{\textbackslash{}beexample}
+\NormalTok{Se considera el siguiente ejemplo...}
+\NormalTok{\textbackslash{}eeexample}
+
+\DocumentationTok{\#\# Uso de la bibliografía}
+
+\NormalTok{Se aconseja guardar todas las referencias bibliográficas en ficheros con formato bibtex. En este caso se usan dos ficheros de bibliografía (podrían tener otros nombres)}\SpecialCharTok{:}
+
+\SpecialCharTok{{-}} \StringTok{"bib/library.bib"}\SpecialCharTok{:}\NormalTok{ en este fichero podremos tener todas las referencias bibliográficas que vayamos encontrando convenientemente formateadas. Se podría utilizar en otros proyectos o trabajos. }
+
+\SpecialCharTok{{-}} \StringTok{"bib/paquetes.bib"}\SpecialCharTok{:}\NormalTok{ este fichero lo genera automáticamente R cuando creamos la salida R Markdown del fichero principal}\SpecialCharTok{:} \StringTok{"tfe\_principal.Rmd"}\NormalTok{, de ahí que no se debe modificar porque se perderían los cambios introducidos. En este se recogerán las referencias bibliográficas de los paquetes R que le indiquemos. Si quisiéramos personalizar alguna referencia a un paquete R se debería incluir en el fichero}\SpecialCharTok{:} \StringTok{"library.bib"}\NormalTok{. Por ejemplo, en el chunk inicial del fichero }\StringTok{"tfe\_principal.Rmd"}\NormalTok{ se han indicado para que paquetes R se incluirán referencias bibliográficas.}
+
+\NormalTok{\textbackslash{}bigskip}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{\{r eval=F,echo=T\}}
+\AttributeTok{knitr::write\_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",}
+\AttributeTok{                   "stringr","shiny","flexdashboard","htmlwidgets",}
+\AttributeTok{                   "bookdown"),}
+\AttributeTok{                 file="bib/paquetes.bib", }
+\AttributeTok{                 width = 60)}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+\NormalTok{Algunas de las referencias bibliográficas incluidas en el fichero }\StringTok{"bib/library.bib"}\NormalTok{ aparecen a continuación. Se recogen ejemplos de publicaciones de tipos diferentes}\SpecialCharTok{:} \StringTok{"Manual"}\NormalTok{, }\StringTok{"Book"}\NormalTok{, }\StringTok{"Article"}\NormalTok{, }\StringTok{"Misc"}\NormalTok{, pero existen muchas más.}
+
+\NormalTok{Hay que resaltar, que cada una de estas referencias bibliográficas tiene un }\FunctionTok{identificador}\NormalTok{ (}\StringTok{"Luque2017"}\NormalTok{, }\StringTok{"R{-}base2"}\NormalTok{, }\StringTok{"Wickham2017"}\NormalTok{, etc) que será el que nos permita hacer referencia a las correspondientes referencias al añadir el prefijo }\StringTok{\textasciigrave{}}\AttributeTok{@}\StringTok{\textasciigrave{}}\NormalTok{, es decir, por ejemplo}\SpecialCharTok{:} \StringTok{\textasciigrave{}}\AttributeTok{@Luque2017}\StringTok{\textasciigrave{}}\NormalTok{.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{bibtex}
+\AttributeTok{@Manual\{Luque2017,}
+\AttributeTok{  title = \{Escribir un Trabajo Fin de Estudios con R Markdown\},}
+\AttributeTok{  author = \{Pedro L. Luque{-}Calvo\},}
+\AttributeTok{  year = "2017",}
+\AttributeTok{  howpublished = \{Disponible en \textbackslash{}url\{http://destio.us.es/calvo\}\}}
+\AttributeTok{\}}
+
+\AttributeTok{@Manual\{R{-}base2,}
+\AttributeTok{  title = \{R: A Language and Environment for Statistical}
+\AttributeTok{    Computing\},}
+\AttributeTok{  author = \{\{R Core Team\}\},}
+\AttributeTok{  organization = \{R Foundation for Statistical Computing\},}
+\AttributeTok{  address = \{Vienna, Austria\},}
+\AttributeTok{  year = \{2016\},}
+\AttributeTok{  url = \{https://www.R{-}project.org/\},}
+\AttributeTok{\}}
+
+
+\AttributeTok{@Book\{Wickham2017,}
+\AttributeTok{    Author = \{Hadley Wickham and Garrett Grolemund\},}
+\AttributeTok{    Edition = \{First Edition\},}
+\AttributeTok{    Publisher = \{O\textquotesingle{}Reilly\},}
+\AttributeTok{    Title = \{R for Data Science: Import, Tidy, Transform, }
+\AttributeTok{    Visualize, and Model Data\},}
+\AttributeTok{    Year = \{2017\}}
+\AttributeTok{\}}
+
+\AttributeTok{@Article\{Example1999,}
+\AttributeTok{    author  = "Example, The",}
+\AttributeTok{    title   = "This is an exmaple article not cited in the text",}
+\AttributeTok{    journal = "Journal of Examples",}
+\AttributeTok{    year    = "1999",}
+\AttributeTok{    volume  = "4",}
+\AttributeTok{    number  = "2",}
+\AttributeTok{    pages   = "1{-}9"}
+\AttributeTok{\}}
+
+\AttributeTok{@Misc\{Techopedia,}
+\AttributeTok{  title = \{"Definition {-} What does Business Intelligence (BI) mean?"\},}
+\AttributeTok{  author = \{Techopedia\},}
+\AttributeTok{  howpublished = \{Disponible en}
+\AttributeTok{  \textbackslash{}url\{https://www.techopedia.com/definition/345/business{-}intelligence{-}bi\}\}}
+\AttributeTok{\}}
+
+\AttributeTok{@Article\{lopez2007aplicacion,}
+\AttributeTok{  title=\{Aplicación de la programación por metas en la distribución de }
+\AttributeTok{  servicios entre empresas operadoras del sistema de transporte masivo\},}
+\AttributeTok{  author=\{Lopez, Juan Fernando and Fernández Henao, Sergio and Morales,}
+\AttributeTok{  Marcela María\},}
+\AttributeTok{  journal=\{Scientia et technica\},}
+\AttributeTok{  volume=\{13\},}
+\AttributeTok{  number=\{37\},}
+\AttributeTok{  pages=\{339{-}{-}343\},}
+\AttributeTok{  year=\{2007\},}
+\AttributeTok{  publisher=\{Universidad Tecnológica de Pereira\}}
+\AttributeTok{\}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{Podrían generarse en la consola de R, al utilizar la función }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{citation("paqueteR")}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{, por ejemplo}\SpecialCharTok{:} 
+
+\NormalTok{\textbackslash{}footnotesize}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{r}
+\AttributeTok{\textgreater{} citation("dplyr")}
+
+\AttributeTok{To cite package ‘dplyr’ in publications use:}
+
+\AttributeTok{  Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2019). dplyr: A}
+\AttributeTok{  Grammar of Data Manipulation. R package version 0.8.3.}
+\AttributeTok{  https://CRAN.R{-}project.org/package=dplyr}
+
+\AttributeTok{A BibTeX entry for LaTeX users is}
+
+\AttributeTok{  @Manual\{,}
+\AttributeTok{    title = \{dplyr: A Grammar of Data Manipulation\},}
+\AttributeTok{    author = \{Hadley Wickham and Romain François and Lionel Henry and Kirill Müller\},}
+\AttributeTok{    year = \{2019\},}
+\AttributeTok{    note = \{R package version 0.8.3\},}
+\AttributeTok{    url = \{https://CRAN.R{-}project.org/package=dplyr\},}
+\AttributeTok{  \}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{\textbackslash{}normalsize}
+
+
+\NormalTok{Para obtener más información sobre la realización de citas en R Markdown visitar la url [R Markdown}\SpecialCharTok{:}\NormalTok{ Bibliographies and Citations](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{rmarkdown.rstudio.com}\SpecialCharTok{/}\NormalTok{authoring\_bibliographies\_and\_citations.html).}
+
+\DocumentationTok{\#\#\# Hacer citaciones}
+
+\NormalTok{Las citas van entre corchetes y están separadas por punto y coma. Cada cita debe tener una clave, compuesta de }\StringTok{"\textasciigrave{}@\textasciigrave{}"} \SpecialCharTok{+}\NormalTok{ el identificador de cita de la base de datos, y opcionalmente puede tener un prefijo, un localizador y un sufijo. A continuación  se muestran algunos ejemplos}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\AttributeTok{Blah blah [vea @Luque2017, págs. 33{-}35; también @Luque2019, cap. 1].}
+
+\AttributeTok{Blah blah [@Luque2017, págs. 33{-}35, 38{-}39 y *passim*].}
+
+\AttributeTok{Blah blah [@Luque2017; @Wickham2017].}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\SpecialCharTok{*}\NormalTok{Produce la siguiente salida}\SpecialCharTok{:}\ErrorTok{*}
+
+\NormalTok{Blah blah [vea }\SpecialCharTok{@}\NormalTok{Luque2017, págs. }\DecValTok{33{-}35}\NormalTok{; también }\SpecialCharTok{@}\NormalTok{Luque2019, cap. }\DecValTok{1}\NormalTok{].}
+
+\NormalTok{Blah blah [}\SpecialCharTok{@}\NormalTok{Luque2017, págs. }\DecValTok{33{-}35}\NormalTok{, }\DecValTok{38{-}39}\NormalTok{ y }\SpecialCharTok{*}\NormalTok{passim}\SpecialCharTok{*}\NormalTok{].}
+
+\NormalTok{Blah blah [}\SpecialCharTok{@}\NormalTok{Luque2017; }\SpecialCharTok{@}\NormalTok{Wickham2017].}
+
+
+\NormalTok{Un signo }\FunctionTok{menos}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{) antes de la }\SpecialCharTok{@}\NormalTok{ suprimirá la mención del autor en la cita. Esto puede ser útil cuando el autor ya se menciona en el texto}\SpecialCharTok{:}
+
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}}\NormalTok{ A minus }\FunctionTok{sign}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{) before the }\SpecialCharTok{@}\NormalTok{ will suppress mention of the author }\ControlFlowTok{in}\NormalTok{ the citation. This can be useful when the author is already mentioned }\ControlFlowTok{in}\NormalTok{ the text}\SpecialCharTok{:} \SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\AttributeTok{Luque dice blah [{-}@Luque2017].}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\SpecialCharTok{*}\NormalTok{Produce la siguiente salida}\SpecialCharTok{:}\ErrorTok{*}
+
+\NormalTok{Luque dice blah [}\SpecialCharTok{{-}}\ErrorTok{@}\NormalTok{Luque2017].}
+
+\NormalTok{También puede escribir una cita en el texto, de la siguiente manera}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\AttributeTok{@Luque2017 dice blah.}
+
+\AttributeTok{@Luque2017 [pág. 33] dice blah.}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\SpecialCharTok{*}\NormalTok{Produce la siguiente salida}\SpecialCharTok{:}\ErrorTok{*}
+
+\ErrorTok{@}\NormalTok{Luque2017 dice blah.}
+
+\SpecialCharTok{@}\NormalTok{Luque2017 [pág. }\DecValTok{33}\NormalTok{] dice blah.}
+
+
+\DocumentationTok{\#\#\# Estilos de citación}
+
+\NormalTok{Por defecto, pandoc usará un formato de }\StringTok{"fecha{-}autor"}\NormalTok{ del estilo }\StringTok{"chicago"}\NormalTok{ para citas y referencias. Para usar otro estilo, deberá especificar un archivo de estilo CSL }\FloatTok{1.0}\NormalTok{ en el campo de metadatos csl. Por ejemplo}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{yaml}
+\AttributeTok{{-}{-}{-}}
+\AttributeTok{title: "Sample Document"}
+\AttributeTok{output: html\_document}
+\AttributeTok{bibliography: bibliography.bib}
+\AttributeTok{csl: biomed{-}central.csl}
+\AttributeTok{{-}{-}{-}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{Puede encontrar una introducción a la creación y modificación de estilos CSL en }\SpecialCharTok{\textless{}}\NormalTok{http}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{citationstyles.org}\SpecialCharTok{/}\NormalTok{downloads}\SpecialCharTok{/}\NormalTok{primer.html}\SpecialCharTok{\textgreater{}}\NormalTok{. Puede encontrar un repositorio de estilos CSL en }\SpecialCharTok{\textless{}}\NormalTok{https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{github.com}\SpecialCharTok{/}\NormalTok{citation}\SpecialCharTok{{-}}\NormalTok{style}\SpecialCharTok{{-}}\NormalTok{language}\SpecialCharTok{/}\NormalTok{styles}\SpecialCharTok{\textgreater{}}\NormalTok{. Consulte también }\SpecialCharTok{\textless{}}\NormalTok{http}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{zotero.org}\SpecialCharTok{/}\NormalTok{styles}\SpecialCharTok{\textgreater{}}\NormalTok{ para navegar fácilmente por ellos.}
+
+
+\SpecialCharTok{**}\NormalTok{Citaciones para salidas PDF}\SpecialCharTok{**}\NormalTok{. Por defecto, las citas son generadas por la utilidad }\StringTok{"pandoc{-}citeproc"}\NormalTok{, y funciona para todos los formatos de salida. Cuando la salida es LaTeX}\SpecialCharTok{/}\NormalTok{PDF, también puede usar paquetes }\FunctionTok{LaTeX}\NormalTok{ (por ejemplo, natbib) para generar citas; ver [documentos PDF](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{bookdown.org}\SpecialCharTok{/}\NormalTok{yihui}\SpecialCharTok{/}\NormalTok{rmarkdown}\SpecialCharTok{/}\NormalTok{pdf}\SpecialCharTok{{-}}\NormalTok{document.html) para más detalles.}
+
+
+
+
+
+
+\DocumentationTok{\#\#\# Estilos bibliográficos con natbib: método 1}
+
+\NormalTok{Este método es el que está activado por defecto.}
+
+\SpecialCharTok{**}\NormalTok{Importante}\SpecialCharTok{**}\NormalTok{. Hay que asegurarse que en el fichero principal}\SpecialCharTok{:} \StringTok{"tfe\_principal.Rmd"}\NormalTok{ aparecen sin comentar las siguientes líneas (habría que comentar las del otro método)}\SpecialCharTok{:}
+
+\SpecialCharTok{{-}}\NormalTok{ En la cabecera }\StringTok{"yaml"}\SpecialCharTok{:}
+
+\NormalTok{\textbackslash{}footnotesize}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\AttributeTok{\# metodobib {-}\textgreater{} true: natbib (descomentar: citation\_package: natbib) }
+\AttributeTok{\#           {-}\textgreater{} false: pandoc (comentar: citation\_package: natbib)}
+\AttributeTok{metodobib: true}
+\AttributeTok{\#natbib: plainnat, abbrvnat, unsrtnat}
+\AttributeTok{biblio{-}style: "plainnat"}
+\AttributeTok{output: }
+\AttributeTok{  pdf\_document: }
+\AttributeTok{    citation\_package: natbib}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{\textbackslash{}normalsize}
+
+
+
+
+
+
+\SpecialCharTok{**}\NormalTok{Importante}\SpecialCharTok{**}\NormalTok{. En la bibligrafía  que }\SpecialCharTok{**}\NormalTok{se muestra al final del documento}\SpecialCharTok{**}\NormalTok{  aparecerán las referencias bibliográficas de aquellas que hayan sido citadas en el documento escrito.}
+
+\NormalTok{También es posible incluir algunas referencias bibliográficas que no hayan sido citadas, con ayuda del comando }\StringTok{\textasciigrave{}}\SpecialCharTok{\textbackslash{}n}\AttributeTok{ocite\{\}}\StringTok{\textasciigrave{}}\NormalTok{ situado al final del fichero}\SpecialCharTok{:} \StringTok{"tfe\_principal.Rmd"}\NormalTok{, como puede verse en el siguiente código}\SpecialCharTok{:}
+
+\NormalTok{\textbackslash{}footnotesize}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\NormalTok{\textbackslash{}ifdefined\textbackslash{}ifcitapandoc}
+
+\NormalTok{\textbackslash{}}\ControlFlowTok{else}
+
+\SpecialCharTok{\textless{}!{-}{-}}\NormalTok{ \textbackslash{}nocite\{}\SpecialCharTok{*}\NormalTok{\} }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\NormalTok{\textbackslash{}nocite\{Luque2017,Luque2019,RStudio,R}\SpecialCharTok{{-}}\NormalTok{base2,}
+\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{knitr,R}\SpecialCharTok{{-}}\NormalTok{rmarkdown,R}\SpecialCharTok{{-}}\NormalTok{dplyr,R}\SpecialCharTok{{-}}\NormalTok{ggplot2,Techopedia\}}
+
+\NormalTok{\textbackslash{}fi }
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{\textbackslash{}normalsize}
+
+ 
+
+
+\NormalTok{En la cabecera }\StringTok{"yaml"}\NormalTok{ del fichero }\StringTok{"tfe\_principal.Rmd"}\NormalTok{ aparece la clave }\StringTok{"biblio{-}style:"}\NormalTok{, que permite presentar la bibliografía siguiendo unas pautas habituales en publicaciones científicas. }
+
+\NormalTok{Por defecto se ha elegido el estilo }\StringTok{"plainnat"}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{yaml}
+\AttributeTok{biblio{-}style: "plainnat" }
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{pero se pueden elegir otras variantes de }\StringTok{"natbib"}\SpecialCharTok{:}
+
+\SpecialCharTok{{-}}\NormalTok{ plainnat, abbrvnat, unsrtnat}
+
+\SpecialCharTok{\textless{}!{-}{-}} \SpecialCharTok{{-}} \ErrorTok{**}\NormalTok{usa números}\SpecialCharTok{**}\ErrorTok{:}\NormalTok{ unsrt, siam, plain, ieeetr, acm, abbrv }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \SpecialCharTok{{-}} \ErrorTok{**}\NormalTok{usa etiquetas}\SpecialCharTok{**}\ErrorTok{:}\NormalTok{ apalike, alpha }\SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\NormalTok{Para obtener más información sobre este tema consultar el siguiente enlace}\SpecialCharTok{:}\NormalTok{ [overleaf}\SpecialCharTok{{-}}\NormalTok{Bibtex](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{www.overleaf.com}\SpecialCharTok{/}\NormalTok{learn}\SpecialCharTok{/}\NormalTok{latex}\SpecialCharTok{/}\NormalTok{Bibtex\_bibliography\_styles)}
+\NormalTok{y }
+\NormalTok{[overleaf}\SpecialCharTok{{-}}\NormalTok{Bibtex}\SpecialCharTok{{-}}\NormalTok{natbib](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{www.overleaf.com}\SpecialCharTok{/}\NormalTok{learn}\SpecialCharTok{/}\NormalTok{latex}\SpecialCharTok{/}\NormalTok{Bibliography\_management\_with\_natbib)}
+
+\SpecialCharTok{\textless{}!{-}{-}}\NormalTok{ Si se comentan las opciones }\StringTok{"csl"}\NormalTok{ de la cabecera }\StringTok{"yaml"}\NormalTok{ se puede personalizar por otra vía la presentación de la bibliografía con el }\FunctionTok{comando}\NormalTok{ (ver más información en [overleaf](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{www.overleaf.com}\SpecialCharTok{/}\NormalTok{learn}\SpecialCharTok{/}\NormalTok{latex}\SpecialCharTok{/}\NormalTok{Bibtex\_bibliography\_styles)}\SpecialCharTok{:} \SpecialCharTok{{-}}\OtherTok{{-}\textgreater{}}
+
+\ErrorTok{**}\NormalTok{Nota importante}\SpecialCharTok{**}\NormalTok{. Hay que evitar que una referencia en el fichero BibTeX no tenga los campos}\SpecialCharTok{:} \StringTok{"year"}\NormalTok{ y }\StringTok{"author"}\NormalTok{, ya que producirá salidas del tipo }\StringTok{"(????)"}\NormalTok{ al inicio de la referencia en la bibliografía. Cuando se incluyen referencias a páginas web suele presentarse esta situación. Las páginas webs usan el formato BibTeX}\SpecialCharTok{:} \StringTok{"\textasciigrave{}@Misc\textasciigrave{}"}\NormalTok{. La recomendación es completar esos dos campos. Pero si no se conoce de forma exacta alguno de ellos, se puede utilizar alguna de las dos soluciones siguientes.}
+
+\SpecialCharTok{{-}} \ErrorTok{**}\NormalTok{Solución }\DecValTok{1}\SpecialCharTok{**}\NormalTok{. La que recomendaría las normas }\StringTok{"apa"}\NormalTok{ (en las citas aparecerá }\StringTok{"autor (s.f.)"}\NormalTok{, donde }\StringTok{"s.f."}\NormalTok{ significa }\StringTok{"sin fecha"}\NormalTok{)}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{bibtex}
+\AttributeTok{@Misc\{webfacmatematicasus1,}
+\AttributeTok{  year = "\{s.f.\}",}
+\AttributeTok{  author = "\{Facultad de Matemáticas (Univ. Sevilla)\}",}
+\AttributeTok{  url = \{https://www.matematicas.us.es\}}
+\AttributeTok{\} }
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\SpecialCharTok{{-}} \ErrorTok{**}\NormalTok{Solución }\DecValTok{2}\SpecialCharTok{**}\NormalTok{. En esta segunda opción (no usa el campo }\StringTok{"author"}\NormalTok{ y se añade en }\StringTok{"year"}\SpecialCharTok{:} \StringTok{"Página web"}\NormalTok{) aparecería al principio de la referencia}\SpecialCharTok{:} \StringTok{"(Página web)"}\NormalTok{.}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{bibtex}
+\AttributeTok{@Misc\{webUS2a,}
+\AttributeTok{  year = "\{Página web\}",}
+\AttributeTok{  title = \{Universidad de Sevilla\},}
+\AttributeTok{  howpublished= \{Disponible en \textbackslash{}url\{https://www.us.es\}\}}
+\AttributeTok{\}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{Otras formas equivalentes serían}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{bibtex}
+\AttributeTok{@Misc\{webUS2b,}
+\AttributeTok{  year = "\{Página web\}",}
+\AttributeTok{  title = \{Universidad de Sevilla\},}
+\AttributeTok{  url = \{https://www.us.es\}}
+\AttributeTok{\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{bibtex}
+\AttributeTok{@Misc\{webUS2c,}
+\AttributeTok{  year = "\{Página web\}",}
+\AttributeTok{  title = \{Universidad de Sevilla\},}
+\AttributeTok{  url = \{https://www.us.es\},}
+\AttributeTok{  note = \{Consultada el 3{-}6{-}2021\}}
+\AttributeTok{\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{Aunque para estás últimas, aparecería en otra línea de cada referencia, la url del siguiente modo}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\AttributeTok{URL: https://www.matematicas.us.es}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+
+
+
+
+\SpecialCharTok{**}\NormalTok{Nota}\SpecialCharTok{**}\ErrorTok{:}\NormalTok{ además de a través del paquete }\StringTok{"natbib"}\NormalTok{ hay otra forma de manejar bibliografías  con el paquete [biblatex](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{www.overleaf.com}\SpecialCharTok{/}\NormalTok{learn}\SpecialCharTok{/}\NormalTok{latex}\SpecialCharTok{/}\NormalTok{Bibliography\_management\_with\_biblatex) que posee características adicionales al sistema bibtex, pero necesita la instalación de nuevo software.}
+
+\NormalTok{[overleaf biblatex](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{www.overleaf.com}\SpecialCharTok{/}\NormalTok{learn}\SpecialCharTok{/}\NormalTok{latex}\SpecialCharTok{/}\NormalTok{Articles}\SpecialCharTok{/}\NormalTok{Getting\_started\_with\_BibLaTeX) y [documentación completa biblatex](http}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{mirror.ox.ac.uk}\SpecialCharTok{/}\NormalTok{sites}\SpecialCharTok{/}\NormalTok{ctan.org}\SpecialCharTok{/}\NormalTok{macros}\SpecialCharTok{/}\NormalTok{latex}\SpecialCharTok{/}\NormalTok{contrib}\SpecialCharTok{/}\NormalTok{biblatex}\SpecialCharTok{/}\NormalTok{doc}\SpecialCharTok{/}\NormalTok{biblatex.pdf)}
+
+
+\SpecialCharTok{\textless{}!{-}{-}} \CommentTok{\#csl: 3{-}biotech.csl {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\#csl: 3d{-}research.csl {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\#csl: journal{-}of{-}chemometrics.csl {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\#Método 3 de bibliografía: descomente {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\#citation\_package: biblatex {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# \textbackslash{}usepackage[style=numeric]\{biblatex\} {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# \textbackslash{}usepackage[citestyle=alphabetic,bibstyle=authortitle]\{biblatex\} {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# numeric,alphabetic, reading, authoryear {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# \textbackslash{}usepackage[style=authoryear,sorting=ynt]\{biblatex\} {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# nty—sorts entries by name, title, year; {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# nyt—sorts entries by name, year, title; {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# nyvt—sorts entries by name, year, volume, title; {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# anyt—sorts entries by alphabetic label, name, year, title; {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# anyvt—sorts entries by alphabetic label, name, year, volume, title; {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# ynt—sorts entries by year, name, title; {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# ydnt—sorts entries by year (descending order), name, title; {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# none—no sorting. Entries appear in the order they appear in the text. {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\#biblio{-}style: authoryear,sorting=ynt,citestyle=alphabetic,bibstyle=numeric {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\#biblio{-}style: numeric,sorting=ynt,citestyle=alphabetic,bibstyle=numeric {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\#biblio{-}style: authoryear,sorting=ydnt,backend=bibtex,hyperref,backref,backrefstyle=none {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\#biblio{-}style: numeric,sorting=ydnt,backend=bibtex,hyperref,backref,backrefstyle=none {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\# {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\#biblio{-}style: authoryear,sorting=ynt  https://stackoverflow.com/questions/49042613/how{-}to{-}change{-}citation{-}style{-}in{-}biblatex{-}in{-}r{-}markdown {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\#latex\_engine: pdflatex  \#pdflatex  \# xelatex {-}{-}\textgreater{}}
+\ErrorTok{\textless{}}\SpecialCharTok{!{-}{-}} \CommentTok{\#citation\_package: biblatex \#natbib {-}{-}\textgreater{}}
+
+
+
+\DocumentationTok{\#\#\# Estilos bibliográficos con pandoc: método 2 \{\#bibliografiametodo2\}}
+
+
+\ErrorTok{**}\NormalTok{Importante}\SpecialCharTok{**}\NormalTok{. Hay que asegurarse que en el fichero principal}\SpecialCharTok{:} \StringTok{"tfe\_principal.Rmd"}\NormalTok{ aparecen sin comentar las siguientes líneas (habría que comentar las del otro método)}\SpecialCharTok{:}
+
+\SpecialCharTok{{-}}\NormalTok{ En la cabecera }\StringTok{"yaml"}\SpecialCharTok{:}
+
+\NormalTok{\textbackslash{}footnotesize}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\AttributeTok{\# metodobib {-}\textgreater{} true: natbib (descomentar: citation\_package: natbib) }
+\AttributeTok{\#           {-}\textgreater{} false: pandoc (comentar: citation\_package: natbib)}
+\AttributeTok{metodobib: false}
+\AttributeTok{output: }
+\AttributeTok{  pdf\_document: }
+\AttributeTok{    \#citation\_package: natbib}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{\textbackslash{}normalsize}
+
+
+
+
+\SpecialCharTok{**}\NormalTok{Importante}\SpecialCharTok{**}\NormalTok{. En la bibligrafía  que }\SpecialCharTok{**}\NormalTok{se muestra al final del documento}\SpecialCharTok{**}\NormalTok{  aparecerán las referencias bibliográficas de aquellas que hayan sido citadas, es decir, hayan aparecido en un comando }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{@identificador}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{ en el documento.}
+
+
+
+\NormalTok{También es posible incluir algunas referencias bibliográficas que no hayan sido citadas, con ayuda del comando }\StringTok{\textasciigrave{}}\AttributeTok{nocite}\StringTok{\textasciigrave{}}\NormalTok{ situado al inicio del documento R }\FunctionTok{Markdown}\NormalTok{ (en este proyecto al inicio del fichero }\StringTok{"tfe\_principal.Rmd"}\NormalTok{), como puede verse en el siguiente código}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{markdown}
+\SpecialCharTok{{-}{-}{-}}
+\NormalTok{nocite}\SpecialCharTok{:} \ErrorTok{|} 
+  \ErrorTok{@}\NormalTok{Luque2017,}\SpecialCharTok{@}\NormalTok{RStudio,}\SpecialCharTok{@}\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{base,}
+  \SpecialCharTok{@}\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{knitr,}\SpecialCharTok{@}\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{rmarkdown,}\SpecialCharTok{@}\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{dplyr,}\SpecialCharTok{@}\NormalTok{R}\SpecialCharTok{{-}}\NormalTok{ggplot2,}\SpecialCharTok{@}\NormalTok{Techopedia}
+\NormalTok{...}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{En la cabecera }\StringTok{"yaml"}\NormalTok{ del fichero }\StringTok{"tfe\_principal.Rmd"}\NormalTok{ aparece la clave }\StringTok{"csl:"}\NormalTok{, que permite presentar la bibliografía siguiendo las pautas que se exigen en algunas revistas científicas (listado para descargar en [zotero csl](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{www.zotero.org}\SpecialCharTok{/}\NormalTok{styles}\SpecialCharTok{/}\NormalTok{), también [más información](https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{citationstyles.org}\SpecialCharTok{/}\NormalTok{publishers}\SpecialCharTok{/}\NormalTok{)).}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{yaml}
+\AttributeTok{csl: acm{-}sig{-}proceedings{-}long{-}author{-}list.csl}
+\AttributeTok{\#csl: methods{-}in{-}ecology{-}and{-}evolution.csl}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+
+\DocumentationTok{\#\# Otras cuestiones de interés}
+
+\DocumentationTok{\#\#\# Cómo hacer referencias a otras partes del documento}
+
+\NormalTok{Se pueden hacer referencias a capítulos, secciones, subsecciones, u otros subniveles. Para ello es conveniente saber cómo insertar identificadores a estas partes. Para incluir un identificador,}
+\NormalTok{al final de la definición de un apartado se añaden unas llaves entre las que se ha puesto el identificador deseado con el prefijo }\StringTok{\textasciigrave{}}\AttributeTok{\#}\StringTok{\textasciigrave{}}\NormalTok{. }
+
+\NormalTok{Para hacer referencia a este identificador se pueden emplear los comandos LaTeX}\SpecialCharTok{:} \ErrorTok{**}\StringTok{\textasciigrave{}}\SpecialCharTok{\textbackslash{}r}\AttributeTok{ef\{identificador\}}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{ para referirse a la numeración del apartado o }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{\textbackslash{}pageref\{identificador\}}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{ para referirse a la página en la que se encuentra definido el apartado.}
+
+
+\NormalTok{En el siguiente ejemplo se ha definido a una sección el identificador }\StringTok{"sec:incluirgrafico"}\NormalTok{, }
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{markdown}
+\AttributeTok{\#\# Cómo incluir un gráfico \{\#sec:incluirgrafico\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\SpecialCharTok{**}\NormalTok{Nota}\SpecialCharTok{**}\NormalTok{. No se pueden definir identificadores iguales a secciones distintas.}
+
+
+
+\DocumentationTok{\#\#\# Colorear texto}
+
+\NormalTok{El siguiente código}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\SpecialCharTok{\textbackslash{}t}\AttributeTok{extcolor\{blue!90!\}\{Texto azul\} y }
+\SpecialCharTok{\textbackslash{}t}\AttributeTok{extcolor\{green!10!orange!90!\}\{texto resaltado\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{produce}
+
+\NormalTok{\textbackslash{}textcolor\{blue}\SpecialCharTok{!}\DecValTok{90}\SpecialCharTok{!}\NormalTok{\}\{Texto azul\} y }
+\NormalTok{\textbackslash{}textcolor\{green}\SpecialCharTok{!}\DecValTok{10}\SpecialCharTok{!}\NormalTok{orange}\SpecialCharTok{!}\DecValTok{90}\SpecialCharTok{!}\NormalTok{\}\{texto resaltado\}}
+
+
+
+\DocumentationTok{\#\#\# Colorear texto en cajas}
+
+\NormalTok{El siguiente código}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\AttributeTok{\textbackslash{}colorlet\{Mycolor1\}\{green!10!orange!90!\}}
+\AttributeTok{\textbackslash{}colorbox\{Mycolor1\}\{}\SpecialCharTok{\textbackslash{}t}\AttributeTok{extcolor\{White\}\{Texto resaltado\}\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{produce}
+
+\NormalTok{\textbackslash{}colorlet\{Mycolor1\}\{green}\SpecialCharTok{!}\DecValTok{10}\SpecialCharTok{!}\NormalTok{orange}\SpecialCharTok{!}\DecValTok{90}\SpecialCharTok{!}\NormalTok{\}}
+\NormalTok{\textbackslash{}colorbox\{Mycolor1\}\{\textbackslash{}textcolor\{White\}\{Texto resaltado\}\}}
+
+
+\DocumentationTok{\#\#\# Colorear párrafos de texto}
+
+\NormalTok{En el siguiente código se utilizan varios comandos LaTeX para producir cajas coloreadas}\SpecialCharTok{:}
+
+\SpecialCharTok{{-}} \ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{\textbackslash{}colorbox\{color\}\{texto\}}\StringTok{\textasciigrave{}}\SpecialCharTok{**}
+\SpecialCharTok{{-}} \ErrorTok{**}\StringTok{\textasciigrave{}}\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{minipage\}\{anchocaja\}    }\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{minipage\}}\StringTok{\textasciigrave{}}\SpecialCharTok{**}
+\SpecialCharTok{{-}} \ErrorTok{**}\StringTok{\textasciigrave{}}\SpecialCharTok{\textbackslash{}t}\AttributeTok{extcolor\{color\}\{texto\}}\StringTok{\textasciigrave{}}\SpecialCharTok{**}
+\SpecialCharTok{{-}} \ErrorTok{**}\StringTok{\textasciigrave{}}\AttributeTok{\textbackslash{}color\{color\}}\StringTok{\textasciigrave{}}\SpecialCharTok{**}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\SpecialCharTok{\textbackslash{}n}\AttributeTok{oindent\textbackslash{}colorbox\{blue\}\{}
+\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{minipage\}\{0.30}\SpecialCharTok{\textbackslash{}t}\AttributeTok{extwidth\}}
+\AttributeTok{\textbackslash{}color\{white\}}
+\AttributeTok{Lo que se ve en esta }\SpecialCharTok{\textbackslash{}t}\AttributeTok{extcolor\{red\}\{minipágina\} }
+\AttributeTok{tiene un color de fondo azul y}
+\AttributeTok{el texto está escrito en blanco. }
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{minipage\}\}\textbackslash{}hspace\{0.5cm\} }
+\AttributeTok{\textbackslash{}colorbox\{yellow\}\{}\SpecialCharTok{\textbackslash{}b}\AttributeTok{egin\{minipage\}\{0.60}\SpecialCharTok{\textbackslash{}t}\AttributeTok{extwidth\} }
+\AttributeTok{Lo que se ve en esta }\SpecialCharTok{\textbackslash{}t}\AttributeTok{extcolor\{red\}\{minipágina\} }
+\AttributeTok{tiene un color de fondo amarillo y}
+\AttributeTok{el texto está escrito en negro}
+\SpecialCharTok{\textbackslash{}e}\AttributeTok{nd\{minipage\}\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+\NormalTok{produce}\SpecialCharTok{:}
+
+\NormalTok{\textbackslash{}noindent\textbackslash{}colorbox\{blue\}\{}
+\NormalTok{\textbackslash{}begin\{minipage\}\{}\FloatTok{0.30}\NormalTok{\textbackslash{}textwidth\}}
+\NormalTok{\textbackslash{}color\{white\}}
+\NormalTok{Lo que se ve en esta \textbackslash{}textcolor\{red\}\{minipágina\} }
+\NormalTok{tiene un color de fondo negro y}
+\NormalTok{el texto está escrito en blanco. }
+\NormalTok{\textbackslash{}end\{minipage\}\}\textbackslash{}hspace\{}\FloatTok{0.5}\NormalTok{cm\} }
+\NormalTok{\textbackslash{}colorbox\{yellow\}\{\textbackslash{}begin\{minipage\}\{}\FloatTok{0.60}\NormalTok{\textbackslash{}textwidth\} }
+\NormalTok{Lo que se ve en esta \textbackslash{}textcolor\{red\}\{minipágina\} }
+\NormalTok{tiene un color de fondo negro y}
+\NormalTok{el texto está escrito en blanco}
+\NormalTok{\textbackslash{}end\{minipage\}\}}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}} \StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\textasciigrave{}} 
+
+
+\DocumentationTok{\#\#\# Incluir ficheros pdf externos}
+
+
+\NormalTok{Es posible incluir un documento pdf externo dentro de nuestro documento con ayuda del comando LaTeX }\SpecialCharTok{**}\StringTok{\textasciigrave{}}\AttributeTok{\textbackslash{}includepdf}\StringTok{\textasciigrave{}}\SpecialCharTok{**}\NormalTok{ del paquete}\SpecialCharTok{:} \StringTok{"pdfpages"}\NormalTok{ (incluido en este proyecto). }
+
+\NormalTok{En el siguiente }\FunctionTok{ejemplo}\NormalTok{ (no se muestra en este documento el resultado) se insertarían en nuestro documento las páginas }\DecValTok{8}\NormalTok{ y }\DecValTok{14}\NormalTok{ del fichero local “xaringanej01\_defecto.pdf” con un escalado de }\DecValTok{75}\NormalTok{\% (de la }\DecValTok{11}\NormalTok{ a }\DecValTok{14}\NormalTok{, habría que escribir}\SpecialCharTok{:} \AttributeTok{pages=}\DecValTok{11{-}14}\NormalTok{)}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\AttributeTok{\textbackslash{}includepdf[scale=0.75,pages=\{8,14\}, }
+\AttributeTok{  pagecommand=\textbackslash{}section*\{Ejemplo de inserción de un pdf en un documento\}, }
+\AttributeTok{  offset=00 {-}30]\{xaringanej01\_defecto.pdf\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+
+
+\NormalTok{En el siguiente ejemplo se incluye el fichero }\FunctionTok{pdf}\NormalTok{ (vendría apaisado y puede que sin numerar) pero rotándolo }\DecValTok{90}\NormalTok{ grados para que quede en vertical}\SpecialCharTok{:}
+
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\AttributeTok{latex}
+\AttributeTok{\textbackslash{}includepdf[scale=0.90,pages=1{-},angle=90,pagecommand=,}
+\AttributeTok{offset=00 {-}20]\{chuleta\_tabla\_kableExtra\_apaisada\_texrevisado.pdf\}}
+\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\NormalTok{como puede verse en la siguiente página.}
+
+\NormalTok{\textbackslash{}includepdf[}\AttributeTok{scale=}\FloatTok{0.90}\NormalTok{,}\AttributeTok{pages=}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{,}\AttributeTok{angle=}\DecValTok{90}\NormalTok{,}\AttributeTok{pagecommand=}\NormalTok{,}
+\end{Highlighting}
+\end{Shaded}
+
+
+
+
+
+\end{document}

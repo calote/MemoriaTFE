@@ -1,9 +1,9 @@
 ---
-documentclass: book
+documentclass: article
+article: true
 principal: true
-forprint: true  # true: imprime a dos caras, false: libro digital
+forprint: false  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
-#paloseco: true # con fuente por defecto (lmodern)
 #fontfamily: inconsolata
 #fontmathfamily: mathptmx
 #codigoajusta: true
@@ -18,7 +18,7 @@ metodobib: true
 #natbib: plainnat, abbrvnat, unsrtnat
 #natbib: chicago, apalike, acm
 #natbib: apalike2 (https://ctan.org/pkg/apalike2)
-#biblio-style: "apa-good"
+biblio-style: "apa-good"
 #natbiboptions: "numbers" # "square,numbers" # ver: https://www.ctan.org/pkg/natbib
 # más info: authoryear,numbers,  super, angle, sort, compress
 # https://ctan.javinator9889.com/macros/latex/contrib/natbib/natnotes.pdf
@@ -27,21 +27,22 @@ csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
 #csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
 #csl: apa.csl  # apa.csl, ieee.csl
 # Método 3 (flexbib):
-flexbib: true
+flexbib: false
 #flexbiboptions: "spanish,plain"
 flexbiboptions: spanish, plain, datebegin,sortcompress,nocomment, noabstract
 #flexbiboptions: "spanish"
 link-citations: yes
 output: 
   pdf_document:
-    keep_tex: yes
+    keep_tex: no
     number_sections: yes
     citation_package: natbib  # coméntelo si usa: pandoc-citeproc (metodobib: false)
     #toc: yes
     fig_caption: yes
     template: latex/templateMemoriaTFE.tex
     includes:
-      before_body: portadas/latex_paginatitulo_modTFE.tex
+      #before_body: portadas/latex_paginatitulo_modTFE.tex
+      before_body: portadas/latex_paginatitulo_modArticulo.tex
 #      before_body: portadas/latex_paginatitulo_modTFGE.tex
 #      before_body: portadas/latex_paginatitulo_modTFGM.tex
 #      before_body: portadas/latex_paginatitulo_modTFDGME.tex
@@ -92,52 +93,48 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
 \fi
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
-\pagenumbering{roman}
+<!-- \pagenumbering{roman} -->
+\pagenumbering{arabic}
 
 \setcounter{tocdepth}{4}
 \subpdfbookmark{Índice General}{indice}
 \tableofcontents
 
 
-\cleardoublepage   
-<!--  \clearpage -->
-\section*{Prólogo}
-\addcontentsline{toc}{section}{Prólogo}
+<!-- \cleardoublepage    -->
+<!-- \section*{Prólogo} -->
+<!-- \addcontentsline{toc}{section}{Prólogo} -->
 
-```{r child = 'prologo.Rmd'}
-```
-
-
-\cleardoublepage   
-<!--  \clearpage -->
-\section*{Resumen}
-\addcontentsline{toc}{section}{Resumen}
-
-```{r child = 'resumen.Rmd'}
-```
+<!-- ```{r child = 'prologo.Rmd'} -->
+<!-- ``` -->
 
 
-\clearpage
-\section*{Abstract}
-\addcontentsline{toc}{section}{Abstract}
+<!-- \cleardoublepage    -->
+<!-- \section*{Resumen} -->
+<!-- \addcontentsline{toc}{section}{Resumen} -->
 
-```{r child = 'abstract.Rmd'}
-```
+<!-- ```{r child = 'resumen.Rmd'} -->
+<!-- ``` -->
+
+
+<!-- \clearpage -->
+<!-- \section*{Abstract} -->
+<!-- \addcontentsline{toc}{section}{Abstract} -->
+
+<!-- ```{r child = 'abstract.Rmd'} -->
+<!-- ``` -->
 
 
 \cleardoublepage   
 \listoffigures
 \addcontentsline{toc}{section}{Índice de Figuras}
 
-\cleardoublepage   
-
 \listoftables
-<!-- \addcontentsline{toc}{section}{Índice de Cuadros} -->
 \addcontentsline{toc}{section}{Índice de Tablas}
 
 \cleardoublepage   
 
-\pagenumbering{arabic}
+<!-- \pagenumbering{arabic} -->
 
 \ifdefined\ifdoblecara
 \fancyhead[LE,RO]{\scriptsize\rightmark}
@@ -154,23 +151,6 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
-```{r child = 'capitulo01n.Rmd'}
-```
-
-\FloatBarrier
-
-```{r child = 'capitulo02n.Rmd'}
-```
-
-\FloatBarrier
-
-```{r child = 'capitulo03n.Rmd'}
-```
-
-\FloatBarrier
-
-```{r child = 'capitulo04n.Rmd'}
-```
 
 
 <!-- 
@@ -190,18 +170,17 @@ install.packages(c("ggplot2","kableExtra","dplyr"))
 
 
 
-\FloatBarrier
+<!-- \FloatBarrier -->
 
-\appendix
+<!-- \appendix -->
 
-
-```{r child = 'apendice01n.Rmd'}
-```
-
+<!-- ```{r child = 'apendice01n.Rmd'} -->
+<!-- ``` -->
 
 
-```{r child = 'apendice02n.Rmd'}
-```
+
+<!-- ```{r child = 'apendice02n.Rmd'} -->
+<!-- ``` -->
 
 
 

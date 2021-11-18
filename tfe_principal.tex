@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper,oneside,]{article}
+\documentclass[12pt,a4paper,oneside,]{book}
 \def\ifdoblecara{} %% set to true
 \let\ifdoblecara\undefined %% set to false
 \def\ifprincipal{} %% set to true
@@ -30,12 +30,14 @@
 \usepackage[margin = 2.5cm]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-              pdfborder={0 0 0},
+              colorlinks=true,
+            linkcolor=blue,
+            citecolor=blue,
+            urlcolor=blue,
               breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-    \usepackage{natbib}
-  \bibliographystyle{apa-good}
-  \usepackage[usenames,dvipsnames]{xcolor}  %new PLLC
+%
+\usepackage[usenames,dvipsnames]{xcolor}  %new PLLC
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -121,6 +123,8 @@
 \usepackage[spanish,es-nodecimaldot,es-noshorthands,es-tabla]{babel}
 % Ver: es-tabla (en: https://osl.ugr.es/CTAN/macros/latex/contrib/babel-contrib/spanish/spanish.pdf)
 % es-tabla (en: https://tex.stackexchange.com/questions/80443/change-the-word-table-in-table-captions)
+\usepackage[spanish, plain, datebegin,sortcompress,nocomment,
+noabstract]{flexbib}
  
 \usepackage{float}
 \usepackage{placeins}
@@ -273,18 +277,17 @@
 
 
 
-
 % Define el estilo texto theorem para cada tipo definido anteriormente
 \newcounter{dummy} 
 \numberwithin{dummy}{section}
 \theoremstyle{ocrenumbox}
 \newtheorem{theoremeT}[dummy]{Teorema}  % (Pedro: Theorem)
-\newtheorem{problem}{Problema}[section]  % (Pedro: Problem)
-\newtheorem{exerciseT}{Ejercicio}[section] % (Pedro: Exercise)
+\newtheorem{problem}{Problema}[chapter]  % (Pedro: Problem)
+\newtheorem{exerciseT}{Ejercicio}[chapter] % (Pedro: Exercise)
 \theoremstyle{blacknumex}
-\newtheorem{exampleT}{Ejemplo}[section] % (Pedro: Example)
+\newtheorem{exampleT}{Ejemplo}[chapter] % (Pedro: Example)
 \theoremstyle{blacknumbox}
-\newtheorem{vocabulary}{Vocabulario}[section]  % (Pedro: Vocabulary)
+\newtheorem{vocabulary}{Vocabulario}[chapter]  % (Pedro: Vocabulary)
 \newtheorem{definitionT}{Definición}[section]  % (Pedro: Definition)
 \newtheorem{corollaryT}[dummy]{Corolario}  % (Pedro: Corollary)
 \theoremstyle{ocrenum}
@@ -298,7 +301,7 @@
 \newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
 \newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
 \newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
-\newtheorem{notation}{Notation}[section]
+\newtheorem{notation}{Notation}[chapter]
 
 
 \mdfdefinestyle{exampledefault}{%
@@ -548,6 +551,7 @@ linewidth=4pt]{mBox}
 
 \begin{document}
 
+\bibliographystyle{flexbib}
 
 
 % nada
@@ -719,10 +723,10 @@ R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 \renewcommand{\footrulewidth}{0.4pt}
 
 \hypertarget{tuxedtulo-del-capuxedtulo}{%
-\section{Título del Capítulo}\label{tuxedtulo-del-capuxedtulo}}
+\chapter{Título del Capítulo}\label{tuxedtulo-del-capuxedtulo}}
 
 \hypertarget{primera-secciuxf3n}{%
-\subsection{Primera sección}\label{primera-secciuxf3n}}
+\section{Primera sección}\label{primera-secciuxf3n}}
 
 \FloatBarrier
 
@@ -756,10 +760,10 @@ R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 \renewcommand{\footrulewidth}{0.4pt}
 
 \hypertarget{tuxedtulo-del-capuxedtulo-1}{%
-\section{Título del Capítulo}\label{tuxedtulo-del-capuxedtulo-1}}
+\chapter{Título del Capítulo}\label{tuxedtulo-del-capuxedtulo-1}}
 
 \hypertarget{primera-secciuxf3n-1}{%
-\subsection{Primera sección}\label{primera-secciuxf3n-1}}
+\section{Primera sección}\label{primera-secciuxf3n-1}}
 
 \FloatBarrier
 
@@ -793,10 +797,10 @@ R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 \renewcommand{\footrulewidth}{0.4pt}
 
 \hypertarget{tuxedtulo-del-capuxedtulo-2}{%
-\section{Título del Capítulo}\label{tuxedtulo-del-capuxedtulo-2}}
+\chapter{Título del Capítulo}\label{tuxedtulo-del-capuxedtulo-2}}
 
 \hypertarget{primera-secciuxf3n-2}{%
-\subsection{Primera sección}\label{primera-secciuxf3n-2}}
+\section{Primera sección}\label{primera-secciuxf3n-2}}
 
 \FloatBarrier
 
@@ -830,10 +834,10 @@ R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 \renewcommand{\footrulewidth}{0.4pt}
 
 \hypertarget{tuxedtulo-del-capuxedtulo-3}{%
-\section{Título del Capítulo}\label{tuxedtulo-del-capuxedtulo-3}}
+\chapter{Título del Capítulo}\label{tuxedtulo-del-capuxedtulo-3}}
 
 \hypertarget{primera-secciuxf3n-3}{%
-\subsection{Primera sección}\label{primera-secciuxf3n-3}}
+\section{Primera sección}\label{primera-secciuxf3n-3}}
 
 \FloatBarrier
 
@@ -867,7 +871,7 @@ R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 \renewcommand{\footrulewidth}{0.4pt}
 
 \hypertarget{tareas-habituales-al-escribir-documentos-r-markdown}{%
-\section{Tareas habituales al escribir documentos R
+\chapter{Tareas habituales al escribir documentos R
 Markdown}\label{tareas-habituales-al-escribir-documentos-r-markdown}}
 
 Este capítulo está escrito en el fichero R Markdown
@@ -876,7 +880,7 @@ pegar en su trabajo la solución a algunas de las cuestiones más
 habituales al escribir un trabajo escrito.
 
 \hypertarget{mostrar-los-chunks-de-cuxf3digo-r-y-las-opciones}{%
-\subsection{Mostrar los chunks de código R y las
+\section{Mostrar los chunks de código R y las
 opciones}\label{mostrar-los-chunks-de-cuxf3digo-r-y-las-opciones}}
 
 Un chunk de código R comienza con tres acentos abiertos:
@@ -1042,10 +1046,10 @@ puede obtenerse más información sobre las opciones en un chunk de código
 R.
 
 \hypertarget{sec:incluirgrafico}{%
-\subsection{Cómo incluir un gráfico}\label{sec:incluirgrafico}}
+\section{Cómo incluir un gráfico}\label{sec:incluirgrafico}}
 
 \hypertarget{incluir-un-fichero-gruxe1fico-en-el-documento}{%
-\subsubsection{Incluir un fichero gráfico en el
+\subsection{Incluir un fichero gráfico en el
 documento}\label{incluir-un-fichero-gruxe1fico-en-el-documento}}
 
 Se tiene el fichero gráfico ``capitulo05ejemplo01.png'' en la subcarpeta
@@ -1075,7 +1079,7 @@ página en el punto del texto en el que se ha escrito.
 \clearpage
 
 \hypertarget{gruxe1fico-sin-leyenda-y-justo-aquuxed}{%
-\paragraph{Gráfico sin leyenda y justo
+\subsubsection{Gráfico sin leyenda y justo
 aquí}\label{gruxe1fico-sin-leyenda-y-justo-aquuxed}}
 
 Si queremos incluirlo sin ningún tipo de leyenda explicativa y
@@ -1093,7 +1097,7 @@ ayuda del siguiente ``chunk de código R'':
 \begin{center}\includegraphics[width=0.7\linewidth]{graficos/capitulo05ejemplo01} \end{center}
 
 \hypertarget{gruxe1fico-con-leyenda-y-justo-aquuxed}{%
-\paragraph{Gráfico con leyenda y justo
+\subsubsection{Gráfico con leyenda y justo
 aquí}\label{gruxe1fico-con-leyenda-y-justo-aquuxed}}
 
 Si queremos incluirlo con una leyenda explicativa con una numeración que
@@ -1135,7 +1139,7 @@ indicarse la página en la que se encuentra: página
 \end{Shaded}
 
 \hypertarget{gruxe1fico-con-leyenda-y-posiciuxf3n-flotante-superior-o-inferior}{%
-\paragraph{Gráfico con leyenda y posición flotante: superior o
+\subsubsection{Gráfico con leyenda y posición flotante: superior o
 inferior}\label{gruxe1fico-con-leyenda-y-posiciuxf3n-flotante-superior-o-inferior}}
 
 En muchos tipos de publicaciones se recomienda que las figuras y tablas
@@ -1209,7 +1213,7 @@ overleaf}.
 \end{figure}
 
 \hypertarget{incluir-un-gruxe1fico-creado-con-r-en-el-documento}{%
-\subsubsection{Incluir un gráfico creado con R en el
+\subsection{Incluir un gráfico creado con R en el
 documento}\label{incluir-un-gruxe1fico-creado-con-r-en-el-documento}}
 
 Se tienen las mismas posibilidades que el caso de un fichero gráfico,
@@ -1273,7 +1277,7 @@ de código R:
 \end{Shaded}
 
 \hypertarget{incluir-un-gruxe1fico-creado-con-r-sin-leyenda-y-justo-aquuxed}{%
-\paragraph{Incluir un gráfico creado con R sin leyenda y justo
+\subsubsection{Incluir un gráfico creado con R sin leyenda y justo
 aquí}\label{incluir-un-gruxe1fico-creado-con-r-sin-leyenda-y-justo-aquuxed}}
 
 Se demuestra con un ejemplo que usa el paquete ``ggplot2'', en el que
@@ -1298,8 +1302,8 @@ aparece justificada a la izquierda).
 \begin{center}\includegraphics[width=0.8\linewidth]{figurasR/unnamed-chunk-28-1} \end{center}
 
 \hypertarget{incluir-un-gruxe1fico-creado-con-r-con-leyenda-y-situado-en-la-parte-superior}{%
-\paragraph{Incluir un gráfico creado con R con leyenda y situado en la
-parte
+\subsubsection{Incluir un gráfico creado con R con leyenda y situado en
+la parte
 superior}\label{incluir-un-gruxe1fico-creado-con-r-con-leyenda-y-situado-en-la-parte-superior}}
 
 El gráfico de la Figura \ref{fig:cap05gg02} es un ejemplo de gráfico
@@ -1328,7 +1332,7 @@ parte superior de la página.
 \end{figure}
 
 \hypertarget{varios-gruxe1ficos-creados-con-r-con-varias-leyendas}{%
-\paragraph{Varios gráficos creados con R con varias
+\subsubsection{Varios gráficos creados con R con varias
 leyendas}\label{varios-gruxe1ficos-creados-con-r-con-varias-leyendas}}
 
 Con el siguiente código se pueden presentar dos gráficos en una única
@@ -1411,7 +1415,7 @@ Produce la Figura \ref{fig:fig2}.
 \end{figure}
 
 \hypertarget{cuxf3mo-incluir-una-tabla-o-cuadro-con-informaciuxf3n}{%
-\subsection{Cómo incluir una tabla o cuadro con
+\section{Cómo incluir una tabla o cuadro con
 información}\label{cuxf3mo-incluir-una-tabla-o-cuadro-con-informaciuxf3n}}
 
 Para profundizar en el tema de la presentación de tablas de información
@@ -1420,7 +1424,7 @@ se recomienda visitar la siguiente url:
 Crear tablas de información en R Markdown}.
 
 \hypertarget{incluir-una-tabla-con-leyenda}{%
-\subsubsection{Incluir una tabla con
+\subsection{Incluir una tabla con
 leyenda}\label{incluir-una-tabla-con-leyenda}}
 
 La presentación de las primeras 10 filas de un data.frame de R, por
@@ -1524,7 +1528,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{table}
 
 \hypertarget{incluir-una-tabla-que-ocupe-varias-puxe1ginas}{%
-\subsubsection{Incluir una tabla que ocupe varias
+\subsection{Incluir una tabla que ocupe varias
 páginas}\label{incluir-una-tabla-que-ocupe-varias-puxe1ginas}}
 
 Para corregir esa situación, la librería ``kableExtra'' nos permite
@@ -1658,7 +1662,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \& 0.2 \& setosa\textbackslash* \textbackslash end\{longtable\}
 
 \hypertarget{incluir-una-tabla-con-aspecto-de-lista-diccionario}{%
-\subsubsection{Incluir una tabla con aspecto de
+\subsection{Incluir una tabla con aspecto de
 lista-diccionario}\label{incluir-una-tabla-con-aspecto-de-lista-diccionario}}
 
 El siguiente código:
@@ -1735,7 +1739,7 @@ Item 3 & Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
 \end{table}
 
 \hypertarget{incluir-una-tabla-con-notas-a-pie-de-tabla}{%
-\subsubsection{Incluir una tabla con notas a pie de
+\subsection{Incluir una tabla con notas a pie de
 tabla}\label{incluir-una-tabla-con-notas-a-pie-de-tabla}}
 
 El siguiente código
@@ -1802,7 +1806,7 @@ Hornet Sportabout & 18.7 & 8 & 360 & 175 & 3.15 & 3.440\\
 \end{tabular}
 
 \hypertarget{presentar-una-tabla-en-modo-apaisado}{%
-\subsubsection{Presentar una tabla en modo
+\subsection{Presentar una tabla en modo
 apaisado}\label{presentar-una-tabla-en-modo-apaisado}}
 
 Se presentan tres ejemplos de tablas apaisadas.
@@ -2095,7 +2099,7 @@ Item 9 & Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi.
 \clearpage
 
 \hypertarget{cambiar-la-etiqueta-tabla}{%
-\subsubsection{Cambiar la etiqueta
+\subsection{Cambiar la etiqueta
 ``Tabla''}\label{cambiar-la-etiqueta-tabla}}
 
 Para que en lugar de ``Tabla'' aparezca ``Cuadro'' (este término es el
@@ -2128,7 +2132,7 @@ Más información en la url siguiente:
 babel-spanish en CTAN}.
 
 \hypertarget{uso-de-expresiones-matemuxe1ticas}{%
-\subsection{Uso de expresiones
+\section{Uso de expresiones
 matemáticas}\label{uso-de-expresiones-matemuxe1ticas}}
 
 En el siguiente enlace
@@ -2138,7 +2142,7 @@ recopilación de los comandos LaTeX para representar todo el alfabeto
 griego y muchos de los símbolos más usados en expresiones matemáticas.
 
 \hypertarget{algunas-expresiones-matemuxe1ticas}{%
-\subsubsection{Algunas expresiones
+\subsection{Algunas expresiones
 matemáticas}\label{algunas-expresiones-matemuxe1ticas}}
 
 Las fracciones pueden usarse en el texto, por ejemplo \(\frac{1}{2}\), y
@@ -2240,7 +2244,7 @@ El código LaTeX utilizado respectivamente ha sido:
 \end{Shaded}
 
 \hypertarget{expresiones-matriciales}{%
-\subsubsection{Expresiones matriciales}\label{expresiones-matriciales}}
+\subsection{Expresiones matriciales}\label{expresiones-matriciales}}
 
 El uso de
 \texttt{\textbackslash{}begin\{array\}\{\}\ ...\ \textbackslash{}end\{array\}}
@@ -2364,7 +2368,7 @@ Otros ejemplos de uso de
 \end{Shaded}
 
 \hypertarget{etiquetadomatematico}{%
-\subsubsection{Alineando ecuaciones y
+\subsection{Alineando ecuaciones y
 etiquetado}\label{etiquetadomatematico}}
 
 Para alinear ecuaciones en R Markdown habrá que utilizar las habilidades
@@ -2480,7 +2484,7 @@ x&=y           &  w &=z              &  a&=b+c\\
 \end{gather*}
 
 \hypertarget{escribiendo-resultados-matemuxe1ticos}{%
-\subsubsection{Escribiendo resultados
+\subsection{Escribiendo resultados
 matemáticos}\label{escribiendo-resultados-matemuxe1ticos}}
 
 Se pueden utilizar entornos matemáticos para establecer:
@@ -2552,7 +2556,7 @@ Para demostrar\ldots{} \eeproof
 Se considera el siguiente ejemplo\ldots{} \eeexample
 
 \hypertarget{uso-de-la-bibliografuxeda}{%
-\subsection{Uso de la bibliografía}\label{uso-de-la-bibliografuxeda}}
+\section{Uso de la bibliografía}\label{uso-de-la-bibliografuxeda}}
 
 Se aconseja guardar todas las referencias bibliográficas en ficheros con
 formato bibtex. En este caso se usan dos ficheros de bibliografía
@@ -2695,7 +2699,7 @@ visitar la url
 Markdown: Bibliographies and Citations}.
 
 \hypertarget{hacer-citaciones}{%
-\subsubsection{Hacer citaciones}\label{hacer-citaciones}}
+\subsection{Hacer citaciones}\label{hacer-citaciones}}
 
 Las citas van entre corchetes y están separadas por punto y coma. Cada
 cita debe tener una clave, compuesta de ``\texttt{@}'' + el
@@ -2752,7 +2756,7 @@ También puede escribir una cita en el texto, de la siguiente manera:
 \citet[pág. 33]{Luque2017} dice blah.
 
 \hypertarget{estilos-de-citaciuxf3n}{%
-\subsubsection{Estilos de citación}\label{estilos-de-citaciuxf3n}}
+\subsection{Estilos de citación}\label{estilos-de-citaciuxf3n}}
 
 Por defecto, pandoc usará un formato de ``fecha-autor'' del estilo
 ``chicago'' para citas y referencias. Para usar otro estilo, deberá
@@ -2785,7 +2789,7 @@ paquetes LaTeX (por ejemplo, natbib) para generar citas; ver
 PDF} para más detalles.
 
 \hypertarget{estilos-bibliogruxe1ficos-con-natbib-muxe9todo-1}{%
-\subsubsection{Estilos bibliográficos con natbib: método
+\subsection{Estilos bibliográficos con natbib: método
 1}\label{estilos-bibliogruxe1ficos-con-natbib-muxe9todo-1}}
 
 Este método es el que está activado por defecto.
@@ -2957,7 +2961,7 @@ biblatex} y
 completa biblatex}
 
 \hypertarget{bibliografiametodo2}{%
-\subsubsection{Estilos bibliográficos con pandoc: método
+\subsection{Estilos bibliográficos con pandoc: método
 2}\label{bibliografiametodo2}}
 
 \textbf{Importante}. Hay que asegurarse que en el fichero principal:
@@ -3019,11 +3023,11 @@ descargar en \href{https://www.zotero.org/styles/}{zotero csl}, también
 \end{Shaded}
 
 \hypertarget{otras-cuestiones-de-interuxe9s}{%
-\subsection{Otras cuestiones de
+\section{Otras cuestiones de
 interés}\label{otras-cuestiones-de-interuxe9s}}
 
 \hypertarget{cuxf3mo-hacer-referencias-a-otras-partes-del-documento}{%
-\subsubsection{Cómo hacer referencias a otras partes del
+\subsection{Cómo hacer referencias a otras partes del
 documento}\label{cuxf3mo-hacer-referencias-a-otras-partes-del-documento}}
 
 Se pueden hacer referencias a capítulos, secciones, subsecciones, u
@@ -3051,7 +3055,7 @@ En el siguiente ejemplo se ha definido a una sección el identificador
 distintas.
 
 \hypertarget{colorear-texto}{%
-\subsubsection{Colorear texto}\label{colorear-texto}}
+\subsection{Colorear texto}\label{colorear-texto}}
 
 El siguiente código
 
@@ -3066,7 +3070,7 @@ produce
 \textcolor{green!10!orange!90!}{texto resaltado}
 
 \hypertarget{colorear-texto-en-cajas}{%
-\subsubsection{Colorear texto en cajas}\label{colorear-texto-en-cajas}}
+\subsection{Colorear texto en cajas}\label{colorear-texto-en-cajas}}
 
 El siguiente código
 
@@ -3082,7 +3086,7 @@ produce
 \colorbox{Mycolor1}{\textcolor{White}{Texto resaltado}}
 
 \hypertarget{colorear-puxe1rrafos-de-texto}{%
-\subsubsection{Colorear párrafos de
+\subsection{Colorear párrafos de
 texto}\label{colorear-puxe1rrafos-de-texto}}
 
 En el siguiente código se utilizan varios comandos LaTeX para producir
@@ -3135,7 +3139,7 @@ el texto está escrito en blanco
 \texttt{}
 
 \hypertarget{incluir-ficheros-pdf-externos}{%
-\subsubsection{Incluir ficheros pdf
+\subsection{Incluir ficheros pdf
 externos}\label{incluir-ficheros-pdf-externos}}
 
 Es posible incluir un documento pdf externo dentro de nuestro documento
@@ -3205,11 +3209,11 @@ R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 \renewcommand{\footrulewidth}{0.4pt}
 
 \hypertarget{apuxe9ndice-tuxedtulo-del-apuxe9ndice}{%
-\section{Apéndice: Título del
+\chapter{Apéndice: Título del
 Apéndice}\label{apuxe9ndice-tuxedtulo-del-apuxe9ndice}}
 
 \hypertarget{primera-secciuxf3n-4}{%
-\subsection{Primera sección}\label{primera-secciuxf3n-4}}
+\section{Primera sección}\label{primera-secciuxf3n-4}}
 
 \ifdefined\ifprincipal
 \else
@@ -3241,11 +3245,11 @@ R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
 \renewcommand{\footrulewidth}{0.4pt}
 
 \hypertarget{apuxe9ndice-tuxedtulo-del-apuxe9ndice-1}{%
-\section{Apéndice: Título del
+\chapter{Apéndice: Título del
 Apéndice}\label{apuxe9ndice-tuxedtulo-del-apuxe9ndice-1}}
 
 \hypertarget{primera-secciuxf3n-5}{%
-\subsection{Primera sección}\label{primera-secciuxf3n-5}}
+\section{Primera sección}\label{primera-secciuxf3n-5}}
 
 \FloatBarrier
 \cleardoublepage
@@ -3278,7 +3282,7 @@ lopez2007aplicacion}
 \bibliography{bib/library.bib,bib/paquetes.bib}
 
 
-\addcontentsline{toc}{section}{Bibliografía}
+%
 
 
 \end{document}

@@ -4,6 +4,11 @@ principal: true
 forprint: true  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
 #paloseco: true # con fuente por defecto (lmodern)
+fontfamily: FiraSans
+fontfamilyoptions: "sfdefault,scaled=.85"
+negritastt: "0.85"
+fontmathfamily: newtxsf
+fontmathfamilyoptions: cmintegrals
 #fontfamily: inconsolata
 #fontmathfamily: mathptmx
 #codigoajusta: true
@@ -193,7 +198,6 @@ install.packages(c("ggplot2","kableExtra","dplyr"))
 \FloatBarrier
 
 \appendix
-
 
 ```{r child = 'apendice01n.Rmd'}
 ```
