@@ -3,22 +3,40 @@ documentclass: book
 principal: true
 forprint: true  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
-geometry: margin = 2.5cm 
+#paloseco: true # con fuente por defecto (lmodern)
+#fontfamily: inconsolata
+#fontmathfamily: mathptmx
+#codigoajusta: true
+#codigofuente: "normalsize"
+geometry: margin = 2.5cm
 bibliography: ["bib/library.bib", "bib/paquetes.bib"]
+#biblio-title: "Referencias"
 # metodobib -> true: natbib (descomentar: citation_package: natbib) 
 #           -> false: pandoc (comentar: citation_package: natbib)
 metodobib: true
+#biblio-style con natbib
 #natbib: plainnat, abbrvnat, unsrtnat
-biblio-style: "plainnat"
+#natbib: chicago, apalike, acm
+#natbib: apalike2 (https://ctan.org/pkg/apalike2)
+#biblio-style: "apa-good"
+#natbiboptions: "numbers" # "square,numbers" # ver: https://www.ctan.org/pkg/natbib
+# más info: authoryear,numbers,  super, angle, sort, compress
+# https://ctan.javinator9889.com/macros/latex/contrib/natbib/natnotes.pdf
 #Método 2 (pandoc): descomente una línea de las 2 siguientes en caso de usarlo
 csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
 #csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
+#csl: apa.csl  # apa.csl, ieee.csl
+# Método 3 (flexbib):
+flexbib: true
+#flexbiboptions: "spanish,plain"
+flexbiboptions: spanish, plain, datebegin,sortcompress,nocomment, noabstract
+#flexbiboptions: "spanish"
 link-citations: yes
 output: 
   pdf_document:
     keep_tex: no
     number_sections: yes
-    citation_package: natbib  # comentado usa: pandoc-citeproc
+    citation_package: natbib  # coméntelo si usa: pandoc-citeproc (metodobib: false)
     #toc: yes
     fig_caption: yes
     template: latex/templateMemoriaTFE.tex
@@ -33,15 +51,20 @@ output:
       #after_body: latex/latex_antes_enddoc.tex
 ---
 
+<!-- Si "metodobib: false", modificar este "nocite:"  -->
+<!-- Si "metodobib: true", modificar el "nocite:" del final de este fichero  -->
+
 ---
 nocite: | 
-  @Luque2017,@Luque2019,@RStudio,@R-base,
+  @Luque2017,@Luque2019,@RStudio,@R-base2,
   @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2,@Techopedia
 ...
 
 
+<!-- \newcommand\Mycite[1]{\citeauthor{#1}~[\citeyear{#1}]} -->
+
 ```{r global_options, include=FALSE}
-Sys.setlocale('LC_ALL','C') # corrige problema con 
+#Sys.setlocale('LC_ALL','C') # corrige problema con (ocasionaba problemas con acentos en fig.cap)
 options(kableExtra.latex.load_packages = F)
 #options(tinytex.latexmk.emulation = FALSE)
 knitr::opts_chunk$set(fig.path = 'figurasR/',
@@ -50,6 +73,9 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
                       cache=FALSE) # 
 knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
                  file="bib/paquetes.bib", width = 60)
+# .packages() incluirá los paquetes utilizados
+# knitr::write_bib(c(.packages(),"rmarkdown"),   
+#                 file="bib/paquetes.bib", width = 60)
 ```
 
 
@@ -128,42 +154,56 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
-```{r child = 'capitulo01.Rmd'}
+```{r child = 'capitulo01n.Rmd'}
 ```
 
 \FloatBarrier
 
-```{r child = 'capitulo02.Rmd'}
+```{r child = 'capitulo02n.Rmd'}
 ```
 
 \FloatBarrier
 
-```{r child = 'capitulo03.Rmd'}
+```{r child = 'capitulo03n.Rmd'}
 ```
 
 \FloatBarrier
 
-```{r child = 'capitulo04.Rmd'}
+```{r child = 'capitulo04n.Rmd'}
 ```
 
-\FloatBarrier
 
-<!-- Borrarlo o comentarlo para obtener la versión final: contiene utilidades -->
-```{r child = 'capitulo05.Rmd'}
-```
+<!-- 
+Descomentarlo para incluir el capítulo 5 el cual contiene utilidades de ejemplo
+para copiar y pegar.
+Atención: necesitará la instalación de algunos paquetes R 
+que puede no tener instalados. Son:
+install.packages(c("ggplot2","kableExtra","dplyr"))
+-->
+
+
+<!-- \FloatBarrier -->
+
+<!-- ```{r child = 'capitulo05.Rmd'} -->
+<!-- ``` -->
+
+
 
 
 \FloatBarrier
 
 \appendix
 
-```{r child = 'apendice01.Rmd'}
+
+```{r child = 'apendice01n.Rmd'}
 ```
 
 
 
-```{r child = 'apendice02.Rmd'}
+```{r child = 'apendice02n.Rmd'}
 ```
+
+
 
 
 \FloatBarrier
@@ -189,9 +229,13 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","kableExtra"),
 
 \else
 
+<!-- Si "metodobib: true", modificar este "nocite:"  -->
+<!-- Si "metodobib: false", modificar el "nocite:" del inicio de este fichero  -->
 
 <!-- \nocite{*} -->
-\nocite{Luque2017,Luque2019,RStudio,R-base,
-R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia}
+\nocite{Luque2017,Luque2019,RStudio,R-base2,
+R-knitr,R-rmarkdown,R-dplyr,R-ggplot2,Techopedia,
+webfacmatematicasus1,webUS2a,webPedroLuque,
+lopez2007aplicacion}
 
 \fi 

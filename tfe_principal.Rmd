@@ -34,7 +34,7 @@ flexbiboptions: spanish, plain, datebegin,sortcompress,nocomment, noabstract
 link-citations: yes
 output: 
   pdf_document:
-    keep_tex: yes
+    keep_tex: no
     number_sections: yes
     citation_package: natbib  # coméntelo si usa: pandoc-citeproc (metodobib: false)
     #toc: yes
@@ -182,10 +182,10 @@ install.packages(c("ggplot2","kableExtra","dplyr"))
 -->
 
 
-\FloatBarrier
+<!-- \FloatBarrier -->
 
-```{r child = 'capitulo05.Rmd'}
-```
+<!-- ```{r child = 'capitulo05.Rmd'} -->
+<!-- ``` -->
 
 
 

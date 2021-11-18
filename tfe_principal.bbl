@@ -1,4 +1,4 @@
-\begin{thebibliography}{14}
+\begin{thebibliography}{13}
 %Comandos de formato, por si no est'an definidos.
 \ProvideTextCommand{\guillemotleft}{OT1}{\leavevmode\raise
   .27ex\hbox{$\scriptscriptstyle\ll$}}
@@ -168,14 +168,6 @@
   Manipulation}}\dateend{2021{\natexlab{b}}}.
   \newblock \preurl{} \url{https://CRAN.R-project.org/package=dplyr}.
   \newblock R package version 1.0.7\finalpoint{}
-
-\bibitem[{\citenamefont{Wickham} \citeandfont{\bbland{}}
-  \citenamefont{Grolemund}(2017)}]{Wickham2017}
-\bibnamefont{Wickham}, \bibfnamefont{Hadley} \bibandfont{\bbland{}}
-  \bibnamefont{Grolemund}, \bibfnamefont{Garrett}\namesend{}\datebegin 2017.
-  \newblock \bibtitle{\emph{R for Data Science: Import, Tidy, Transform,
-  Visualize, and Model Data}}.
-  \newblock O'Reilly, first edition\bbledition{}\dateend{2017}\finalpoint{}
 
 \bibitem[{\citenamefont{Xie}(2021)}]{R-knitr}
 \bibnamefont{Xie}, \bibfnamefont{Yihui}\namesend{}\datebegin 2021.
