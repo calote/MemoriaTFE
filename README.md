@@ -388,7 +388,7 @@ Se podría personalizar también la numeración de los apéndices añadiendo:
 \setcounter{chapter}{0}
 ```
 
-# Referencias  {#referencias}
+# Referencias
 
 ## Ficheros pdf resultado de diferentes variantes de la plantilla
 
