@@ -5,7 +5,7 @@ Repositorio que mantiene actualizado el proyecto MemoriaTFE que se encuentra pub
 <http://destio.us.es/calvo/post/escribir-un-trabajo-fin-de-estudios-con-rmarkdown/>.
 
 
-- [Los sistemas de bibliografía](#sistemabibliograficos)
+- [Los sistemas de bibliografía](#los-sistemas-de-bibliografía)
 - [Simplificar cabeceras de ficheros de capítulos](#simpflificadoficheroscapitulos)
 - [Uso de diferentes familias de fuentes](#usodefuentes)
 - [Crear un documento que no sea un libro (no tenga capítulos, no sea "book")](#nobook)
@@ -14,7 +14,7 @@ Repositorio que mantiene actualizado el proyecto MemoriaTFE que se encuentra pub
 
 # Algunos consejos
 
-## Los sistemas de bibliografía {#sistemabibliograficos}
+## Los sistemas de bibliografía
 
 ### Método 1: El sistema de bibiografía basado en natbib
 
