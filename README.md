@@ -6,10 +6,10 @@ Repositorio que mantiene actualizado el proyecto MemoriaTFE que se encuentra pub
 
 
 - [Los sistemas de bibliografía](#los-sistemas-de-bibliografía)
-- [Simplificar cabeceras de ficheros de capítulos](#simpflificadoficheroscapitulos)
-- [Uso de diferentes familias de fuentes](#usodefuentes)
-- [Crear un documento que no sea un libro (no tenga capítulos, no sea "book")](#nobook)
-- [Otros ajustes](#otrosajustes)
+- [Simplificar cabeceras de ficheros de capítulos](#simplificar-cabeceras-de-ficheros-de-capítulos)
+- [Uso de diferentes familias de fuentes](#uso-de-diferentes-familias-de-fuentes)
+- [Crear un documento sin capítulos](#crear-un-documento-sin-capítulos)
+- [Otros ajustes](#otros-ajustes)
 - [Referencias](#referencias)
 
 # Algunos consejos
@@ -145,7 +145,7 @@ Se muestran algunos ejemplos a continuación:
 1. Si se cambia de método bibliográfico, se recomienda borrar previamente los ficheros con extensión: ".bbl" y ".blg", si no se hace podría producirse errores lo que impediría la creación del fichero pdf final.
 
 
-## Simplificar cabeceras de ficheros de capítulos {#simpflificadoficheroscapitulos}
+## Simplificar cabeceras de ficheros de capítulos
 
 La idea se pudo concretar usando la información en: [Stackoverflow: "Importing common YAML in rstudio/knitr document"](https://stackoverflow.com/questions/39885363/importing-common-yaml-in-rstudio-knitr-document).
 
@@ -162,7 +162,7 @@ Se han creado unos ficheros cuyos nombres empiezan por "cabecera_*.*" que contie
 
 
 
-## Uso de diferentes familias de fuentes {#usodefuentes}
+## Uso de diferentes familias de fuentes
 
 En la cabecera "yaml" del fichero "tfe_principal.Rmd" se puede usar (por defecto: "fontfamily: lmodern"):
 
@@ -290,7 +290,7 @@ Otras pruebas:
     fontfamilyoptions: default   #\usepackage[default]{sourcecodepro}
     ```
 
-## Crear un documento que no sea un libro (no tenga capítulos, no sea "book") {#nobook}
+## Crear un documento sin capítulos
 
 Cambiar la cabecera yaml del siguiente modo:
 
@@ -302,7 +302,7 @@ article: true
 En el fichero "tfe_principal.Rmd", eliminar los saltos de página no adecuados, quitar la lista de tablas y/o figuras si fuera necesario, etc.
 
 
-## Otros ajustes {#otrosajustes}
+## Otros ajustes
 
 
 ### Evitar que el código R fuente no sobrepase el ancho del texto
