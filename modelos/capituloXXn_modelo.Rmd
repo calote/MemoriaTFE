@@ -7,12 +7,11 @@ output:
     template: latex/templateMemoriaTFE.tex
     pandoc_args: ["--metadata-file=cabecera_capitulos.yaml"]
   html_document: default
+#bibliography: bib/library.bib # descomentar si: editor visual RStudio  
 ---
 
 <!-- escribir 2 para capítulo 3 -->
-
 <!-- \setcounter{chapter}{2} -->
-
 <!-- \pagenumbering{arabic} -->
 
 `r xfun::file_string('cabecera_capitulos.tex')`

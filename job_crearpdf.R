@@ -14,6 +14,7 @@ ficheropdf = paste0(nbfichero,".pdf")
 
 rmarkdown::render(ficheroRmd,  encoding = 'UTF-8')
 
+#Sys.sleep(10)
 
 #install.packages("beepr")
 #library(beepr)
@@ -21,4 +22,4 @@ beepr::beep(sound = 5)
 
 
 browseURL(ficheropdf)
-#browseURL('https://www.youtube.com/watch?v=QH2-TGUlwu4')
+#browseURL('http://destio.us.es/calvo')
