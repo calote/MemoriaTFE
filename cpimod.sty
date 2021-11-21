@@ -20,18 +20,20 @@
 %\renewcommand{\sfdefault}{phv} %Set default sans serif font
 %\renewcommand{\familydefault}{\sfdefault} %Set default font to sans serif - must specify where roman is used
 
-\newgeometry{margin = 1in}
+%\newgeometry{margin = 1in}
 \newcommand{\callout}[1]{{\large\emph{\textcolor{cpiOrange}{#1}}}}
 \renewcommand{\frame}[1]{\begin{framed} {\color{black} #1} \end{framed}}
 
-%\raggedright
-\setlength{\parskip}{1.2ex plus 0.5ex minus 0.2ex}
-\setlength{\parindent}{0in}
+% %\raggedright
+% \setlength{\parskip}{1.2ex plus 0.5ex minus 0.2ex}
+% \setlength{\parindent}{0in}
 
 \makeatletter
 
 \renewcommand*{\maketitle}{\newpage
 %\renewcommand\@maketitle{\newpage
+\setlength{\parskip}{1.2ex plus 0.5ex minus 0.2ex}
+\setlength{\parindent}{0in}
 \newgeometry{margin = 0in}
 %\vspace{-1cm}
 \quad\includegraphics[width=5cm]{\Logo}
