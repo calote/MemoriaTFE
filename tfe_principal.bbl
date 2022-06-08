@@ -1,4 +1,4 @@
-\begin{thebibliography}{13}
+\begin{thebibliography}{12}
 %Comandos de formato, por si no est'an definidos.
 \ProvideTextCommand{\guillemotleft}{OT1}{\leavevmode\raise
   .27ex\hbox{$\scriptscriptstyle\ll$}}
@@ -71,8 +71,7 @@
   \bibfnamefont{Winston} \bibandfont{\bbland{}} \bibnamefont{Iannone},
   \bibfnamefont{Richard}\namesend{}\datebegin 2021.
   \newblock \bibtitle{\emph{rmarkdown: Dynamic Documents for R}}\dateend{2021}.
-  \newblock \preurl{} \url{https://CRAN.R-project.org/package=rmarkdown}.
-  \newblock R package version 2.11\finalpoint{}
+  \newblock Https://github.com/rstudio/rmarkdown\finalpoint{}
 
 \bibitem[{\citenamefont{{Facultad de Matemáticas (Univ.
   Sevilla)}}({s.f.})}]{webfacmatematicasus1}
@@ -135,39 +134,13 @@
   \newblock Disponible en
   \url{https://www.techopedia.com/definition/345/business-intelligence-bi}\dateend{2017}\finalpoint{}
 
-\bibitem[{\citenamefont{Wickham}
-  \citetalfont{\bbletal{}}(2021{\natexlab{a}})\citenamefont{Wickham},
-  \citenamefont{Chang}, \citenamefont{Henry}, \citenamefont{Pedersen},
-  \citenamefont{Takahashi}, \citenamefont{Wilke}, \citenamefont{Woo},
-  \citenamefont{Yutani} \citeandfont{\bbland{}}
-  \citenamefont{Dunnington}}]{R-ggplot2}
-\bibnamefont{Wickham}, \bibfnamefont{Hadley}\nameseparator{}
-  \bibnamefont{Chang}, \bibfnamefont{Winston}\nameseparator{}
-  \bibnamefont{Henry}, \bibfnamefont{Lionel}\nameseparator{}
-  \bibnamefont{Pedersen}, \bibfnamefont{Thomas~Lin}\nameseparator{}
-  \bibnamefont{Takahashi}, \bibfnamefont{Kohske}\nameseparator{}
-  \bibnamefont{Wilke}, \bibfnamefont{Claus}\nameseparator{} \bibnamefont{Woo},
-  \bibfnamefont{Kara}\nameseparator{} \bibnamefont{Yutani},
-  \bibfnamefont{Hiroaki} \bibandfont{\bbland{}} \bibnamefont{Dunnington},
-  \bibfnamefont{Dewey}\namesend{}\datebegin 2021{\natexlab{a}}.
-  \newblock \bibtitle{\emph{ggplot2: Create Elegant Data Visualisations Using
-  the Grammar of Graphics}}\dateend{2021{\natexlab{a}}}.
-  \newblock \preurl{} \url{https://CRAN.R-project.org/package=ggplot2}.
-  \newblock R package version 3.3.5\finalpoint{}
-
-\bibitem[{\citenamefont{Wickham}
-  \citetalfont{\bbletal{}}(2021{\natexlab{b}})\citenamefont{Wickham},
-  \citenamefont{François}, \citenamefont{Henry} \citeandfont{\bbland{}}
-  \citenamefont{Müller}}]{R-dplyr}
-\bibnamefont{Wickham}, \bibfnamefont{Hadley}\nameseparator{}
-  \bibnamefont{François}, \bibfnamefont{Romain}\nameseparator{}
-  \bibnamefont{Henry}, \bibfnamefont{Lionel} \bibandfont{\bbland{}}
-  \bibnamefont{Müller}, \bibfnamefont{Kirill}\namesend{}\datebegin
-  2021{\natexlab{b}}.
-  \newblock \bibtitle{\emph{dplyr: A Grammar of Data
-  Manipulation}}\dateend{2021{\natexlab{b}}}.
-  \newblock \preurl{} \url{https://CRAN.R-project.org/package=dplyr}.
-  \newblock R package version 1.0.7\finalpoint{}
+\bibitem[{\citenamefont{Wickham} \citeandfont{\bbland{}}
+  \citenamefont{Grolemund}(2017)}]{Wickham2017}
+\bibnamefont{Wickham}, \bibfnamefont{Hadley} \bibandfont{\bbland{}}
+  \bibnamefont{Grolemund}, \bibfnamefont{Garrett}\namesend{}\datebegin 2017.
+  \newblock \bibtitle{\emph{R for Data Science: Import, Tidy, Transform,
+  Visualize, and Model Data}}.
+  \newblock O'Reilly, first edition\bbledition{}\dateend{2017}\finalpoint{}
 
 \bibitem[{\citenamefont{Xie}(2021)}]{R-knitr}
 \bibnamefont{Xie}, \bibfnamefont{Yihui}\namesend{}\datebegin 2021.

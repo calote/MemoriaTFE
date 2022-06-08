@@ -388,6 +388,21 @@ Se podría personalizar también la numeración de los apéndices añadiendo:
 \setcounter{chapter}{0}
 ```
 
+### Personalizar la presentación de los capítulos
+
+Colocando en la cabecera yaml del fichero "tfe_principal.Rmd" las líneas asociadas a la clave: "header-includes" siguiente:
+```yaml
+link-citations: yes
+header-includes:
+  - \usepackage[Conny]{fncychap}
+  - "% Options: Glenn, Sonny, Bjornstrup, Lenny, Conny, Reijne (estandar), Bjarne (no)"
+output: 
+```
+
+Se usa el paquete LaTeX "fncychap" que dispone de varios formatos o estilos para la presentación de los capítulos.
+
+![](graficos/fncychap.png)
+
 # Referencias
 
 ## Ficheros pdf resultado de diferentes variantes de la plantilla

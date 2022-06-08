@@ -8,7 +8,7 @@ fontsize: 12pt # 10pt,11pt
 #fontmathfamily: mathptmx
 #codigoajusta: true
 #codigofuente: "normalsize"
-geometry: margin = 2.5cm
+geometry: margin=2.5cm
 bibliography: ["bib/library.bib", "bib/paquetes.bib"]
 #biblio-title: "Referencias"
 # metodobib -> true: natbib (descomentar: citation_package: natbib) 
