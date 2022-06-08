@@ -403,6 +403,44 @@ Se usa el paquete LaTeX "fncychap" que dispone de varios formatos o estilos para
 
 ![](graficos/fncychap.png)
 
+
+### Cómo evitar errores de codificación con los ficheros de la plantilla-memoria
+
+El motivo es que algunos alumnos envían problemas indicando que no se les crea el pdf y suele estar motivado porque han introducido algunos acentos y no están escritos en la codificación utf8. 
+
+Los mensajes de error eran del siguiente tipo:
+
+```
+/Applications/RStudio.app/Contents/MacOS/quarto/bin/tools/pandoc +RTS -K512m -RTS tfe_principal.knit.md --to latex --from markdown+autolink_bare_uris+tex_math_single_backslash --output tfe_principal.tex --lua-filter /Library/Frameworks/R.framework/Versions/4.1/Resources/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Library/Frameworks/R.framework/Versions/4.1/Resources/library/rmarkdown/rmarkdown/lua/latex-div.lua --self-contained --template latex/templateMemoriaTFE.tex --number-sections --highlight-style tango --pdf-engine pdflatex --natbib --include-before-body portadas/latex_paginatitulo_modTFE.tex 
+
+processing file: ./capitulo05.Rmd
+output file: tfe_principal.knit.md
+
+pandoc: Cannot decode byte '\xe1': Data.Text.Internal.Encoding.decodeUtf8: Invalid UTF-8 stream
+Error: pandoc document conversion failed with error 1
+In addition: Warning messages:
+1: package 'readxl' was built under R version 4.1.2 
+2: package 'ggplot2' was built under R version 4.1.2 
+3: package 'nlme' was built under R version 4.1.2 
+4: In pt(-abs(tVal), fDF) : NaNs produced
+Execution halted
+
+```
+
+Se puede resolver ejecutando en la consola de RStudio el siguiente código (asegurarse de que el fichero "funciones_detectar_problemasCodificacion.R" está en la misma carpeta que esté el fichero "tfe_principal.Rmd"):
+
+```r
+source("funciones_detectar_problemasCodificacion.R")
+vficheros01 = c("portadas/latex_paginatitulo_modTFE.tex",
+                "bib/library.bib","bib/paquetes.bib",
+                "prologo.Rmd","resumen.Rmd","abstract.Rmd",
+                "capitulo01.Rmd","capitulo02.Rmd", "capitulo03.Rmd",
+                "capitulo04.Rmd","capitulo05.Rmd")
+# func_utf8_corregir_problemas_ficheros(vficheros01, sobreescribir = FALSE)
+func_utf8_corregir_problemas_ficheros(vficheros01, sobreescribir = TRUE)
+```
+
+
 # Referencias
 
 ## Ficheros pdf resultado de diferentes variantes de la plantilla
