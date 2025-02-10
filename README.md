@@ -2,7 +2,7 @@
 # Sobre la plantilla para crear un Trabajo Fin de Estudios: MemoriaTFE
 
 Repositorio que mantiene actualizado el proyecto MemoriaTFE que se encuentra publicado a través de mi página web: 
-<http://destio.us.es/calvo/post/escribir-un-trabajo-fin-de-estudios-con-rmarkdown/>.
+<http://destio.us.es/calvo/Qseries_tutorialesSobrePlantillaTFE.html> y en <http://destio.us.es/calvo/Qpost/2017-11-26_escribir-un-trabajo-fin-de-estudios-con-rmarkdown/index.html>.
 
 
 - [Los sistemas de bibliografía](#los-sistemas-de-bibliografía)
