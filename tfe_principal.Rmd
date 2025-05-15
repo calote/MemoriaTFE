@@ -1,7 +1,7 @@
 ---
 documentclass: book
 principal: true
-forprint: true  # true: imprime a dos caras, false: libro digital
+forprint: false  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
 #paloseco: true # con fuente por defecto (lmodern)
 #fontfamily: inconsolata
@@ -29,7 +29,8 @@ csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
 # Método 3 (flexbib):
 flexbib: true
 #flexbiboptions: "spanish,plain"
-flexbiboptions: spanish, plain, datebegin,sortcompress,nocomment, noabstract
+flexbiboptions: spanish, plain,sortcompress,nocomment, noabstract # no numera, presenta autor (año)
+# flexbiboptions: spanish, datebegin,sortcompress,nocomment, noabstract  # numera bibliografía
 #flexbiboptions: "spanish"
 link-citations: yes
 output: 
@@ -56,8 +57,8 @@ output:
 
 ---
 nocite: | 
-  @Luque2017,@Luque2019,@RStudio,@R-base2,
-  @R-knitr,@R-rmarkdown,@Techopedia
+  @Luque2017,@RStudio,@R-base2,
+  @R-knitr,@R-rmarkdown
 ...
 
 
@@ -101,10 +102,10 @@ knitr::write_bib(c("knitr","rmarkdown"),
 
 \cleardoublepage   
 <!--  \clearpage -->
-\section*{Prólogo}
-\addcontentsline{toc}{section}{Prólogo}
+\section*{Agradecimientos}
+\addcontentsline{toc}{section}{Agradecimientos}
 
-```{r child = 'prologo.Rmd'}
+```{r child = 'agradecimientos.Rmd'}
 ```
 
 
@@ -239,9 +240,8 @@ install.packages(c("ggplot2","kableExtra","dplyr"))
 <!-- Si "metodobib: false", modificar el "nocite:" del inicio de este fichero  -->
 
 <!-- \nocite{*} -->
-\nocite{Luque2017,Luque2019,RStudio,R-base2,
-R-knitr,R-rmarkdown,Techopedia,
-webfacmatematicasus1,webUS2a,webPedroLuque,
-lopez2007aplicacion}
+\nocite{Luque2017,RStudio,R-base2,
+R-knitr,R-rmarkdown,
+webfacmatematicasus1,webPedroLuque}
 
 \fi 

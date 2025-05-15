@@ -1,0 +1,6 @@
+---
+output: pdf_document
+---
+
+
+Escrito colocado al comienzo de una obra en el que se incluyen los agradecimientos.
