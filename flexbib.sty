@@ -1,75 +1,32 @@
-
 \NeedsTeXFormat{LaTeX2e}[1995/06/01]
-\ProvidesPackage{flexbib}[2018/09/15 v. 1.999]
-% Jose M. Mira mira@um.es
+\ProvidesPackage{flexbib}[2025/02/21]
+% Jose M. Mira mira@um.es  % V. 2 
 
-\input{spanishbst}
-\newcommand{\finalpoint}{.}
- 
-\@ifclassloaded{aguplus}{\PackageError{flexbib}
-  {The aguplus class already includes flexbib coding,\MessageBreak
-   so you should not add it explicitly}
-  {Type <Return> for now, but then later remove\MessageBreak
-   the command \protect\usepackage{flexbib} from the document}
-  \endinput}{}
-\@ifclassloaded{nlinproc}{\PackageError{flexbib}
-  {The nlinproc class already includes flexbib coding,\MessageBreak
-   so you should not add it explicitly}
-  {Type <Return> for now, but then later remove\MessageBreak
-   the command \protect\usepackage{flexbib} from the document}
-  \endinput}{}
-\@ifclassloaded{egs}{\PackageError{flexbib}
-  {The egs class already includes flexbib coding,\MessageBreak
-   so you should not add it explicitly}
-  {Type <Return> for now, but then later remove\MessageBreak
-   the command \protect\usepackage{flexbib} from the document}
-  \endinput}{}
- % Define citation punctuation for some author-year styles
- % One may add and delete at this point
- % Or put additions into local configuration file flexbib.cfg
-\newcommand\bibstyle@chicago {\bibpunct{(}{)}{;}{a}{,}{,}}
-\newcommand\bibstyle@named   {\bibpunct{[}{]}{;}{a}{,}{,}}
-\newcommand\bibstyle@agu     {\bibpunct{[}{]}{;}{a}{,}{,~}}%Amer. Geophys. Union
-\newcommand\bibstyle@egs     {\bibpunct{(}{)}{;}{a}{,}{,}}%Eur. Geophys. Soc.
-\newcommand\bibstyle@agsm    {\bibpunct{(}{)}{,}{a}{}{,}\gdef\harvardand{\&}}
-\newcommand\bibstyle@kluwer  {\bibpunct{(}{)}{,}{a}{}{,}\gdef\harvardand{\&}}
-\newcommand\bibstyle@dcu     {\bibpunct{(}{)}{;}{a}{;}{,}\gdef\harvardand{and}}
-\newcommand\bibstyle@aa      {\bibpunct{(}{)}{;}{a}{}{,}} %Astronomy & Astrophysics
-\newcommand\bibstyle@pass    {\bibpunct{(}{)}{;}{a}{,}{,}}%Planet. & Space Sci
-\newcommand\bibstyle@anngeo  {\bibpunct{(}{)}{;}{a}{,}{,}}%Annales Geophysicae
-\newcommand\bibstyle@nlinproc{\bibpunct{(}{)}{;}{a}{,}{,}}%Nonlin.Proc.Geophys.
- % Define citation punctuation for some numerical styles
-\newcommand\bibstyle@cospar  {\bibpunct{/}{/}{,}{n}{}{}%
-     \gdef\NAT@biblabelnum##1{##1.}}
-\newcommand\bibstyle@esa     {\bibpunct{(Ref.~}{)}{,}{n}{}{}%
-     \gdef\NAT@biblabelnum##1{##1.\hspace{1em}}}
-\newcommand\bibstyle@nature{\bibpunct{}{}{,}{s}{}{\textsuperscript{,}}%
-     \gdef\NAT@biblabelnum##1{##1.}}
- % The standard LaTeX styles
-\newcommand\bibstyle@plain   {\bibpunct{[}{]}{,}{n}{}{,}}
+\RequirePackage{csquotes} % comillas de acuerdo con el idioma de babel
+\RequirePackage{ifthen} %
+
+ % The standard LaTeX styles -----------------OK
+\newcommand\bibstyle@plain    {\bibpunct{[}{]}{,}{n}{}{,}}
 \newcommand\bibstyle@amsplain {\bibpunct{[}{]}{,}{n}{}{,}}
 \let\bibstyle@alpha=\bibstyle@plain
 \let\bibstyle@abbrv=\bibstyle@plain
 \let\bibstyle@unsrt=\bibstyle@plain
  % The author-year modifications of the standard styles
 \newcommand\bibstyle@plainnat{\bibpunct{[}{]}{,}{a}{,}{,}}
-\let\bibstyle@abbrvnat=\bibstyle@plainnat
-\let\bibstyle@unsrtnat=\bibstyle@plainnat
 \newif\ifNAT@plain \NAT@plainfalse
 \newif\ifNAT@super \NAT@superfalse
 \DeclareOption{plain}{\NAT@plaintrue
-   \ExecuteOptions{square,comma,nobibstyle,dateend}}
-\DeclareOption{plain*}{\NAT@plaintrue
-   \ExecuteOptions{square,comma,nobibstyle,dateend}
-   \AtBeginDocument{\let\cite\citet}}
-\DeclareOption{footcite}{\NAT@plainfalse
-   \ExecuteOptions{round,colon,bibstyle,dateend}
-   \AtBeginDocument{\let\cite\citefull}}
-\DeclareOption{nonamereplace}{\NAT@plainfalse
+   \ExecuteOptions{square,comma,nobibstyle,yearend}}
+%\DeclareOption{plain*}{\NAT@plaintrue
+%   \ExecuteOptions{square,comma,nobibstyle,yearend}
+%\AtBeginDocument{\let\cite\citet}}
+\DeclareOption{numbers}{\ExecuteOptions{plain}}
+%\DeclareOption{numbers*}{\ExecuteOptions{plain*}}
+\DeclareOption{datebegin}{\ExecuteOptions{yearfirst}} % para antiguas versiones
+\DeclareOption{dateend}{\ExecuteOptions{yearend}}   % para antiguas versiones
+\DeclareOption{yearafter}{\ExecuteOptions{yearend}}
+\DeclareOption{nonamereplace}{ %\NAT@plainfalse
    \AtBeginDocument{\renewcommand{\namereplace}[1]{#1}}}
-\DeclareOption{super}{\NAT@supertrue\NAT@plaintrue
-   \renewcommand\NAT@open{}\renewcommand\NAT@close{}
-   \ExecuteOptions{nobibstyle}}
 \DeclareOption{authoryear}{\NAT@plainfalse
    \ExecuteOptions{round,colon,bibstyle}}
 \DeclareOption{round}{%
@@ -88,6 +45,7 @@
    \ExecuteOptions{nobibstyle}}
 \DeclareOption{colon}{\renewcommand\NAT@sep{;}
    \ExecuteOptions{nobibstyle}}
+\DeclareOption{final}{\ExecuteOptions{nocomment,noabstract}}
 \DeclareOption{nobibstyle}{\let\bibstyle=\@gobble}
 \DeclareOption{bibstyle}{\let\bibstyle=\@citestyle}
 \newif\ifNAT@openbib \NAT@openbibfalse
@@ -95,62 +53,81 @@
 \DeclareOption{sectionbib}{\def\NAT@sectionbib{on}}
 \def\NAT@sort{0}
 \DeclareOption{sort}{\def\NAT@sort{1}}
-%\DeclareOption{sort&compress}{\def\NAT@sort{2}}
-\DeclareOption{sortcompress}{\def\NAT@sort{2}}
+\DeclareOption{sort&compress}{\def\NAT@sort{2}}
 \@ifpackageloaded{cite}{\PackageWarningNoLine{flexbib}
   {The `cite' package should not be used\MessageBreak
    with flexbib. Use option `sort' instead}\ExecuteOptions{sort}}{}
 \newif\ifNAT@longnames\NAT@longnamesfalse
 \DeclareOption{longnamesfirst}{\NAT@longnamestrue}
 \DeclareOption{nonamebreak}{\def\NAT@nmfmt#1{\mbox{\NAT@up#1}}}
-
-%%%%%
-\newcommand{\citefull}[1]{\bgroup\let\namereplace\relax\renewcommand{\bibcomment}[2]{}%
-\renewcommand{\bibabstract}[2]{}\renewcommand{\finalpoint}{}\bibentry{#1}\egroup}
-\newcommand{\citenamefont}[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\finalpoint}{.}
+                     %  Variante de \cite que recupera contenido completo del item
+\newcommand{\citefull}[1]{\bgroup\let\namereplace\relax\renewcommand{\finalpoint}{}%   
+	                     \renewcommand{\bibcomment}[2]{}%
+                         \renewcommand{\bibabstract}[2]{}\bibentry{#1}\egroup} 
+\providecommand{\fullcite}[1]{\citefull{#1}}  
+\providecommand{\footfullcite}[1]{\citeffoot{#1}}  
+\newcommand{\citeffoot}[1]{\footnote{\citefull{#1}.}} % cita completa a pie de página
+\newcommand{\citenamefont}[1]{\let~\ #1} % sustituye ~ por un espacio y no lo imprime
 \newcommand{\citetalfont}[1]{#1}
 \newcommand{\citeandfont}[1]{#1}
 \newcommand{\bibandfont}[1]{#1}
 \newcommand{\bibnamefont}[1]{\textsc{#1}}
 \newcommand{\bibfnamefont}[1]{\textsc{#1}}
-\newcommand{\bibvolfont}[1]{\textbf{#1}}
+\newcommand{\bibvolfont}[1]{#1}
 \newcommand{\nameseparator}{;}
 \newcommand{\natexlab}[1]{#1}
 \newcommand{\Capitalize}[1]{\uppercase{#1}}
 \newcommand{\capitalize}[1]{\expandafter\Capitalize#1}
 \newcommand{\bibtitle}[1]{#1}
 \newcommand{\namereplace}[1]{---{}---}
-\newcommand{\bibsmalltitle}[1]{#1}
 \newcommand{\namesend}{:}
 \newcommand{\inbooktitlefont}[1]{\emph{#1}}
 \newcommand{\bibinfont}[1]{#1}                                 
 \newcommand{\MR}[1]{[#1]}
 \newcommand{\bibtranslator}[1]{#1}
-\newcommand{\citeshort}[1]{\citeauthor{#1},\citeauthor*{#1}}
-   
-\newcommand{\dateend}[1]{, #1}
-\providecommand{\enquote}[1]{\guillemotleft#1\guillemotright}
-\providecommand{\preurl}{\hfil\break}
-\DeclareOption{spanish}{\InputIfFileExists{spanishbst.tex}{}{\typeout{*****^^J BABELBST: spanishbst.tex does not exist}}}
-\DeclareOption{english}{\InputIfFileExists{englishbst.tex}{}{\typeout{*****^^J BABELBST: englishbst.tex does not exist}}}
-\DeclareOption{french}{\InputIfFileExists{frenchbst.tex}{}{\typeout{*****^^J BABELBST: frenchbst.tex does not exist}}}
-\DeclareOption{german}{\InputIfFileExists{germanbst.tex}{}{\typeout{*****^^J BABELBST: germanbst.tex does not exist}}}
-\DeclareOption{dateend}{\def\datebegin#1.{\relax}%
-  \renewcommand{\dateend}[1]{, #1}}
-   %\DeclareOption{datebegin}{\def\datebegin #1.{ (#1).}%
-\DeclareOption{datebegin}{\def\datebegin #1.{\ifx\relax#1\relax .\else \space(#1).\fi}% MODIFICAR PARA CUANDO VACIO
-  \renewcommand{\dateend}[1]{\relax}%
-  \renewcommand{\namesend}{\relax}}
-                        
-\newcommand{\bibcomment}[2]{%
- \begin{quotation}%\noindent\textsc{\bibkeyname} #1\\
- \noindent\textsc{\bibcommentname:}\ #2\end{quotation}}
-\newcommand{\bibabstract}[2]{%
- \begin{quotation} \noindent\textsc{\bibabstractname:}\ #2\end{quotation}}
+\newcommand{\shorttitle}[1]{#1}
+\newcommand{\citeAuthorTitle}[1]{\let~\ \citeauthor{#1}}                           % OK con yearafter
+\newcommand{\citeAuthor}[1]{{\renewcommand{\shorttitle}[1]{}\citeAuthorTitle{#1}}} % OK con yearafter sin autor
+\newcommand{\citefullAuthor}[1]{{\renewcommand{\shorttitle}[1]{}\citefullauthor{#1}}} 
 
+\newcommand{\bibcomment}[2]{%
+	\begin{quotation} %\noindent\textsc{\bibkeyname} #1\\
+		\noindent\textsc{\bibcommentname:}\ #2\end{quotation}}
+%\newcommand{\bibkeyname}{Etiqueta:}
+\newcommand{\bibabstract}[2]{%
+	\begin{quotation} \noindent\textsc{\abstractname:}\ #2\end{quotation}}
+
+          %%%%% Customise the issue edition number according to language
+\newcommand{\bbleditionnum}[1]{
+\ifthenelse{\equal{#1}{1}}{#1\bblst}{}%
+\ifthenelse{\equal{#1}{2}}{#1\bblnd}{}%
+\ifthenelse{\equal{#1}{3}}{#1\bblrd}{}%
+\ifthenelse{#1>3}{#1\bblth}{}%
+}
+          %%%%%
+
+\def\yearfirst#1.{\relax}
+\newcommand{\yearend}[1]{, #1}
+\providecommand{\preurl}{\hfil\break}
+\providecommand{\doi}[1]{\textsc{doi:} #1}
+\DeclareOption{LanguageName}{\InputIfFileExists{\languagename fb.tex}{}{\typeout{*****^^J BABELBST: does not exist the flexbib option for this babel language}}}
+\DeclareOption{apa7}{\InputIfFileExists{apa7fb.tex}{}{\typeout{*****^^J BABELBST: apa7fb.tex does not exist}}}
+\DeclareOption{HE}{\InputIfFileExists{HEfb.tex}{\typeout{HEfb.tex cargado}}{\typeout{*****^^J BABELBST: HEfb.tex does not exist}}}
 
 \DeclareOption{nocomment}{\renewcommand{\bibcomment}[2]{\relax}}
 \DeclareOption{noabstract}{\renewcommand{\bibabstract}[2]{\relax}}
+\DeclareOption{noquotes}{\renewcommand{\enquote}[1]{#1}}
+\DeclareOption{yearend}{\def\yearfirst#1.{\relax}%
+    \renewcommand{\yearend}[1]{, #1}}
+\DeclareOption{yearfirst}{\def\yearfirst #1.{\ifx\relax#1\relax .\else \space(#1).\fi}% MODIFICAR PARA CUANDO VACIO
+	\renewcommand{\yearend}[1]{\relax}%
+	\renewcommand{\namesend}{\relax}}
+\DeclareOption{nonamereplace}{
+   \AtBeginDocument{\renewcommand{\namereplace}[1]{#1}}}
+\DeclareOption{nosmallcaps}{
+   \AtBeginDocument{\renewcommand{\bibnamefont}[1]{#1}} \renewcommand{\bibfnamefont}[1]{#1}}
 %%%%%%%%
 
 \def\NAT@nmfmt#1{{\NAT@up#1}}
@@ -173,10 +150,9 @@
 \@onlypreamble{\bibpunct}
 \newcommand\NAT@open{(} \newcommand\NAT@close{)}
 \newcommand\NAT@sep{;}
-
-\ExecuteOptions{datebegin}
-
+\ExecuteOptions{authoryear,yearfirst,LanguageName}   % default option
 \ProcessOptions
+
 \newcommand\NAT@aysep{,} \newcommand\NAT@yrsep{,}
 \newcommand\NAT@cmt{, }
 \newcommand\NAT@cite%
@@ -408,7 +384,7 @@
 \newcommand\NAT@set@cites{\ifNAT@plain
   \ifNAT@super \let\@cite\NAT@citesuper
      \def\NAT@mbox##1{\unskip\nobreak\hspace{1\p@}\textsuperscript{##1}}%
-     \let\citeyearpar=\citeyear
+     \let\citeyearp=\citeyear
      \let\NAT@space\relax\else
      \let\NAT@mbox=\mbox
      \let\@cite\NAT@citenum \def\NAT@space{ }\fi
@@ -445,7 +421,8 @@
 \DeclareRobustCommand\citep
    {\begingroup\NAT@swatrue\def\NAT@ctype{0}\NAT@partrue
          \@ifstar{\NAT@fulltrue\NAT@citetp}{\NAT@fullfalse\NAT@citetp}}
-\DeclareRobustCommand\cite{\begingroup\def\NAT@ctype{0}\NAT@partrue\NAT@swatrue
+\DeclareRobustCommand\cite
+      {\begingroup\def\NAT@ctype{0}\NAT@partrue\NAT@swatrue
       \@ifstar{\NAT@fulltrue\NAT@cites}{\NAT@fullfalse\NAT@cites}}
 \newcommand\NAT@cites{\@ifnextchar [{\NAT@@citetp}{%
      \ifNAT@plain\else
@@ -461,41 +438,22 @@
 \DeclareRobustCommand\citeauthor
    {\begingroup\NAT@swafalse\def\NAT@ctype{1}\NAT@parfalse
     \@ifstar{\NAT@fulltrue\NAT@citetp}{\NAT@fullfalse\NAT@citetp}}
-\DeclareRobustCommand\Citet
-   {\begingroup\NAT@swafalse\def\NAT@ctype{0}\NAT@partrue
-     \let\NAT@up\NAT@Up
-     \@ifstar{\NAT@fulltrue\NAT@citetp}{\NAT@fullfalse\NAT@citetp}}
-\DeclareRobustCommand\Citep
-   {\begingroup\NAT@swatrue\def\NAT@ctype{0}\NAT@partrue
-     \let\NAT@up\NAT@Up
-         \@ifstar{\NAT@fulltrue\NAT@citetp}{\NAT@fullfalse\NAT@citetp}}
-\DeclareRobustCommand\Citealt
-   {\begingroup\NAT@swafalse\def\NAT@ctype{0}\NAT@parfalse
-     \let\NAT@up\NAT@Up
-         \@ifstar{\NAT@fulltrue\NAT@citetp}{\NAT@fullfalse\NAT@citetp}}
-\DeclareRobustCommand\Citealp
-   {\begingroup\NAT@swatrue\def\NAT@ctype{0}\NAT@parfalse
-     \let\NAT@up\NAT@Up
-         \@ifstar{\NAT@fulltrue\NAT@citetp}{\NAT@fullfalse\NAT@citetp}}
-\DeclareRobustCommand\Citeauthor
-   {\begingroup\NAT@swafalse\def\NAT@ctype{1}\NAT@parfalse
-     \let\NAT@up\NAT@Up
-    \@ifstar{\NAT@fulltrue\NAT@citetp}{\NAT@fullfalse\NAT@citetp}}
+
 \DeclareRobustCommand\citeyear
    {\begingroup\NAT@swafalse\def\NAT@ctype{2}\NAT@parfalse\NAT@citetp}
-\DeclareRobustCommand\citeyearpar
+\DeclareRobustCommand\citeyearp
    {\begingroup\NAT@swatrue\def\NAT@ctype{2}\NAT@partrue\NAT@citetp}
-\newcommand\citetext[1]{\NAT@open#1\NAT@close}
-\DeclareRobustCommand\citefullauthor
-   {\citeauthor*}
+\DeclareRobustCommand\citefullauthor{\citeauthor*}
+
+\newcommand\citetext[1]{\NAT@open#1\NAT@close} 
 \newcommand\defcitealias[2]{%
    \@ifundefined{al@#1\@extra@b@citeb}{}
    {\PackageWarning{flexbib}{Overwriting existing alias for citation #1}}
    \@namedef{al@#1\@extra@b@citeb}{#2}}
 \DeclareRobustCommand\citetalias{\begingroup
    \NAT@swafalse\def\NAT@ctype{3}\NAT@parfalse\NAT@citetp}
-\DeclareRobustCommand\citepalias{\begingroup
-   \NAT@swatrue\def\NAT@ctype{3}\NAT@partrue\NAT@citetp}
+\DeclareRobustCommand\citetalias{\begingroup
+	\NAT@swafalse\def\NAT@ctype{3}\NAT@parfalse\NAT@citetp}
 \renewcommand\nocite[1]{\@bsphack
   \@for\@citeb:=#1\do{%
     \edef\@citeb{\expandafter\@firstofone\@citeb}%
@@ -505,6 +463,7 @@
        \NAT@citeundefined \PackageWarning{flexbib}%
        {Citation `\@citeb' undefined}}{}\fi}%
   \@esphack}
+
 \newcommand\NAT@parse[1]{{%
      \let\protect=\@unexpandable@protect\let~\relax
      \let\active@prefix=\@gobble
@@ -766,12 +725,13 @@
 \def\BR@nodot#1.\relax#2\relax{#1}
 \newcommand\bibentry[1]{\nocite{#1}{\frenchspacing
      \hyper@natanchorstart{#1\@extra@b@citeb}%
-     \@nameuse{BR@r@#1\@extra@b@citeb}\hyper@natanchorend}}
+     \@nameuse{BR@r@#1\@extra@b@citeb}\hyper@natanchorend}} % copiado de bibentry.dtx (Patrick W Daly)
+ 
 \providecommand\@extra@b@citeb{} \providecommand\hyper@natanchorstart[1]{} 
 \providecommand\hyper@natanchorend{}
 
 \AtBeginDocument{%
-  \providecommand*{\urlprefix}{}
+  \providecommand*{\urlprefix}{URL}
   \providecommand*{\url}[1]{\texttt{#1}}
 }
 
@@ -781,5 +741,4 @@
 \nobibliography*
 %%%%
 
-\InputIfFileExists{flexbib.cfg}
-       {\typeout{Local config file flexbib.cfg used}}{}
+\InputIfFileExists{flexbib.cfg}{\typeout{Local config file flexbib.cfg used}}{}

@@ -28,10 +28,13 @@ csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
 #csl: apa.csl  # apa.csl, ieee.csl
 # Método 3 (flexbib):
 flexbib: true
-#flexbiboptions: "spanish,plain"
-flexbiboptions: spanish, plain,sortcompress,nocomment, noabstract # no numera, presenta autor (año)
-# flexbiboptions: spanish, datebegin,sortcompress,nocomment, noabstract  # numera bibliografía
-#flexbiboptions: "spanish"
+# https://www.latex.um.es/retazos/leccion_15/flexbib.html (documentación flexbib)
+flexbiboptions: authoryear # no numera, por defecto
+#flexbiboptions: yearend,nocomment, noabstract  # no numera bibliografía
+#flexbiboptions: plain # numera bib
+#flexbiboptions: plain,nocomment, noabstract # numera bib
+#flexbiboptions: apa7 # no numera
+#flexbiboptions: HE # no numera
 link-citations: yes
 output: 
   pdf_document:
@@ -116,7 +119,6 @@ knitr::write_bib(c("knitr","rmarkdown"),
 
 ```{r child = 'resumen.Rmd'}
 ```
-
 
 \clearpage
 \section*{Abstract}

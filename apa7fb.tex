@@ -1,0 +1,19 @@
+% Se redefinen comandos de flexbib para adaptarse a los gustos de APA7
+
+\renewcommand{\bibnamefont}[1]{#1}    % fuente normal en apellidos
+\renewcommand{\bibfnamefont}[1]{#1}   % fuente normal en nombre de pila. Usar iniciales  en BBDD
+\renewcommand{\enquote}[1]{#1}        % elimina comillas del título
+\renewcommand{\bibvolfont}[1]{\textit{#1}}     % volumen en itálica
+\def\bibnumfont#1{\upshape{#1}}       % número en fuente normal
+\renewcommand{\nameseparator}{,}      % separa los autores con , 
+\renewcommand{\bbland}{\&}            % el último de forma especial
+\renewcommand{\namereplace}[1]{#1}    % con autores repetidos, los pone en lugar de una raya
+\renewcommand{\bblpp}{}               % elimina pp. de las páginas en article, no en inproceedings
+\renewcommand{\bblp}{}                % elimina p. de las páginas en article, no en inproceedings
+\let\cite\citealp                     % cambia formato de cita para adaptarse al de APA7 
+                 % APA7 original parece ignorar el campo    address
+                 % en  inbook  tengo experiencias de que ignora los campos chapter y pages ???
+                 % Como flexbib respeta el nombre de pila siempre y otros ponen iniciales,
+                 % para integrarse simular a otros desde flexbib una opción es repetir registros
+                 % uno a tu gusto (con un  alias)  y otro con alias-I que coincide con el anterior
+                 % salvo que para el nombre de pila se usan iniciales  (-I)

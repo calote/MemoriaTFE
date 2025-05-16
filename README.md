@@ -88,18 +88,11 @@ output:
 
 La información sobre el paquete LaTeX "flexbib" sobre BibTeX se encuentra en: <https://www.latex.um.es/retazos/leccion_15/flexbib.html>. Desde aquí quiero hacer constar el agradecimiento a los creadores.
 
-Con el paquete LaTeX "flexbib" se facilita la escritura de la **bibliografía en español** (opción: spanish). También lo facilita para otros idiomas: inglés (english), francés (french) y el alemán (german).
+Con el paquete LaTeX "flexbib" se facilita la escritura de la **bibliografía en español** (también se puede usar para otros idiomas a través del paquete LaTeX "babel").
 
-- [Manual flexbib (pdf)](https://www.latex.um.es/retazos/leccion_15/flexbib_manual.pdf)
+- [Manual flexbib (pdf)](https://www.latex.um.es/retazos/leccion_15/flexbib-Manual-v2.pdf)
 
-    En el manual se pueden encontrar todas las opciones disponibles a partir de la página 8. Se recomienda también leer el apartado 2 "El sistema flexbib" a partir de la página 4, para conocer las características generales y opciones que este paquete LaTeX nos permite personalizar en relación con la citas de referencias y la presentación de la bibliografía.
-
-- [Blog: cambiar el idioma de la bibliografía en LaTeX](https://ondahostil.wordpress.com/2019/07/15/lo-que-he-aprendido-cambiar-el-idioma-de-la-bibliografia-en-latex/)
-
-
-**Nota:** Se ha modificado la opción de flexbib "sort&compress" por "sortcompress", para evitar un error que se producía al transformar "pandoc" el documento.
-
-
+    En el manual se pueden encontrar todas las opciones disponibles a partir de la página 5. 
 
 
 #### Cómo usar flexbib en la plantilla
@@ -118,26 +111,25 @@ Si se va a usar "flexbib" se deben ajustar también los valores de: `flexbib` y 
 
 Se muestran algunos ejemplos a continuación:
 
-- Ejemplo 1. Se eligen: spanish (bibliografía en español) y plain (bibliografía numerada)
+- Ejemplo 1. Se eligen: plain (bibliografía numerada)
 
     ```yaml
     flexbib: true
-    flexbiboptions: spanish, plain
+    flexbiboptions: plain
     ```
 
-- Ejemplo 2. Se elige: spanish (bibliografía en español) y por defecto se utiliza referencias autor-año (bibliografía sin numerar)
+- Ejemplo 2. Se elige: por defecto se utiliza referencias autor-año (bibliografía sin numerar)
 
     ```yaml
     flexbib: true
-    flexbiboptions: spanish
     ```
 
 
-- Ejemplo 3. Se eligen: spanish (bibliografía en español),  plain (bibliografía numerada), datebegin (año en la bibliografía después del autor), sortcompress (al citar, sustituye [1,3,2] por [1-3]), nocomment y noabstract (no muestran los campos del fichero BibTeX: "comment" y "abstract")
+- Ejemplo 3. Se elige: apa7 (usa metodología apa sin numerar la bibliografía)
 
     ```yaml
     flexbib: true
-    flexbiboptions: spanish, plain, datebegin, sortcompress,nocomment, noabstract
+    #flexbiboptions: apa7
     ```
 
 #### Solución de problemas

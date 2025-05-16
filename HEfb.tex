@@ -1,0 +1,16 @@
+% Se redefinen comandos de flexbib para adaptarse a los usos de Historia de la Educación
+
+\let\cite\citefull
+%\renewcommand{\bibnamefont}[1]{\textsc{#1}}    % fuente versalita en apellidos
+%\renewcommand{\bibfnamefont}[1]{\textsc{#1}}   % fuente versalita en nombre de pila
+\renewcommand{\bibvolfont}[1]{#1}     % volumen en itálica
+\def\bibnumfont#1{\upshape{#1}}       % número en fuente normal
+\renewcommand{\nameseparator}{;}      % separa los autores con ; 
+\renewcommand{\namereplace}[1]{#1}    % con autores repetidos, los pone en lugar de una raya
+%\renewcommand{\citenamefont}[1]{\textsc{#1}}
+\renewcommand{\namesend}{}            % para evitar el . en la cita cuando se usa yearend
+\let\citecorta\citeAuthorTitle        % compatibilidad versiones anteriores
+\let\citecortaT\citeAuthorTitle       % idem
+
+
+

@@ -1,7 +1,20 @@
-% Modelo para generar un fichero bbl parametrizado.
-% J. M. Mira  11/10/2015
-% Version 1.09
-% mira@um.es
+%   flexbib.bst
+% Version 2   2025/02/21
+%  Intended to generate a parameterized .bbl file.
+%  J. M. Mira  (mira@um.es)  Universidad de Murcia
+% 
+%
+% The EDITION field depends on the language 
+% New FUNCTION {name.edition} with the original content of FUNCTION {bbl.edition},
+% reconstructed to take the language into account
+%
+% yearfirst  option that places the year in the bibliographic list immediately after the authors
+% yearend    option that places the year at the end 
+% \namesend  is inserted after the authors and depends on the option
+
+% Las normas APA eliminan la abreviatura de página/s  p. pp. de todas las publicaciones
+% salvo para los libros con autores en diferentes capítulos (InProceedings) v. bbl.inpro.pages
+
 ENTRY
   { abstract
     address
@@ -19,8 +32,7 @@ ENTRY
     issn
     journal
     key
-    hyphenation
-    month
+    language
     mrnumber
     note
     number
@@ -30,15 +42,17 @@ ENTRY
     school
     series
     title
-    smalltitle
+    shorttitle
     translator
     type
     url
+    version
     volume
     year
   }
   {}
   { label extra.label sort.label short.list }
+
 INTEGERS { output.state before.all mid.sentence after.sentence after.block }
 
 FUNCTION {init.state.consts}
@@ -47,7 +61,8 @@ FUNCTION {init.state.consts}
   #2 'after.sentence :=
   #3 'after.block :=
 }
-STRINGS { s t}
+
+STRINGS {s t}
 
 FUNCTION {output.nonnull}
 { 's :=
@@ -113,7 +128,6 @@ FUNCTION {output.checkb}
     'output.nonnullb
   if$
 }
-
 
 FUNCTION {output.checkc}
 { 't :=
@@ -259,7 +273,8 @@ FUNCTION {bib.fname.font}
   if$
 }
 
-FUNCTION {bib.and.font} { duplicate$ empty$
+FUNCTION {bib.and.font} 
+{ duplicate$ empty$
   { pop$ "" }
   { "\bibandfont{" swap$ * "}" * }
   if$
@@ -302,7 +317,7 @@ FUNCTION {capitalize}
 
 FUNCTION {space.word} { " " swap$ * " " * } 
 
-% Dependientes del idioma. Depending on language %%%%%
+% Language-dependent particles
 
 FUNCTION {bbl.and} { "\bbland{}"}
 
@@ -318,8 +333,15 @@ FUNCTION {bbl.editor}
 FUNCTION {bbl.edby}
 { "\bbledby{}" }
 
-FUNCTION {bbl.edition}
+FUNCTION {name.edition}  % new name for original version of bbl.edition
 { "\bbledition{}" }
+
+FUNCTION {bbl.edition}   % new edition numbered according to language 
+{ duplicate$ empty$
+  { pop$ "" }
+  { "\bbleditionnum{" swap$ * "}\bbledition{}" * }
+  if$
+}
 
 FUNCTION {bbl.volume}
 { "\bblvolume{}" }
@@ -336,11 +358,18 @@ FUNCTION {bbl.nr}
 FUNCTION {bbl.in}
 { "\bblin{}" }
 
-FUNCTION {bbl.pages}
+FUNCTION {bbl.pages}  % include pp. in article, no used in several styles
 { "\bblpp{}" }
 
-FUNCTION {bbl.page}
+FUNCTION {bbl.page}   % include p. in article, no used in several styles
 { "\bblp{}" }
+
+FUNCTION {bbl.inpro.pages}  % include pp. in inproceedings (like APA)
+{ "\bblinpropp{}" }
+
+FUNCTION {bbl.inpro.page}   % include p. in inproceedings (like APA)
+{ "\bblinprop{}" }
+
 
 FUNCTION {bbl.chapter}
 { "\bblchapter{}" }
@@ -354,6 +383,8 @@ FUNCTION {bbl.mthesis}
 FUNCTION {bbl.phdthesis}
 { "\bblphdthesis{}" }
 
+
+                        % Not used
 MACRO {jan} {"\bbljan{}"}
 
 MACRO {feb} {"\bblfeb{}"}
@@ -417,8 +448,6 @@ FUNCTION {bibinfo.warn}
   if$
 }
 
-
-
 STRINGS  { bibinfo}
 INTEGERS { nameptr namesleft numnames }
 
@@ -454,7 +483,7 @@ FUNCTION {format.names}
                 {
                   " " * bbl.etal cite.etal.font *
                 }
-                {
+                { 
                   bbl.and bib.and.font
                   space.word * t *
                 }
@@ -547,7 +576,7 @@ FUNCTION {format.isbn}
   duplicate$ empty$ 'skip$
     {
       new.block
-      "ISBN " swap$ * 
+      "\textsc{isbn}: " swap$ * 
     }
   if$
 }
@@ -557,16 +586,15 @@ FUNCTION {format.issn}
   duplicate$ empty$ 'skip$
     {
       new.block
-      "ISSN " swap$ *
+      "\textsc{issn}: " swap$ *
     }
   if$
 }
 
-
-FUNCTION {format.url}
+FUNCTION {format.url}          %  ¿diferente? 
 { url empty$
     { "" }
-    { new.block "\preurl{} \url{" url * "}" * }
+    { new.block "\preurl\url{" url * "}" * }
   if$
 }
 
@@ -575,8 +603,7 @@ FUNCTION {format.doi}
   duplicate$ empty$ 'skip$
     {
       new.block
-      "\doi{" swap$ * "}" *
-    }
+      "\preurl\url{https://doi.org/" swap$ * "}" * }
   if$
 }
 
@@ -590,13 +617,19 @@ FUNCTION {format.mrnumber}
   if$
 }
 
+FUNCTION {format.version}
+{ version empty$
+    { "" }
+    { "v. " version * }
+  if$
+}
 
-FUNCTION {select.hyphenation}
+FUNCTION {select.language}
 { duplicate$ empty$
     'pop$
-    { hyphenation empty$
+    { language empty$
         'skip$
-        { "{\selectlanguage{" hyphenation * "}" * swap$ * "}" * }
+        { "{\selectlanguage{" language * "}" * swap$ * "}" * }
       if$
     }
     if$
@@ -628,7 +661,7 @@ FUNCTION {format.title}
     {
       "\bibtitle{\enquote{" swap$ *
       "}}" *
-      select.hyphenation
+      select.language
     }
   if$
 }
@@ -641,35 +674,49 @@ FUNCTION {format.translator}
     {
       "\bibtranslator{\bibtranslatorname " swap$ *
       "}" *
-      select.hyphenation
+      select.language
     }
   if$
 }
 
 
-FUNCTION {format.small.title}
-{ smalltitle
-  "smalltitle" bibinfo.check
+FUNCTION {format.short.title}
+{  shorttitle
+  "shorttitle" bibinfo.check
   duplicate$ empty$ 'skip$
     {
-      "{\bibsmalltitle{\emph{" swap$ *
-      "}}}" *
-      select.hyphenation
+      "{\protect\shorttitle{,\itshape\ " swap$ *
+      "}}" *
+      select.language
     }
   if$
 }
 
-FUNCTION {format.small.title.book}
-{ smalltitle
-  "smalltitle" bibinfo.check
-  duplicate$ empty$ 'skip$
-    {
-      "{\bibsmalltitle{\emph{" swap$ *
-      "}}} " *
-      select.hyphenation
-    }
-  if$
+FUNCTION {format.short.titleB}  % ensayando
+{  shorttitle
+"shorttitle" bibinfo.check
+duplicate$ empty$ 'skip$
+{
+"{\citeshortfont{ " swap$ *
+"}} " *
+select.language
 }
+if$
+}
+
+
+
+%FUNCTION {format.short.title.book}  % creo que no es necesaria
+%{  shorttitle
+%  "shorttitle" bibinfo.check
+%  duplicate$ empty$ 'skip$
+%    {
+%      "{\citeshortfont{ " swap$ *
+%      "}} " *
+%      select.language
+%    }
+%  if$
+%}
 
 FUNCTION {end.quote.btitle}
 { booktitle empty$
@@ -716,7 +763,7 @@ FUNCTION {format.full.names}
       namesleft #1 - 'namesleft :=
     }
   while$
-}
+ }
 
 FUNCTION {author.editor.key.full}
 { author empty$
@@ -770,20 +817,40 @@ FUNCTION {make.full.names}
 
 FUNCTION {output.bibitem}
 { newline$
-  "\bibitem[{" write$
-  label write$
-  ")"  make.full.names duplicate$ short.list =
+  "\bibitem[" write$
+    label write$
+    ")"   make.full.names duplicate$ short.list =
      { pop$ }
-     { * }
+     { * } 
    if$
-  format.small.title *
-  "}]{" * write$
+%  format.short.title * % lo pone al final del arg. optativo de \bibitem
+  "]{" * write$
   cite$ write$
   "}" write$
   newline$      
   ""
   before.all 'output.state :=
 }
+
+
+FUNCTION {output.bibitem.bis}             % PARA ENSAYOS
+{ newline$
+  "\bibitem[" write$
+  label write$
+  ")"  make.full.names duplicate$ short.list =
+     { pop$ }
+     { * }
+   if$
+     format.short.title *
+    "]{" * write$
+  cite$ write$
+  "}" write$
+  newline$      
+  ""
+  before.all 'output.state :=
+}
+
+
 
 FUNCTION {n.dashify}
 {
@@ -813,7 +880,7 @@ FUNCTION {n.dashify}
 
 FUNCTION {word.in}
 { bbl.in capitalize
-  ":" *
+  "\bblinend " *
   bib.in.font
   " " * }
 
@@ -823,11 +890,11 @@ FUNCTION {format.date.begin}
    {"empty year in " cite$ *  warning$
     extra.label *
     before.all 'output.state :=
-    "\datebegin " swap$ * "" * 
+    "\yearfirst " swap$ * "" * 
      }
    {extra.label *
     before.all 'output.state :=
-    "\datebegin " swap$ * "." * }
+    "\yearfirst " swap$ * "." * }
    if$ 
 }
 
@@ -837,7 +904,7 @@ FUNCTION {format.date.end}
    'skip$
    {extra.label *
     before.all 'output.state :=
-    "\dateend{" swap$ * "}" *}
+    "\yearend{" swap$ * "}" *}
    if$ 
 }
 
@@ -845,7 +912,7 @@ FUNCTION {format.btitle}
 { title "title" bibinfo.check
   duplicate$ empty$ 'skip$
     { like.book.title
-      select.hyphenation
+      select.language
     }
   if$
 }
@@ -894,10 +961,9 @@ FUNCTION {format.number.series}
   if$
 }
 
-FUNCTION {format.edition}
+FUNCTION {format.edition}    % Works correctly, error message???
 { edition duplicate$ empty$ 'skip$
-    {
-      output.state mid.sentence =
+    { output.state mid.sentence =
         { "l" }
         { "t" }
       if$ change.case$
@@ -932,11 +998,11 @@ FUNCTION {format.pages}
 { pages duplicate$ empty$ 'skip$
     { duplicate$ multi.page.check
         {
-          bbl.pages swap$
+          bbl.inpro.pages swap$
           n.dashify
         }
         {
-          bbl.page swap$
+          bbl.inpro.page swap$
         }
       if$
       tie.or.space.prefix
@@ -946,7 +1012,7 @@ FUNCTION {format.pages}
   if$
 }
 
-FUNCTION {format.journal.pages}
+FUNCTION {format.journal.pages}  % nuevo
 { pages duplicate$ empty$ 'pop$
     { swap$ duplicate$ empty$
         { pop$ pop$ format.pages }
@@ -957,7 +1023,7 @@ FUNCTION {format.journal.pages}
           pages multi.page.check
             'bbl.pages
             'bbl.page
-          if$
+          if$                      % para mensajes de error
           swap$ tie.or.space.prefix
           "pages" bibinfo.check
           * *
@@ -995,7 +1061,7 @@ FUNCTION {format.vol.num.pages}
         'skip$
       if$
       swap$
-      "(" swap$ * ")" *
+      "\upshape (" swap$ * ")" *     
     }
   if$ *
   bib.vol.font
@@ -1172,8 +1238,8 @@ FUNCTION {article}
       "journal" bibinfo.check
       emphasize
       "journal" output.check
-      format.date.end "year" output.check
       format.vol.num.pages output
+      format.date.end "year" output.check
     }
     { format.article.crossref output.nonnull
       format.pages output
@@ -1276,9 +1342,9 @@ FUNCTION {inbook}
   format.date.begin "year" output.check
   new.block
   format.btitle "title" output.check
-%  new.block
-%  format.translator "translator" output.checkc
-%  new.block  
+  new.block
+  format.translator "translator" output.checkc
+  new.block  
   crossref missing$
     {
       format.bvolume output
@@ -1317,6 +1383,8 @@ FUNCTION {incollection}
   new.block
   format.title "title" output.check
   new.block
+  format.translator "translator" output.checkc
+  new.block  
   crossref missing$
     { format.in.ed.booktitle "booktitle" output.check
       end.quote.btitle
@@ -1350,7 +1418,7 @@ FUNCTION {inproceedings}
   format.date.begin "year" output.check
   new.block
   format.title "title" output.check
-  new.block
+  new.block 
   crossref missing$
     { format.in.ed.booktitle "booktitle" output.check
       end.quote.btitle
@@ -1390,6 +1458,7 @@ FUNCTION {manual}
   format.date.begin "year" output.check
   new.block
   format.btitle "title" output.check
+  format.version output
   organization address new.block.checkb
   organization "organization" bibinfo.check output
   address "address" bibinfo.check output
@@ -1410,8 +1479,7 @@ FUNCTION {mastersthesis}
   names.end
   format.date.begin "year" output.check
   new.block
-  format.btitle
-  "title" output.check
+  format.title output
   new.block
   bbl.mthesis format.thesis.type output.nonnull
   school "school" bibinfo.warn output
@@ -1555,7 +1623,7 @@ FUNCTION {format.lab.names}
   s #1 "{vv~}{ll}" format.name$
   cite.name.font
   s num.names$ duplicate$
-  #2 >
+   #2 >
     { pop$
       " " * bbl.etal cite.etal.font *
     }
@@ -1629,6 +1697,7 @@ FUNCTION {calc.short.authors}
 FUNCTION {calc.label}
 { calc.short.authors
   short.list
+  format.short.title *  
   "("
   *
   year duplicate$ empty$
@@ -1813,17 +1882,10 @@ FUNCTION {begin.bib}
   if$
   "\begin{thebibliography}{" number.label int.to.str$ * "}" *
   write$ newline$
-  "%Comandos de formato, por si no est'an definidos."
-write$ newline$
-"\ProvideTextCommand{\guillemotleft}{OT1}{\leavevmode\raise .27ex\hbox{$\scriptscriptstyle\ll$}} \ProvideTextCommand{\guillemotright}{OT1}{\leavevmode\raise .27ex\hbox{$\scriptscriptstyle\gg$}}"
-write$ newline$
-"\providecommand{\enquote}[1]{\guillemotleft#1\guillemotright} \providecommand{\natexlab}[1]{#1} \providecommand{\bibnamefont}[1]{\textsc{#1}} \providecommand{\bibfnamefont}[1]{\textsc{#1}} \providecommand{\bibfnamefontand}[1]{#1} \providecommand{\citenamefont}[1]{#1} \providecommand{\bibnamefont}[1]{\textsc{#1}} \providecommand{\bbletalfont}[1]{\emph{#1}}  \providecommand{\citeandfont}[1]{#1} \providecommand{\citetalfont}[1]{#1} \providecommand{\bibyearfont}[1]{#1} \providecommand{\isbn}[1]{ISBN #1} \providecommand{\url}[1]{\texttt{#1}} \providecommand{\urlprefix}{} \providecommand{\nameseparator}{;} \providecommand{\namereplace}[1]{{---{}---} \ifx\datebegin\relax \else \def\datebegin #1.{\relax}\fi} \providecommand{\dateend}[1]{, #1} \providecommand{\bibtitle}[1]{#1}\providecommand{\bibtranslator}[1]{#1} \providecommand{\bibtranslatorname}{Traducido por } \providecommand{\selectlanguage}[1]{\relax} \providecommand{\finalpoint}{.} \providecommand{\namesend}{:} \providecommand{\Capitalize}[1]{\uppercase{#1}} \providecommand{\capitalize}[1]{\expandafter\Capitalize#1} \providecommand{\bibinfont}[1]{\textbf{#1}} \providecommand{\inbooktitlefont}[1]{\emph{#1}} \providecommand{\bibvolfont}[1]{\textbf{#1}} \providecommand{\bibandfont}[1]{#1}  \providecommand{\bibcommentname}{\textsc{Obs:}} \providecommand{\bibcomment}[2]{\begin{quotation} \noindent\textsc{\bibcommentname}\ #2\end{quotation}} \providecommand{\bibabstract}[2]{\begin{quotation} \noindent\textsc{\Abstractname:}\ #2\end{quotation}}"
-write$ newline$
-"\providecommand{\bblin}{En} \providecommand{\bbland}{y} \providecommand{\bbletal}{et al.} \providecommand{\bbled}{ed.} \providecommand{\bbleds}{Eds.} \providecommand{\bbvolume}{Vol.}  \providecommand{\bblof}{de} \providecommand{\bbledition}{ª~edición} \providecommand{\bblp}{p.}  \providecommand{\bblpp}{pp.} \providecommand{\bbltechreport}{Informe técnico} \providecommand{\bblmthesis}{Tesina} \providecommand{\bblphdthesis}{Tesis doctoral} \providecommand{\bblchapter}{cap\'\i{}tulo} \providecommand{\bblnumber}{número} \providecommand{\bblvolume}{volumen} \providecommand{\MR}[1]{\relax\ifhmode\unskip\space\fi MR #1} \expandafter\ifx\csname urlstyle\endcsname\relax \providecommand{\doi}[1]{doi: #1}\else  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi"
-  write$ newline$
-  "%Para resultados estilo plain descomente la l'inea siguiente"
-  write$ newline$
-  "%\let\oldbibitem=\bibitem \def\bibitem[#1]#2{\oldbibitem{#2}}"
+  
+  "% Formatting commands, customizable from the .bbl file" 
+   write$ newline$
+  "\providecommand{\bibnamefont}[1]{\textsc{#1}} \providecommand{\bibfnamefont}[1]{\textsc{#1}} \providecommand{\bibfnamefontand}[1]{#1} \providecommand{\citenamefont}[1]{#1} \providecommand{\bbletalfont}[1]{\emph{#1}} \providecommand{\citeandfont}[1]{#1} \providecommand{\citetalfont}[1]{#1} \providecommand{\bibyearfont}[1]{#1} \providecommand{\isbn}[1]{ISBN #1} \providecommand{\url}[1]{\urlprefix\texttt{#1}} \providecommand{\urlprefix}{URL:} \providecommand{\nameseparator}{;} \providecommand{\namereplace}[1]{{---{}---} \ifx\datebegin\relax \else \def\datebegin #1.{\relax}\fi} \providecommand{\dateend}[1]{, #1} \providecommand{\bibtitle}[1]{#1} \providecommand{\bibtranslator}[1]{#1} \providecommand{\bibtranslatorname}{Traducido por } \providecommand{\selectlanguage}[1]{\relax} \providecommand{\finalpoint}{.} \providecommand{\namesend}{} \providecommand{\Capitalize}[1]{\uppercase{#1}} \providecommand{\capitalize}[1]{\expandafter\Capitalize#1} \providecommand{\bibinfont}[1]{\textbf{#1}} \providecommand{\inbooktitlefont}[1]{\emph{#1}} \providecommand{\bibvolfont}[1]{\textbf{#1}} \providecommand{\bibandfont}[1]{#1} \providecommand{\bibcommentname}{\textsc{Comentarios:}} \providecommand{\bibcomment}[2]{\begin{quotation}\noindent\textsc{\bibcommentname}\ #2\end{quotation}} \providecommand{\bibabstract}[2]{\begin{quotation}\noindent\textsc{\abstractname:}\ #2\end{quotation}} \providecommand{\bblin}{En} \providecommand{\bblinpropp}{pp.} \providecommand{\bblinprop}{p.} \providecommand{\bblinpropp}{pp.} \providecommand{\bblinprop}{p.} \providecommand{\bblinend}{} \providecommand{\bbland}{y} \providecommand{\bbletal}{et al.} \providecommand{\bbled}{ed.} \providecommand{\bbleds}{Eds.} \providecommand{\bbvolume}{Vol.}  \providecommand{\bblof}{de} \providecommand{\bbledition}{.ª~edición} \providecommand{\bblp}{p.} \providecommand{\bblpp}{pp.} \providecommand{\bblmthesis}{Tesis de Máster} \providecommand{\bblphdthesis}{Tesis Doctoral} \providecommand{\bbltechreport}{Informe técnico} \providecommand{\bblchapter}{Capítulo} \providecommand{\bblnumber}{número} \providecommand{\bblvolume}{volumen} \providecommand{\preurl}{\newline}  \providecommand{\MR}[1]{\relax\ifhmode\unskip\space\fi MR #1} \expandafter\ifx\csname urlstyle\endcsname\relax\fi"
   write$ newline$
 }
 EXECUTE {begin.bib}
