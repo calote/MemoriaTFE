@@ -129,7 +129,7 @@ Se muestran algunos ejemplos a continuación:
 
     ```yaml
     flexbib: true
-    #flexbiboptions: apa7
+    flexbiboptions: apa7
     ```
 
 #### Solución de problemas
